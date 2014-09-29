@@ -2,3 +2,4 @@ php_errorlog
 php_mail.log
 cgi-bin/
 mysql.php
+.DS_Store
