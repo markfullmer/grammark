@@ -41,6 +41,6 @@ Release       | Short Description
 Analytics
 =========
 To turn on Google Analytics, copy your tracking code into *js/analyticstracking.php* and uncomment the following line in *index.php*:
-'''
+```
 include_once('js/analyticstracking.php');
-'''
+```
