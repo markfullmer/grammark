@@ -1,7 +1,10 @@
-GRAMMARK.ORG
-These files are a web-based grammark checking program that lets people customize what they want to look for. It highlights things like passive voice, wordiness, and grammar errors, and offer suggestions when the mouse hovers over the highlighted word/phrase.
+Grammark
+========
+<img src="https://github.com/markfullmer/grammark/blob/master/img/screenshot1.png" align="right" />
+These files are a web-based grammar checking program that lets people customize what they want to look for. It highlights things like passive voice, wordiness, and grammar errors, and offer suggestions when the mouse hovers over the highlighted word/phrase.
 
 GETTING STARTED
+===============
 1. Unzip the files and upload them to a directory in your website
 2. Create an SQL database with user and password
 3. Import the SQL database file zipped here, grammark.sql into that database
