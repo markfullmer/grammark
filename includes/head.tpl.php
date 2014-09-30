@@ -15,6 +15,7 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/foundation/5.4.4/css/foundation.min.css">  
 <?php
+include_once('js/analyticstracking.php');
 include('mysql.php');
 if (empty($_GET['id'])) {$tab = 1;}
 elseif ($_GET['id'] == 'passive') { $tab = 2; }

@@ -4,7 +4,7 @@ include('microtimestart.php');
 include('includes/head.tpl.php');
 ?>
 <?php echo '<body id="tab'. $tab .'">'; 
-include_once('js/analyticstracking.php');
+//include_once('js/analyticstracking.php');
 include('includes/nav.tpl.php'); 
 ?>
 <div id='wrap'>
