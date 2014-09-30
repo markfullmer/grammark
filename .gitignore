@@ -1,6 +1,6 @@
 php_errorlog
 php_mail.log
 cgi-bin/
-mysql.php
+settings.php
 .DS_Store
 .sass-cache/
