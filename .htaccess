@@ -1,6 +1,10 @@
 Options +FollowSymLinks
 RewriteEngine On
 
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
 RewriteRule ^/$ index.php [QSA,NC,L]
 RewriteRule ^about.php$ /about [R,L]
 RewriteRule ^contact.php$ /contact [R,L]
