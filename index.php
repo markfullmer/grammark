@@ -34,6 +34,11 @@ else {
 }
 ?>
 </div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.5/js/vendor/jquery.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.5/js/foundation.min.js"></script>
+<script>
+   $(document).foundation();
+</script>
 </body>
 </html>
 
