@@ -1,11 +1,6 @@
 <?php 
-
-
-
 include('calculations.php');	
-
 // Potential problems
-
 echo '<div class="large-6 columns"">';
 echo '<h2>Potential Problems: <span style="background-color:yellow;">'. $problems .'</span></h2>';
 echo '<table>';
@@ -54,29 +49,16 @@ echo 'href="?id=passive">'. count($passive) .' ('. number_format(count($passive)
 echo '</td></tr>';
 
 echo '</table>';
-
 echo '<a class="button" href="index.php?id=passive">Fix Problems</a> ';
-
 echo '<a class="button" href="index.php?id=start">Start Over</a><br />';
-
 include('microtimeend.php');
-
 echo '</div>';
-
-
-
-// Score
-
 ?>
 
 <script type="text/javascript">
-
-function showValue(value, name)
-
-{
+function showValue(value, name) {
 	document.getElementById(name).innerHTML=value;
 }
-
 </script>
 
 <div class="large-6 columns">
