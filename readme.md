@@ -1,7 +1,7 @@
 Grammark
 ========
 <img src="https://github.com/markfullmer/grammark/blob/master/img/screenshot1.png" align="right" />
-These files are a web-based grammar checking program that lets people customize what they want to look for. It highlights things like passive voice, wordiness, and grammar errors, and offer suggestions when the mouse hovers over the highlighted word/phrase.
+A complete web application for identifying writing problems and offering suggestions. 
 
 GETTING STARTED
 ===============
@@ -17,3 +17,11 @@ That's it! You're ready to go.
 
 This software is protected under a GNU General Public License: http://www.gnu.org/licenses/gpl.html
 You may use it, provided that any modifications you make to it are available for others to use and modify in a similar manner. 
+
+Versions
+========
+
+Release       | Short Description
+------------- | -------------
+[Grammark 2.0](https://github.com/markfullmer/grammark)  | [Foundation](http://foundation.zurb.com/)-based CSS with better directory structure and settings files
+[Grammark 1.0](https://github.com/markfullmer/grammark/tree/Version-1)  | Custom CSS with flat file structure
