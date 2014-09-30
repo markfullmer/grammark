@@ -10,10 +10,11 @@ RewriteRule ^about.php$ /about [R,L]
 RewriteRule ^contact.php$ /contact [R,L]
 RewriteRule ^source-code.php$ /source [R,L]
 RewriteRule ^about.php$ /about [R,L]
+RewriteRule ^database-add.php$ /database-add [R,L]
 RewriteRule ^wordiness-list.php$ /wordiness-list [R,L]
 RewriteRule ^transitions-list.php$ /transitions-list [R,L]
 RewriteRule ^grammar-error-list.php$ /grammar-error-list [R,L]
 
-RewriteRule ^([a-z0-9_\-]+)/?$ index.php?url=$1 [QSA,NC,L] 
+RewriteRule ^([a-z0-9_\-]+)/?$ index.php?url=$1 [QSA,NC,L]
 
 ErrorDocument 404 '404 Page not found. <a href="http://grammark.org">Back to grammark.org</a>'
