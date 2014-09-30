@@ -9,7 +9,7 @@ To run Grammark, you need to have access to a webserver (or the equivalent on yo
 
 Installation
 ============
-1. Place the files contained in this distribution on a webserver.
+1. Place the files contained in this distribution on a webserver. Navigating to the location (e.g., mysite.com/grammark) will render the site, but without the text processing.
 2. Create a new SQL database, with username and password
 3. Import the SQL database file zipped here, *grammark_grammar.sql*, into that database
 3. Copy *example.settings.php* as a new file, "settings.php".
@@ -20,15 +20,15 @@ Installation
   - $db_name="DATABASE NAME HERE";
   - $email = "EMAIL ADDRESS FOR CONTACT FORM";
  
-If you've done everything correctly,
-That's it! You're ready to go.
+If you've followed the steps above, going to "mysite.com/grammark" will give you a fully-functioning grammark checker.
 
+License
+=======
 This software is protected under a GNU General Public License: http://www.gnu.org/licenses/gpl.html
 You may use it, provided that any modifications you make to it are available for others to use and modify in a similar manner. 
 
 Versions
 ========
-
 Release       | Short Description
 ------------- | -------------
 [Grammark 2.0](https://github.com/markfullmer/grammark)  | [Foundation](http://foundation.zurb.com/)-based CSS with better directory structure and settings files
