@@ -7,6 +7,10 @@ Requirements
 ============
 To run Grammark, you need to have access to a webserver (or the equivalent on your local computer) with PHP and MySQL installed, and a basic knowledge of how to use them. The download includes installation and configuration instructions. If you are completely new to this, try reading http://www.sitepoint.com/php-amp-mysql-1-installation/ 
 
+Dependencies
+============
+- Foundation CSS/JS library (automatically included by default via cdnjs.cloudflare.com)
+
 Installation
 ============
 1. Place the files contained in this distribution on a webserver. Navigating to the location (e.g., mysite.com/grammark) will render the site, but without the text processing.
@@ -33,3 +37,10 @@ Release       | Short Description
 ------------- | -------------
 [Grammark 2.0](https://github.com/markfullmer/grammark)  | [Foundation](http://foundation.zurb.com/)-based CSS with better directory structure and settings files
 [Grammark 1.0](https://github.com/markfullmer/grammark/tree/Version-1)  | Custom CSS with flat file structure
+
+Analytics
+=========
+To turn on Google Analytics, copy your tracking code into *js/analyticstracking.php* and uncomment the following line in *index.php*:
+'''
+include_once('js/analyticstracking.php');
+'''
