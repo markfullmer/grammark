@@ -28,9 +28,9 @@
 
 		$sentencecounts[] = str_word_count($sentence);
 
-		if (str_word_count($sentence) >= $runoncriteria) { 
+		if (str_word_count($sentence) >= $runoncriteria) {
 
-			$runons[] = $sentence; 
+			$runons[] = $sentence;
 
 			}
 
@@ -66,7 +66,7 @@
 
 	$sdpercent = number_format($standarddeviation/$wps*100);
 
-	
+
 
 // Find transitions
 
@@ -76,13 +76,13 @@ $sql = " SELECT DISTINCT transition FROM transitions ";
 
 		$result = mysql_query($sql)	or die(mysql_error());
 
-		while ($row = mysql_fetch_array($result)) 
+		while ($row = mysql_fetch_array($result))
 
-		{	extract($row); 
+		{	extract($row);
 
 			$transitions[] = $transition;
 
-		}	
+		}
 
 $count = 0;
 
@@ -92,7 +92,7 @@ foreach ($transitions as $check) {
 
 		$pos = stripos($clean,$added);
 
-		if(($pos !== false)) {	
+		if(($pos !== false)) {
 
 			$ucheck = ucfirst($check);
 
@@ -104,7 +104,7 @@ foreach ($transitions as $check) {
 
 			}
 
-		}	
+		}
 
 $transitionscount = $count;
 
@@ -122,9 +122,9 @@ else { $transitionsper = 0; }
 
 		$result = mysql_query($sql)	or die(mysql_error());
 
-		while ($row = mysql_fetch_array($result)) 
+		while ($row = mysql_fetch_array($result))
 
-		{	extract($row); 
+		{	extract($row);
 
 			$errors[] = $error;
 
@@ -142,7 +142,7 @@ foreach ($errors as $check) {
 
 		$pos = stripos($clean,$added);
 
-		if(($pos !== false)) {	
+		if(($pos !== false)) {
 
 			$ucheck = ucfirst($check);
 
@@ -156,7 +156,7 @@ foreach ($errors as $check) {
 
 			}
 
-		}	
+		}
 
 $wordycount = $count;
 
@@ -170,9 +170,9 @@ $wordycount = $count;
 
 		$result = mysql_query($sql)	or die(mysql_error());
 
-		while ($row = mysql_fetch_array($result)) 
+		while ($row = mysql_fetch_array($result))
 
-		{	extract($row); 
+		{	extract($row);
 
 			$errors[] = $error;
 
@@ -188,7 +188,7 @@ foreach ($errors as $check) {
 
 		$pos = stripos($clean,$added);
 
-		if(($pos !== false)) {	
+		if(($pos !== false)) {
 
 			$ucheck = ucfirst($check);
 
@@ -202,7 +202,7 @@ foreach ($errors as $check) {
 
 			}
 
-		}	
+		}
 
 
 
@@ -228,7 +228,7 @@ $grammarcount = $count;
 
 	// If the previous word was an 'is' 'has' or 'be' verb...
 
-	if ($gotverb != '0') { 
+	if ($gotverb != '0') {
 
 		// If the current word is a past participle
 
@@ -246,7 +246,7 @@ $grammarcount = $count;
 
 	// Search for 'is' 'has' and 'be' verbs
 
-	if (in_array($word,$verbs)) { 
+	if (in_array($word,$verbs)) {
 
 	$gotverb = $word;}
 
@@ -268,9 +268,9 @@ $passivecount = count($passive);
 
 //		$result = mysql_query($sql)	or die(mysql_error());
 
-//		while ($row = mysql_fetch_array($result)) 
+//		while ($row = mysql_fetch_array($result))
 
-//		{	extract($row); 
+//		{	extract($row);
 
 //			$errors[] = $error;
 
@@ -290,7 +290,7 @@ $passivecount = count($passive);
 
 //		$pos = strpos($clean,$added);
 
-//		if(($pos !== false)) {	
+//		if(($pos !== false)) {
 
 //			$count = $count+substr_count($clean,$added);
 
@@ -298,7 +298,7 @@ $passivecount = count($passive);
 
 //			}
 
-//		}	
+//		}
 
 $spellinggrammar = $grammarcount;
 
@@ -308,7 +308,7 @@ $spellinggrammar = $grammarcount;
 
 // Assign the allowed threshold for scoring
 
-if (isset($_POST['customize'])) { 
+if (isset($_POST['customize'])) {
 
 	$_SESSION['allowedpassive'] = $_POST['allowedpassive'];
 
@@ -420,9 +420,9 @@ elseif (isset($_GET['preset']) && $_GET['preset'] == 'internet') {
 
 	}
 
-elseif (empty($_SESSION['allowedpassive'])) 
+elseif (empty($_SESSION['allowedpassive']))
 
-	{ 
+	{
 
 	$allowedpassive = 10;
 

@@ -1,6 +1,5 @@
 <?php
-function spamcheck($field)
-  {
+function spamcheck($field) {
   $field=filter_var($field, FILTER_SANITIZE_EMAIL);
   if(filter_var($field, FILTER_VALIDATE_EMAIL))
     {
@@ -37,5 +36,5 @@ if (isset($_REQUEST['email'])) {
   </textarea><br />
   <input type='submit' />
   </form>";
- 
+
 ?>
