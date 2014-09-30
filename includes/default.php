@@ -74,14 +74,10 @@ echo '</div>';
 function showValue(value, name)
 
 {
-
 	document.getElementById(name).innerHTML=value;
-
 }
 
 </script>
-
-<script src="html5slider.js"></script>
 
 <div class="large-6 columns">
 	<div class="panel">

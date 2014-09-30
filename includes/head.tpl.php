@@ -12,7 +12,7 @@
   <meta name="Author" content="Mark Fullmer" />
   <meta name="Description" content="Open Source PHP Code for grammar checking" />
   <link rel="shortcut icon" href="favicon.ico">
-  <link rel="stylesheet" type="text/css" href="style/style.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/foundation/5.4.4/css/foundation.min.css">
 <?php
 include('mysql.php');
