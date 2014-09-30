@@ -18,7 +18,7 @@
 			<li>Ands, Buts, Ors</li>
 			<li>Grammar traps</li>
 		</ul>
-	<img src="screenshot1.png" alt="Screenshot of Grammark highlighting" />
+	<img src="./img/screenshot1.png" alt="Screenshot of Grammark highlighting" />
 	</div>
 </div>
 <div class="large-3 columns">
@@ -35,7 +35,7 @@
 	</div>
 	<div class="panel">
 		<h4>Fully Customizable</h4>
-		<img src="customize.png" alt="Screenshot of Customization" />
+		<img src="./img/customize.png" alt="Screenshot of Customization" />
 	</div>
 </div>
 </div>
