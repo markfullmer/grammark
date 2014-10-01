@@ -15,7 +15,7 @@ if (isset($_REQUEST['submit'])) {
 }
 ?>
 
-<form method='post' action='index.php/?url=database-add'>
+<form method='post' action='database-add'>
   <p><input name='error' type='text' class='textbox' style='width:200px;margin-top:10px;display:inline;' placeholder='Error (ex. lesser then)'
   <?php if (isset($_REQUEST['error'])) { echo 'value="'. $_REQUEST['error'] .'"'; } ?>
   />
