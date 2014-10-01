@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 echo '<h2>Suggest a grammar error for this database</h2>';
 
@@ -22,7 +22,7 @@ if (isset($_REQUEST['submit'])) {
 
     mail("mfullmer@gmail.com", "Grammark database add",
 
-    $error, $correct, "From: mfullmer@gmail.com" );
+    'text', "From: mfullmer@gmail.com" );
 
     echo "Your error suggestion was recorded. We'll check it out.";
 
@@ -34,13 +34,13 @@ if (isset($_REQUEST['submit'])) {
 
   <form method='post' action='database-add.php'>
 
-  <p><input name='error' type='text' class='textbox' style='width:200px;margin-top:10px;display:inline;' placeholder='Error (ex. lesser then)' 
+  <p><input name='error' type='text' class='textbox' style='width:200px;margin-top:10px;display:inline;' placeholder='Error (ex. lesser then)'
 
   <?php if (isset($_REQUEST['error'])) { echo 'value="'. $_REQUEST['error'] .'"'; } ?>
 
   />
 
-  <input name='correct' type='text' class='textbox' style='width:200px;margin-top:10px;display:inline;' placeholder='Suggestion (ex. lesser than)' 
+  <input name='correct' type='text' class='textbox' style='width:200px;margin-top:10px;display:inline;' placeholder='Suggestion (ex. lesser than)'
 
   <?php if (isset($_REQUEST['correct'])) { echo 'value="'. $_REQUEST['correct'] .'"'; } ?>
 
@@ -64,6 +64,6 @@ if (isset($_REQUEST['submit'])) {
 
   <input class='button' type='submit' value='Submit suggestion' />
 
-  </form> 
+  </form>
 
   </div>
