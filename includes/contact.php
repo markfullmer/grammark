@@ -1,5 +1,5 @@
 <div class="large-6 columns">
-<?php 
+<?php
 
 function spamcheck($field) {
   $field=filter_var($field, FILTER_SANITIZE_EMAIL);
@@ -20,9 +20,9 @@ if (isset($_REQUEST['email'])) {
     $response = '<span style="color:red;">Your math is wrong. Either you are a spam bot or you need to go back to grade 1.</span>';
   }
   else {
-    $email = $_REQUEST['email'] ;
-    $name = $_REQUEST['name'] ;
-    $message = $_REQUEST['message'] ;
+    $email = htmlspecialchars($_REQUEST['email']);
+    $name = htmlspecialchars($_REQUEST['name']);
+    $message = htmlspecialchars($_REQUEST['message']);
     mail("mfullmer@gmail.com", "Grammark: $name",
     $message, "From: $email" );
     $response =  "Your email was sent. We'll get back to you soon.";
@@ -32,14 +32,14 @@ if (isset($_REQUEST['email'])) {
 ?>
 
 <form method='post' action='contact'>
-  <input name='name' type='text' placeholder='Name' 
+  <input name='name' type='text' placeholder='Name'
     <?php if (isset($_REQUEST['name'])) { echo 'value="'. $_REQUEST['name'] .'"'; } ?>
   />
-  <input name='email' type='text' placeholder='Email (for reply)' 
+  <input name='email' type='text' placeholder='Email (for reply)'
     <?php if (isset($_REQUEST['email'])) { echo 'value="'. $_REQUEST['email'] .'"'; } ?>
   />
-  <textarea name='message' style="height:200px;" placeholder='Type your message here.'><?php if (isset($_REQUEST['message'])) { 
-    echo $_REQUEST['message']; } 
+  <textarea name='message' style="height:200px;" placeholder='Type your message here.'><?php if (isset($_REQUEST['message'])) {
+    echo $_REQUEST['message']; }
   ?></textarea>
   <?php
 	 $x = rand(5,15);
