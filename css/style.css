@@ -1,6 +1,6 @@
 html { -webkit-font-smoothing: antialiased; }
 
-body { font: .9em verdana, arial, sans-serif; background:#FFF; margin:auto;}
+
 
 label, input[type=button], input[type=submit], button { cursor: pointer; }
 
@@ -119,7 +119,7 @@ ul#tabnav a:hover {
 
 }
 
-@media (max-width: 1064px) {
+@media screen and (max-width: 1064px) {
 	#wrap {
 	margin-left: auto;
 	margin-right: auto;
