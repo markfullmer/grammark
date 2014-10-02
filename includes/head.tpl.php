@@ -8,6 +8,7 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1' />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Grammar Checker and Writing Style</title>
   <meta name="Author" content="Mark Fullmer" />
   <meta name="Description" content="Open Source PHP Code for grammar checking" />
