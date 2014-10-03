@@ -1,6 +1,6 @@
 <?php
-$host="localhost"; // usually localhost
-$username="USER NAME HERE";
-$password="PASSWORD HERE";
-$db_name="DATABASE NAME HERE";
-$email = "EMAIL ADDRESS FOR CONTACT FORM";
+define('HOST',''); // usually localhost
+define('USERNAME','');
+define('PASSWORD','');
+define('DB_NAME','');
+define('EMAIL',''); // for the contact and database suggestion forms

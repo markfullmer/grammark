@@ -8,7 +8,7 @@ if (isset($_REQUEST['submit'])) {
     $error = htmlspecialchars($_REQUEST['error']);
     $correct = htmlspecialchars($_REQUEST['correct']);
     $subject = 'Error suggestion: ' .$error . ' Correct suggestion: ' . $correct;
-    mail("mfullmer@gmail.com", "Grammark database add", $subject, "From: mfullmer@gmail.com" );
+    mail(EMAIL, "Grammark database add", $subject, "From: mfullmer@gmail.com" );
     $response = "Your error suggestion was recorded. We'll check it out.";
   }
   echo '<div class="panel">' . $response . '</div>';

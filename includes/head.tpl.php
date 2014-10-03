@@ -16,8 +16,6 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.5/css/foundation.min.css">
 <?php
-//include_once('js/analyticstracking.php');
-include('mysql.php');
 if (empty($_GET['id'])) {$tab = 1;}
 elseif ($_GET['id'] == 'passive') { $tab = 2; }
 elseif ($_GET['id'] == 'wordiness') { $tab = 3; }

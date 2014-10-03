@@ -23,7 +23,7 @@ if (isset($_REQUEST['email'])) {
     $email = htmlspecialchars($_REQUEST['email']);
     $name = htmlspecialchars($_REQUEST['name']);
     $message = htmlspecialchars($_REQUEST['message']);
-    mail("mfullmer@gmail.com", "Grammark: $name",
+    mail(EMAIL, "Grammark: $name",
     $message, "From: $email" );
     $response =  "Your email was sent. We'll get back to you soon.";
     }

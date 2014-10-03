@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('microtimestart.php');
+include('settings.php');
 include('includes/head.tpl.php');
 ?>
 <?php echo '<body id="tab'. $tab .'">';
@@ -10,13 +11,22 @@ include('includes/nav.tpl.php');
 <div id='wrap'>
 
 <?php
-$pages = array('about','source','contact','wordiness-list','grammar-error-list','transitions-list','database-add');
+$pages = array(
+	'about',
+	'source',
+	'contact',
+	'wordiness-list',
+	'grammar-error-list',
+	'transitions-list',
+	'database-add'
+);
 if (isset($_GET['id']) && $_GET['id'] == 'start' ) { $_SESSION['text'] = '0'; }
 if (isset($_POST['text'])) { $_SESSION['text'] = $_POST['text'];}
 if (isset($_GET['url']) && in_array($_GET['url'],$pages)) {
 	include("includes/" . $_GET['url'] . ".php");
 }
 elseif (isset($_SESSION['text']) && $_SESSION['text'] != '0') {
+	include('mysql.php');
 	include ('includes/menu.php');
 	include('variables.php');
 	if (empty($_GET['id'])) {
