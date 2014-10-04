@@ -1,5 +1,13 @@
 <?php
 session_start();
+require_once 'vendor/autoload.php';
+
+$loader = new Twig_Loader_Filesystem('templates');
+$twig = new Twig_Environment($loader, array(
+
+));
+//  add to above for caching: 'cache' => 'cache/compilation_cache',
+echo $twig->render('index.twig', array('name' => 'Fabien'));
 include('microtimestart.php');
 include('settings.php');
 include('includes/head.tpl.php');
