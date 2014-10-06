@@ -4,3 +4,4 @@ cgi-bin/
 settings.php
 .DS_Store
 .sass-cache/
+cache/compilation_cache/*
