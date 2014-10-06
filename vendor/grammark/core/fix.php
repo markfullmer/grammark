@@ -39,6 +39,9 @@ class Fix {
       $this->rows = $trans;
     }
 
+    /**
+    * Locates items from the given array and highlights them in the given text
+    */
     public function highlight($text = array()) {
       $result = $text->clean;
       foreach ($this->rows as $find) {
@@ -51,7 +54,7 @@ class Fix {
           $result = preg_replace('/'.$find.'/',$highlighted,$result);
           $result = preg_replace('/'.$ufind.'/',$uhighlighted,$result);
           $count = $count+substr_count($text->nopunctuation,$find);
-          $count = $count+substr_count($text->nopunctuation,$find);
+          $count = $count+substr_count($text->nopunctuation,$ufind);
         }
       }
       $this->count = $count;
