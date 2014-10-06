@@ -6,8 +6,6 @@ class Fix {
      */
     protected $db;
     protected $rows;
-    protected $clean;
-    protected $nopunctuation;
     protected $guidance = array(
       'fail' => array(
         "transitions" => "<p>Transitions help readers see your organization and
@@ -30,15 +28,6 @@ class Fix {
         $this->db = $dbConn;
     }
 
-    public function sanitize() {
-      $text = strip_tags($_SESSION['text']);
-      $this->clean = $text;
-      $text = preg_replace('/[\.!?;]/', '.', $text); // Unify terminators
-      $text = preg_replace('/[,]/', '', $text); // Remove commas
-      $text = preg_replace("[^\'A-Za-z-]", " ", html_entity_decode($text, ENT_QUOTES));
-      $this->nopunctuation = $text;
-    }
-
     public function getTable($table) {
       $stmt = $this->db->prepare("SELECT * FROM transitions");
       $stmt->execute(array());
@@ -50,24 +39,24 @@ class Fix {
       $this->rows = $trans;
     }
 
-    public function highlight() {
-      $text = $this->clean;
+    public function highlight($text = array()) {
+      $result = $text->clean;
       foreach ($this->rows as $find) {
         $added = ' '. $find .' ';
-        $pos = stripos($this->nopunctuation,$added);
+        $pos = stripos($text->nopunctuation,$added);
         if(($pos !== false)) {
           $ufind = ucfirst($find);
           $highlighted = '<span class="highlight">' . $find . '</span>' ;
           $uhighlighted = '<span class="highlight">' . $ufind . '</span>' ;
-          $text = preg_replace('/'.$find.'/',$highlighted,$text);
-          $text = preg_replace('/'.$ufind.'/',$uhighlighted,$text);
-          $count = $count+substr_count($this->nopunctuation,$find);
-          $count = $count+substr_count($this->nopunctuation,$find);
+          $result = preg_replace('/'.$find.'/',$highlighted,$result);
+          $result = preg_replace('/'.$ufind.'/',$uhighlighted,$result);
+          $count = $count+substr_count($text->nopunctuation,$find);
+          $count = $count+substr_count($text->nopunctuation,$find);
         }
       }
       $this->count = $count;
-      $this->score = $count;
-      $this->highlighted = $text;
+      $this->score = number_format($count/$text->sentences['count']*100);
+      $this->highlighted = $result;
     }
 
     public function render($id = null) {
@@ -84,6 +73,7 @@ class Fix {
           'alt' => 'passed the test'
         );
       }
+      $results['id'] = $id;
       $results['output'] = nl2br($this->highlighted);
       $results['count'] = $this->count;
       $results['goal'] = $_SESSION['score'][$id];

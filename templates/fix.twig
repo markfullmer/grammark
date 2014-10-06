@@ -10,20 +10,20 @@
 {% block sidebar %}
 <script type="text/javascript">
   function copyContent () {
-    document.getElementById("text").value = document.getElementById("content").innerHTML;
+    document.getElementById("text").value = document.getElementById("editable").innerHTML;
     return true;
   }
   function copyContenttwo () {
-    document.getElementById("save").value = document.getElementById("content").innerHTML;
+    document.getElementById("save").value = document.getElementById("editable").innerHTML;
     return true;
   }
 </script>
 <h4>Click on the text below to start editing</h4>
-<div id="content" class="textbox" style="padding:10px 30px 10px 30px;" contenteditable="true">
+<div id="editable" class="textbox" style="padding:10px 30px 10px 30px;" contenteditable="true">
   {{ output|raw }}
   </div>
   <form action="?id={{ id }}" method="post" onsubmit="return copyContent()">
-  <p><textarea class="textbox" id="text" name="text" rows="50" cols="55" style="display:none; visibility:none" ></textarea></p>
+  <p><textarea class="textbox" id="text" name="text" rows="50" cols="55" style="display:none; visibility:none" >thkjh</textarea></p>
   <p><input type="hidden" name="id" value="{{ id }}" /></p>
   <p><input class="button" type="submit" name="submit" value="Recheck"/></p>
 </form>

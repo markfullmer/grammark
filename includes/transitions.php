@@ -8,9 +8,9 @@ $transitions = array();
 
 		$result = mysql_query($sql)	or die(mysql_error());
 
-		while ($row = mysql_fetch_array($result)) 
+		while ($row = mysql_fetch_array($result))
 
-		{	extract($row); 
+		{	extract($row);
 
 			$transitions[]=trim($transition);
 
@@ -28,7 +28,7 @@ foreach ($transitions as $check) {
 
 		$pos = stripos($clean,$added);
 
-		if(($pos !== false)) {	
+		if(($pos !== false)) {
 
 			$ucheck = ucfirst($check);
 
@@ -46,7 +46,7 @@ foreach ($transitions as $check) {
 
 			}
 
-		}	
+		}
 
 
 
