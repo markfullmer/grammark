@@ -3,6 +3,7 @@
     {% include 'head.twig' %}
     <body>
     {% if analytics %}
+    hello
       <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -15,6 +16,16 @@
     {% endif %}
     {% include 'nav.twig' %}
     <div id="wrap">
+        {% if template in 'results,fix' %}
+        <ul id="tabnav">
+          <li class="tab1"><a href="index.php">Overview</a></li>
+          <li class="tab2"><a href="index.php?id=passive">Passive Voice</a></li>
+          <li class="tab3"><a href="index.php?id=wordiness">Wordiness</a></li>
+          <li class="tab4"><a href="index.php?id=transitions">Transitions</a></li>
+          <li class="tab5"><a href="index.php?id=andbutor">Sentences</a></li>
+          <li class="tab6"><a href="index.php?id=grammar">Grammar</a></li>
+      </ul>
+      {% endif %}
       <div id="content">{% block content %}{% endblock %}</div>
       <div id="sidebar">{% block sidebar %}{% endblock %}</div>
     </div>
