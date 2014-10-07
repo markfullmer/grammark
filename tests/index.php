@@ -1,6 +1,6 @@
 <?php
 include 'tests/texts.php';
-echo '<h2>Automated tests</h2>';
+//echo '<h6>Automated tests</h6>';
 $test = new RunTests();
 echo $test->countTransitions($textone, 3);
 echo $test->countSentences($textone,20);
@@ -49,8 +49,8 @@ class RunTests {
   }
 
   public function display() {
-    $result = $this->boolean ? 'Passed: ' : '<b>Failed</b>: ';
-    return $result.$this->message.'<br />';
+    $result = $this->boolean ? '' : '<b>Failed</b>: '.$this->message.'<br />';
+    return $result;
   }
 }
 ?>

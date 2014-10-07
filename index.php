@@ -56,9 +56,9 @@ elseif (isset($_SESSION['text'])) { // Some text has been submitted
 }
 $data['template'] = $template;
 $data['analytics'] = ANALYTICS;
-echo $twig->render($template . '.twig', $data);
 if (TESTING_MODE) {
 	include 'tests/index.php';
 }
+echo $twig->render($template . '.twig', $data);
 ?>
 
