@@ -14,6 +14,18 @@ class ProcessText {
       $this->sentences['array'] = explode(".", $this->clean);
       $this->sentences['count'] = count($this->sentences['array']);
     }
+    public function sentenceVariety() {
+      foreach ($this->sentences['array'] as $sentence) {
+        $sentencecounts[] = str_word_count($sentence);
+      }
+      // Standard deviation: takes average sentence length, finds each sentence's variance from this, then averages that deviation & converts it to a percent
+      $words_per_sentence = number_format(str_word_count($this->clean)/$this->sentences['count']);
+      foreach ($sentencecounts as $length) {
+        $powers[] = pow($length-$words_per_sentence,2);
+      }
+      $standard_deviation = number_format(sqrt(array_sum($powers)/count($powers)));
+      $this->sentences['variety'] = number_format($standard_deviation/$words_per_sentence*100);
+    }
     public function stripPunctuation() {
       $text = preg_replace('/[\.!?;]/', '.', $this->clean); // Unify terminators
       $text = preg_replace('/[,.]/', '', $text); // Remove commas

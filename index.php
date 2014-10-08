@@ -48,7 +48,10 @@ elseif (isset($_SESSION['text'])) { // Some text has been submitted
 		new Score($config); // load the current scores
 		$database = new Data();
 		$table = $database->getTable($config);
-		//$content['guidance'] calculate($configuration,$text->nopunctuation,$table)
+		//$content['guidance'] $text->calculate($configuration,$table)
+		$text->getSentences();
+		$text->sentenceVariety();
+		echo $text->sentences['variety'];
 		$content['output'] = $text->highlight($config,$table);
 	}
 }
