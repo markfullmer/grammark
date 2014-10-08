@@ -20,7 +20,7 @@ $pages = array(
 	'transitions-list', 'database-add'
 );
 $template = 'default';
-$data = array();
+$content = array();
 if (isset($_GET['id']) && $_GET['id'] == 'start' ) {
   // A "start" callback wipes the session
 	unset($_SESSION['text']);
@@ -32,33 +32,31 @@ if (isset($_GET['url']) && in_array($_GET['url'],$pages)) {
 	// If the callback is for a page defined in the system
 	$template = 'page';
 	$page = new Page();
-	$data = $page->get($_GET['url']);
+	$content = $page->get($_GET['url']);
 }
 elseif (isset($_SESSION['text'])) { // Some text has been submitted
-	$db = new PDO('mysql:host='.HOST.';dbname='.DB_NAME.';charset=utf8', USERNAME, PASSWORD);
-	new Score(); // load the current scores
 	$text = new ProcessText($_SESSION['text']);
-	$text->stripPunctuation();
 	if (empty($_GET['id'])) { // No specific fix tab is selected
 	  $template = 'results';
 	  $results = new Results();
-	  $data = $results->get();
+	  $content = $results->get();
 	}
 	else { // A specific fix tab is selected
 		$template = 'fix';
-		$fix = new Fix();
-		$fix->setDB($db);
-		$fix->getTable($_GET['id']);
-		$text->getSentences();
-		$fix->highlight($text);
-		$data = $fix->render($_GET['id']);
+		$type = new $_GET['id']();
+		$config = get_class_vars(get_class($type));
+		new Score($config); // load the current scores
+		$database = new Data();
+		$table = $database->getTable($config);
+		//$content['guidance'] calculate($configuration,$text->nopunctuation,$table)
+		$content['output'] = $text->highlight($config,$table);
 	}
 }
-$data['template'] = $template;
-$data['analytics'] = ANALYTICS;
+$content['template'] = $template;
+$content['analytics'] = ANALYTICS;
 if (TESTING_MODE) {
 	include 'tests/index.php';
 }
-echo $twig->render($template . '.twig', $data);
+//print_r($text);
+echo $twig->render($template . '.twig', $content);
 ?>
-
