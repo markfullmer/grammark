@@ -1,6 +1,6 @@
 <?php
 
-class Transitions {
+class Transitions extends ProcessText {
     /**
     * The configuration settings for finding an existing trait in a text
     *
@@ -19,6 +19,7 @@ class Transitions {
     public static $table = 'transitions';
     public static $find = 'transition';
     public static $suggestion = null;
+    public static $fails_if = '<';
     public static $fail = '<p>Transitions help readers see your organization and
         thought process. Example:</p><ul><li><b>No transition:</b> <i>Martinez
         states that 70% of taxes are paid by the wealthiest 10%. Obama\'s argument
@@ -34,5 +35,9 @@ class Transitions {
     public static $humanities = '25';
     public static $sciences = '25';
     public static $internet = '15';
+
+        public function loadConfig() {
+        $this->config = get_class_vars(get_class());
+    }
 }
 ?>

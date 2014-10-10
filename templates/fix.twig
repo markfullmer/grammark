@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="panel">
-  <img src="img/{{ result }}.png" style="display:inline; float:right;" alt="{{ alt }}" />
-  <h3>{{ score }}{{ label }}</h3>
-  {{ guidance|raw }} {{goal}}
+  <img src="img/{{ guidance.result }}.png" style="display:inline; float:right;" alt="{{ guidance.alt }}" />
+  <h3>{{ guidance.score }}{{ guidance.label }}</h3>
+  {{ guidance.text }} {{guidance.goal}}
 </div>
 {% endblock %}
 {% block sidebar %}

@@ -4,11 +4,15 @@ class ProcessText {
     public $clean;
     public $sentences;
     public $nopunctuation;
+    public $highlighted;
+    public $config;
+    public $score;
 
     public function __construct($submission) {
       $this->clean = strip_tags($submission); // remove html/javascript
       $this->stripPunctuation();
     }
+
     public function getSentences() {
       $this->sentences['text'] = preg_replace('/[\.!?;]/', '.', $this->clean); // Unify terminators
       $this->sentences['array'] = explode(".", $this->clean);
@@ -18,7 +22,6 @@ class ProcessText {
       foreach ($this->sentences['array'] as $sentence) {
         $sentencecounts[] = str_word_count($sentence);
       }
-      // Standard deviation: takes average sentence length, finds each sentence's variance from this, then averages that deviation & converts it to a percent
       $words_per_sentence = number_format(str_word_count($this->clean)/$this->sentences['count']);
       foreach ($sentencecounts as $length) {
         $powers[] = pow($length-$words_per_sentence,2);
@@ -32,20 +35,56 @@ class ProcessText {
       $text = preg_replace("[^\'A-Za-z-]", " ", html_entity_decode($text, ENT_QUOTES));
       $this->nopunctuation = $text;
     }
-    public function highlight($config,$table) {
+    public function highlight($table) {
       $result = $this->clean;
       foreach ($table['find'] as $find) {
-        $table['search'][] = '/'.$find.'/';
+        $table['search'][] = $find;
         $table['replace'][] = '<span class="highlight">' . $find . '</span>';
       }
       foreach ($table['find'] as $find) {
-        $table['ufind'][] = ucfirst($find);
+        $table['usearch'][] = ucfirst($find);
         $table['ureplace'][] = '<span class="highlight">' . ucfirst($find) . '</span>';
       }
       // If there is a correction table, append that to the replaces.
-      $result = strtr($result, array_combine($table['find'], $table['replace']));
-      $result = strtr($result, array_combine($table['ufind'], $table['ureplace']));
-      return $result;
+      $result = strtr($result, array_combine($table['search'], $table['replace']));
+      $result = strtr($result, array_combine($table['usearch'], $table['ureplace']));
+      $this->highlighted = $result;
+    }
+    public function score($table) {
+      foreach($table['find'] as $find) {
+        $count = substr_count($this->nopunctuation,' '. $find .' ');
+        $ucount = substr_count($this->nopunctuation,' '. ucfirst($find) .' ');
+        $total = $total+$count+$ucount;
+      }
+      if ($this->score_type == 'per_sentence') {
+        $score = number_format($total/$this->sentences['count']*100);
+      }
+      else {
+        $score = $total;
+      }
+      $this->score = $score;
+    }
+    public function guidance() {
+      $guidance['score'] = $this->score;
+      $guidance['label'] = $this::$label;
+      $guidance['guidance'] = $this::$pass;
+      $guidance['result'] = 'pass';
+      $guidance['alt'] = 'passes the criterion';
+      if ($this::$fails_if == '>') {
+        $lesser = $this->score;
+        $greater = $_SESSION['score']{$this::$name};
+      }
+      elseif ($this::$fails_if == '<') {
+        $greater = $score;
+        $lesser = $_SESSION['score']{$this::$name};
+      }
+      if ($lesser > $greater) {
+        $guidance['guidance'] = $this::$fail;
+        $guidance['result'] = 'fail';
+        $guidance['alt'] = 'fails the criterion';
+      }
+      $guidance['goal'] = $_SESSION['score']{$this::$name};
+      return $guidance;
     }
 }
 ?>

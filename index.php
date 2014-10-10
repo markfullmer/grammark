@@ -35,13 +35,34 @@ if (isset($_GET['url']) && in_array($_GET['url'],$pages)) {
 	$content = $page->get($_GET['url']);
 }
 elseif (isset($_SESSION['text'])) { // Some text has been submitted
-	$text = new ProcessText($_SESSION['text']);
+	//$text = new ProcessText($_SESSION['text']);
+	print_r($text);
 	if (empty($_GET['id'])) { // No specific fix tab is selected
 	  $template = 'results';
 	  $results = new Results();
 	  $content = $results->get();
 	}
 	else { // A specific fix tab is selected
+		$template = 'fix';
+		$obj = new $_GET['id']($_SESSION['text']);
+		unset($_SESSION['score']);
+		new Score($obj);
+		print_r($_SESSION['score']);
+		$database = new Data();
+		$table = $database->getTable($obj);
+		//$obj->getSentences();
+		//$obj->sentenceVariety();
+		//print_r($table);
+		$obj->score($table);
+		$content = $obj->guidance();
+		$obj->highlight($table);
+
+		$content['output'] = $obj->highlighted;
+		//print_r($obj);
+		//print_r($_SESSION['score']);
+		//$obj->highlight();
+
+		/*
 		$template = 'fix';
 		$type = new $_GET['id']();
 		$config = get_class_vars(get_class($type));
@@ -52,7 +73,10 @@ elseif (isset($_SESSION['text'])) { // Some text has been submitted
 		$text->getSentences();
 		$text->sentenceVariety();
 		echo $text->sentences['variety'];
-		$content['output'] = $text->highlight($config,$table);
+		$score = $text->score($config,$table);
+		$content = $text->guidance($config,$score);
+		$text->highlight($config,$table);
+		$content['output'] = $text->highlighted;*/
 	}
 }
 $content['template'] = $template;
