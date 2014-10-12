@@ -4,7 +4,7 @@
 <div class="panel">
   <img src="img/{{ guidance.result }}.png" style="display:inline; float:right;" alt="{{ guidance.alt }}" />
   <h3>{{ guidance.score }}{{ guidance.label }}</h3>
-  {{ guidance.text }} {{guidance.goal}}
+  {{ guidance.text|raw }}
 </div>
 {% endblock %}
 {% block sidebar %}

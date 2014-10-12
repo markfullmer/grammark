@@ -15,7 +15,8 @@ class Wordiness extends ProcessText {
     *
     * @static
     */
-    public static $name = 'wordiness';
+    public static $name = 'Wordiness';
+    public static $id = 'wordiness';
     public static $table = 'wordiness';
     public static $find = 'error';
     public static $suggestion = null;

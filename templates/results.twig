@@ -2,18 +2,25 @@
 
 {% block content %}
   <div class="large-6 columns">
-    <h2>Potential Problems: <span style="background-color:yellow;">{{ totalProblems }}</span></h2>
+    <h2>Potential Problems: <span class="highlight">{{ results.total }}</span></h2>
     <table>
-    <tr>
-      <td>Grammar:</td>
-      <td>
-        {% if problems >= limit %}
-        <a class="error" href="?id=grammar">{{ problems }}</a>
-        {% else %}
-        {{ problems }} (most common: {{ common }}
-        {% endif %}
-      </td>
+    {% for key,item in results.individual %}
+      <tr>
+        <td>
+          {{ key }}:
+        </td>
+        <td>
+          {% if item.result == 'fail' %}
+          <span class="highlight"><a href="?id={{ item.id }}">{{ item.raw_score }}</a></span>
+          {% else %}
+          {{ item.raw_score }}
+          {% endif %}
+          {% if item.type == 'per_sentence' %}
+          ({{ item.score }}% of sentences)
+          {% endif %}
+        </td>
     </tr>
+    {% endfor %}
   </table>
   <a class="button" href="index.php?id=passive">Fix Problems</a>
   <a class="button" href="index.php?id=start">Start Over</a><br />

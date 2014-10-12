@@ -15,7 +15,8 @@ class Transitions extends ProcessText {
     *
     * @static
     */
-    public static $name = 'transitions';
+    public static $name = 'Transitions';
+    public static $id = 'transitions';
     public static $table = 'transitions';
     public static $find = 'transition';
     public static $suggestion = null;
@@ -35,9 +36,5 @@ class Transitions extends ProcessText {
     public static $humanities = '25';
     public static $sciences = '25';
     public static $internet = '15';
-
-        public function loadConfig() {
-        $this->config = get_class_vars(get_class());
-    }
 }
 ?>

@@ -7,6 +7,7 @@ class ProcessText {
     public $highlighted;
     public $config;
     public $score;
+    public $raw_score;
 
     public function __construct($submission) {
       $this->clean = strip_tags($submission); // remove html/javascript
@@ -55,19 +56,24 @@ class ProcessText {
         $count = substr_count($this->nopunctuation,' '. $find .' ');
         $ucount = substr_count($this->nopunctuation,' '. ucfirst($find) .' ');
         $total = $total+$count+$ucount;
+
       }
-      if ($this->score_type == 'per_sentence') {
+      echo $total;
+      if ($this::$score_type == 'per_sentence') {
+        echo 'got here';
+        $this->getSentences();
         $score = number_format($total/$this->sentences['count']*100);
       }
       else {
         $score = $total;
       }
+      $this->raw_score = $total;
       $this->score = $score;
     }
     public function guidance() {
       $guidance['score'] = $this->score;
       $guidance['label'] = $this::$label;
-      $guidance['guidance'] = $this::$pass;
+      $guidance['text'] = $this::$pass;
       $guidance['result'] = 'pass';
       $guidance['alt'] = 'passes the criterion';
       if ($this::$fails_if == '>') {
@@ -75,16 +81,16 @@ class ProcessText {
         $greater = $_SESSION['score']{$this::$name};
       }
       elseif ($this::$fails_if == '<') {
-        $greater = $score;
+        $greater = $this->score;
         $lesser = $_SESSION['score']{$this::$name};
       }
       if ($lesser > $greater) {
-        $guidance['guidance'] = $this::$fail;
+        $guidance['text'] = $this::$fail;
         $guidance['result'] = 'fail';
         $guidance['alt'] = 'fails the criterion';
       }
       $guidance['goal'] = $_SESSION['score']{$this::$name};
-      return $guidance;
+      $this->guidance = $guidance;
     }
 }
 ?>

@@ -15,7 +15,8 @@ class Grammar extends ProcessText {
     *
     * @static
     */
-    public static $name = 'grammar';
+    public static $name = 'Grammar issues';
+    public static $id = 'grammar';
     public static $table = 'miscellaneous';
     public static $find = 'error';
     public static $suggestion = null;

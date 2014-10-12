@@ -15,7 +15,8 @@ class Passive extends ProcessText {
     *
     * @static
     */
-    public static $name = 'passive';
+    public static $name = 'Passive voice';
+    public static $id = 'passive';
     public static $table = 'irregularpasttense';
     public static $find = 'word';
     public static $suggestion = null;
@@ -44,6 +45,7 @@ class Passive extends ProcessText {
     public static $internet = '0';
 
     public function score($table) {
+        $this->getSentences();
         $verbs = array(
             'is','are','was','were','be','being','been',
             'Is','Are','Was','Were','Be','Being','Been'
@@ -62,7 +64,8 @@ class Passive extends ProcessText {
             }
         }
         $this->passive = $passive;
-        $this->score = count($passive);
+        $this->raw_score = count($passive);
+        $this->score = number_format(count($passive)/$this->sentences['count']*100);
     }
     public function highlight() {
         $result = $this->clean;
