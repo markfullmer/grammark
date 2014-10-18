@@ -4,6 +4,7 @@
   <div class="large-6 columns">
     <h2>Potential Problems: <span class="highlight">{{ results.total }}</span></h2>
     <table>
+    <tr><td></td><td>Actual</td><td>Goal</td></tr>
     {% for key,item in results.individual %}
       <tr>
         <td>
@@ -17,6 +18,14 @@
           {% endif %}
           {% if item.type == 'per_sentence' %}
           ({{ item.score }}% of sentences)
+          {% endif %}
+        </td>
+        <td>
+         {{ item.goal }}
+          {% if item.type == 'per_sentence' %}
+          % of sentences
+          {% else %}
+          errors
           {% endif %}
         </td>
     </tr>

@@ -23,5 +23,24 @@ class Data {
       }
       return $table;
     }
+    public function getOneByURL($url) {
+      $table = array();
+      $sql = "SELECT content FROM Pages WHERE url = :url";
+      $stmt = $this->db->prepare($sql);
+      $stmt->execute(array(':url' => $url));
+      $row = $stmt
+        ->fetch(PDO::FETCH_OBJ);
+      return $row->content;
+    }
+
+    public function getAllByTable($table) {
+      $results = array();
+      $sql = "SELECT * FROM ".$table;
+      $stmt = $this->db->prepare($sql);
+      $stmt->execute(array());
+      $row = $stmt
+        ->fetchAll(PDO::FETCH_ASSOC);
+      return $row;
+    }
 }
 ?>

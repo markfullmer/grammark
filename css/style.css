@@ -7,13 +7,18 @@ label, input[type=button], input[type=submit], button { cursor: pointer; }
 .textbox {
 	border:1px solid gray;
 }
-.title-area .name a img{
+
+.title-area .name div {
+	background:url("../img/title.png");
+	background-size:100% 100%;
 	height:45px;
+	width:400px;
+	font-size:1px;
+	font-color:black;
 }
 .highlight {
 	background-color:yellow;
 }
-
 nav {
 	margin-bottom:10px;
 }
@@ -123,11 +128,25 @@ ul#tabnav a:hover {
 }
 
 @media screen and (max-width: 1064px) {
+
 	#wrap {
-	margin-left: auto;
-	margin-right: auto;
-	margin-top:20px;
-	width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top:20px;
+		width: 100%;
+	}
+
+	.title-area .name div {
+		background:url("../img/title-small.png");
+		background-size:100% 100%;
+		height:45px;
+		width:250px;
+		font-size:1px;
+		font-color:black;
+	}
+
+	nav li > a.button {
+		text-align:left;
 	}
 }
 

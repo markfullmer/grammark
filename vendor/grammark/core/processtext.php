@@ -58,9 +58,7 @@ class ProcessText {
         $total = $total+$count+$ucount;
 
       }
-      echo $total;
       if ($this::$score_type == 'per_sentence') {
-        echo 'got here';
         $this->getSentences();
         $score = number_format($total/$this->sentences['count']*100);
       }

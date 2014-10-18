@@ -14,6 +14,11 @@ function t($string,$replacements) {
 	}
 	return $string;
 }
+
+function l($link,$text) {
+	return '<a href="'.$link.'">'.$text.'</a>';
+}
+
 // Define our custom autoloader
 spl_autoload_register('my_autoloader');
 define('DOCROOT', dirname(__FILE__));
@@ -23,7 +28,7 @@ function my_autoloader($name) {
 
 $pages = array(
 	'about', 'source', 'contact', 'wordiness-list', 'grammar-error-list',
-	'transitions-list', 'database-add'
+	'transitions-list', 'database-add','spelling-errors'
 );
 $tabs = array('passive','wordiness','transitions','grammar','andbutor');
 $template = 'default';
@@ -39,7 +44,7 @@ if (isset($_GET['url']) && in_array($_GET['url'],$pages)) {
 	// If the callback is for a page defined in the system
 	$template = 'page';
 	$page = new Page();
-	$content = $page->get($_GET['url']);
+	$content = $page->content;
 }
 elseif (isset($_SESSION['text'])) { // Some text has been submitted
 	if (isset($_GET['id'])) { // A specific fix tab is selected
