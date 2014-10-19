@@ -15,7 +15,7 @@ class Transitions extends ProcessText {
     *
     * @static
     */
-    public static $name = 'Transitions';
+    public static $name = 'Sentences with Transitions';
     public static $id = 'transitions';
     public static $table = 'transitions';
     public static $find = 'transition';

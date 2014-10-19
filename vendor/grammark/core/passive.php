@@ -15,7 +15,7 @@ class Passive extends ProcessText {
     *
     * @static
     */
-    public static $name = 'Passive voice';
+    public static $name = 'Passive voice sentences';
     public static $id = 'passive';
     public static $table = 'irregularpasttense';
     public static $find = 'word';

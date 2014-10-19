@@ -3,3 +3,9 @@
         "twig/twig": "1.*"
     }
 }
+
+{
+  "require": {
+    "pdepend/pdepend" : "2.0.3"
+  }
+}

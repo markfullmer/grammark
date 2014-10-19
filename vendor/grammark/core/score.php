@@ -3,7 +3,7 @@
 class Score {
   public function __construct($config) {
     if (isset($_POST['customize'])) {
-      $_SESSION['score']{$config::$name} = $_POST['score'];
+      $_SESSION['score']{$config::$name} = $_POST{$config::$id};
     }
     elseif (isset($config::${$_GET['preset']})) {
       $_SESSION['score']{$config::$name} = $config::${$_GET['preset']};

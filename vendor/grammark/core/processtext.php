@@ -8,6 +8,8 @@ class ProcessText {
     public $config;
     public $score;
     public $raw_score;
+    public $instances;
+    public static $highlight_spacer;
 
     public function __construct($submission) {
       $this->clean = strip_tags($submission); // remove html/javascript
@@ -39,10 +41,12 @@ class ProcessText {
     public function highlight($table) {
       $result = $this->clean;
       foreach ($table['find'] as $find) {
+        if ($this::$highlight_spacer) { $find = ' ' . $find . ' '; }
         $table['search'][] = $find;
         $table['replace'][] = '<span class="highlight">' . $find . '</span>';
       }
       foreach ($table['find'] as $find) {
+        if ($this::$highlight_spacer) { $find = ' ' . $find . ' '; }
         $table['usearch'][] = ucfirst($find);
         $table['ureplace'][] = '<span class="highlight">' . ucfirst($find) . '</span>';
       }
@@ -55,6 +59,7 @@ class ProcessText {
       foreach($table['find'] as $find) {
         $count = substr_count($this->nopunctuation,' '. $find .' ');
         $ucount = substr_count($this->nopunctuation,' '. ucfirst($find) .' ');
+        if ($count+$ucount > 0) { $this->instances[] = $find; }
         $total = $total+$count+$ucount;
 
       }
@@ -89,6 +94,10 @@ class ProcessText {
       }
       $guidance['goal'] = $_SESSION['score']{$this::$name};
       $this->guidance = $guidance;
+    }
+
+    public function alter() {
+
     }
 }
 ?>

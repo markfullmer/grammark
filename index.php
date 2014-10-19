@@ -30,7 +30,7 @@ $pages = array(
 	'about', 'source', 'contact', 'wordiness-list', 'grammar-error-list',
 	'transitions-list', 'database-add','spelling-errors'
 );
-$tabs = array('passive','wordiness','transitions','grammar','andbutor');
+$tabs = array('passive','wordiness','transitions','grammar','andbutor','spelling');
 $template = 'default';
 $content = array();
 if (isset($_GET['id']) && $_GET['id'] == 'start' ) {
@@ -56,6 +56,7 @@ elseif (isset($_SESSION['text'])) { // Some text has been submitted
 			$database = new Data();
 			$table = $database->getTable($obj);
 			$obj->score($table);
+			$obj->alter();
 			$content = $obj->guidance();
 			$obj->highlight($table);
 			$content['output'] = nl2br($obj->highlighted);
@@ -71,6 +72,7 @@ elseif (isset($_SESSION['text'])) { // Some text has been submitted
 	  $template = 'results';
 	  unset($_SESSION['score']);
 	  $results = new Results($tabs);
+	  $content['overview'] = $results->tests[4]->guidance['text'];
 	  $content['results'] = $results->display();
 	}
 

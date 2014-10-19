@@ -2,6 +2,13 @@
 
 {% block content %}
   <div class="large-6 columns">
+    <table>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    {{ overview|raw }}
     <h2>Potential Problems: <span class="highlight">{{ results.total }}</span></h2>
     <table>
     <tr><td></td><td>Actual</td><td>Goal</td></tr>
@@ -17,14 +24,11 @@
           {{ item.raw_score }}
           {% endif %}
           {% if item.type == 'per_sentence' %}
-          ({{ item.score }}% of sentences)
+          ({{ item.score }}%)
           {% endif %}
         </td>
         <td>
-         {{ item.goal }}
-          {% if item.type == 'per_sentence' %}
-          % of sentences
-          {% else %}
+         {{ item.goal }}{% if item.type == 'per_sentence' %}%{% else %}
           errors
           {% endif %}
         </td>
@@ -49,10 +53,20 @@
       <h2>Score: {{ score }}%</h2>
       <p>Calculates errors divided by number of your sentences ({{ sentencecount }} sentences). Maximum allowable errors for 100%:</p>
       <form action="index.php" method="post">
-        <span id="{{ category }}"> {{ limit }} </span> % {{ category }}<br />
-        <input type="range" name="allowed{{ category }}" min="0" max="100" value="{{ allowedpassive }} step="1" onchange="showValue(this.value, '{{ category}}')'' /><br />
+        {% for key,item in results.individual %}
+          {{ key }}<br />
+          <input type="range" name="{{ item.id }}" min="0" max="100" value="{{ item.goal }}"
+          step="1" onchange="showValue(this.value, '{{ item.id }}')" />
+          <span id="{{ item.id }}">{{ item.goal }}</span><br />
+        {% endfor %}
         <input class="button" type="submit" name="customize" value="Customize" />
       </form>
+      <!--
+
+        <span id="{{ category }}"> {{ limit }} </span> % {{ category }}<br />
+        <input type="range" name="allowed{{ category }}" min="0" max="100" value="{{ allowedpassive }} step="1" onchange="showValue(this.value, '{{ category}}')'' /><br />
+
+      -->
     <p>
     Presets:
       <a class="tiny button" href="index.php?preset=humanities">Humanities</a>
