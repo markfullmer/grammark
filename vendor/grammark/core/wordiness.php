@@ -33,6 +33,7 @@ Try to eliminate all wordiness.</p>';
     public static $humanities = '10';
     public static $sciences = '10';
     public static $internet = '0';
+    public static $highlight_spacer = true;
 }
 ?>
 

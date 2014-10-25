@@ -34,6 +34,7 @@ class Grammar extends ProcessText {
     public static $humanities = '0';
     public static $sciences = '0';
     public static $internet = '0';
+    public static $highlight_spacer = true;
 }
 ?>
 

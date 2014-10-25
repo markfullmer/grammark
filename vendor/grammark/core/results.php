@@ -3,6 +3,7 @@
 class Results {
 
   public $tests;
+  public $individual = array();
 
   public function __construct($tabs) {
       foreach ($tabs as $class) {
@@ -28,9 +29,16 @@ class Results {
       );
       if ($test::$fails_if == '>') {
         $results['total'] = $results['total']+$test->raw_score;
+        if ($test->score <= $test->guidance['goal']) {
+          $results['grade'][] = 1;
+        }
+        else {
+          $results['grade'][] = ($test->guidance['goal']+1)/($test->score+1);
+        }
       }
     }
-    return $results;
+    $results['score'] = number_format(array_sum($results['grade'])/count($results['grade'])*100);
+    $this->individual = $results;
   }
 }
 ?>

@@ -30,7 +30,8 @@ $pages = array(
 	'about', 'source', 'contact', 'wordiness-list', 'grammar-error-list',
 	'transitions-list', 'database-add','spelling-errors'
 );
-$tabs = array('passive','wordiness','transitions','grammar','andbutor','spelling');
+$tabs = array('passive','wordiness','transitions','grammar','andbutor','spelling',
+'nominalizations');
 $template = 'default';
 $content = array();
 if (isset($_GET['id']) && $_GET['id'] == 'start' ) {
@@ -65,7 +66,6 @@ elseif (isset($_SESSION['text'])) { // Some text has been submitted
 		}
 		else {
 			//redirect to base url?
-			echo 'no good';
 		}
 	}
 	if (empty($_GET['id'])) { // No specific fix tab is selected
@@ -73,7 +73,8 @@ elseif (isset($_SESSION['text'])) { // Some text has been submitted
 	  unset($_SESSION['score']);
 	  $results = new Results($tabs);
 	  $content['overview'] = $results->tests[4]->guidance['text'];
-	  $content['results'] = $results->display();
+	  $results->display();
+	  $content['results'] = $results->individual;
 	}
 
 }
