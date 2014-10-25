@@ -78,6 +78,7 @@ elseif (isset($_SESSION['text'])) { // Some text has been submitted
 	}
 
 }
+$content['url'] = "http://" . $_SERVER['SERVER_NAME'];
 $content['template'] = $template;
 $content['analytics'] = ANALYTICS;
 if (TESTING_MODE) {
