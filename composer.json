@@ -1,0 +1,7 @@
+{
+    "require": {
+        "twig/twig": "1.*",
+        "pdepend/pdepend" : "2.0.3",
+        "phpmd/phpmd" : "@stable"
+    }
+}
