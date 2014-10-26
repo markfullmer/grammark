@@ -25,7 +25,7 @@ class Data {
     }
     public function getOneByURL($url) {
       $table = array();
-      $sql = "SELECT content FROM Pages WHERE url = :url";
+      $sql = "SELECT content FROM pages WHERE url = :url";
       $stmt = $this->db->prepare($sql);
       $stmt->execute(array(':url' => $url));
       $row = $stmt
