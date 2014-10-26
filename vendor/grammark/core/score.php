@@ -8,7 +8,7 @@ class Score {
     elseif (isset($config::${$_GET['preset']})) {
       $_SESSION['score']{$config::$name} = $config::${$_GET['preset']};
     }
-    else {
+    elseif (empty($_SESSION['score']{$config::$name})) {
       $_SESSION['score']{$config::$name} = $config::$standard;
     }
   }

@@ -21,8 +21,16 @@ class Nominalizations extends ProcessText {
     public static $find = 'word';
     public static $suggestion = null;
     public static $fails_if = '>';
-    public static $fail = 'Fail instructions';
-    public static $pass = 'Pass instructions';
+    public static $fail = '<p>Most of the highlighted words below are acceptable to use.
+    However, Grammark identified an excessive number of nominalized word forms. What are those?
+    Simply speaking, they are non root-form words. These kind of words bog down writing and decrease readability:</p>
+    <ul><li><b>Nominalized usage:</b> The <mark>distribution</mark> of <mark>monetization</mark> will show <mark>financial</mark> <mark>improvement</mark>.</li>
+    <li><b>Root form usage:</b> <mark>Finances</mark> will <mark>improve</mark> if we <mark>distribute</mark> <mark>money</mark>.</li></ul><p>Pick a number of the more glaringly obvious nominalized forms below and ask yourself, "How can I say the same thing with a root form word?"</p>';
+    public static $pass = '<p>Most of the highlighted words below are acceptable to use.
+    Still, it is good to review how you are using nominalized word forms. What are those?
+    Simply speaking, they are non root-form words. These kind of words bog down writing and decrease readability:</p>
+    <ul><li><b>Nominalized usage:</b> The <mark>distribution</mark> of <mark>monetization</mark> will show <mark>financial</mark> <mark>improvement</mark>.</li>
+    <li><b>Root form usage:</b> <mark>Finances</mark> will <mark>improve</mark> if we <mark>distribute</mark> <mark>money</mark>.</li></ul>';
     public static $label = '% of sentences with nominalized word forms';
     public static $score_type = 'per_sentence';
     public static $standard = '50';

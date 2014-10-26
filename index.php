@@ -4,6 +4,7 @@ require_once 'vendor/autoload.php';
 require_once 'settings.php';
 $loader = new Twig_Loader_Filesystem('templates');
 $twig = new Twig_Environment($loader, array(
+	'cache' => 'cache/compilation_cache',
 ));
 //  add to above for caching: 'cache' => 'cache/compilation_cache',
 
@@ -52,7 +53,6 @@ elseif (isset($_SESSION['text'])) { // Some text has been submitted
 		if (in_array($_GET['id'],$tabs)) {
 			$template = 'fix';
 			$obj = new $_GET['id']($_SESSION['text']);
-			unset($_SESSION['score']);
 			new Score($obj);
 			$database = new Data();
 			$table = $database->getTable($obj);
@@ -70,7 +70,6 @@ elseif (isset($_SESSION['text'])) { // Some text has been submitted
 	}
 	if (empty($_GET['id'])) { // No specific fix tab is selected
 	  $template = 'results';
-	  unset($_SESSION['score']);
 	  $results = new Results($tabs);
 	  $content['overview'] = $results->tests[4]->guidance['text'];
 	  $results->display();
