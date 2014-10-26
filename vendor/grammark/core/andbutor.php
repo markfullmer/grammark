@@ -63,7 +63,9 @@ class AndButOr extends ProcessText {
             $table['search'][] = $runon;
             $table['replace'][] = '<span class="highlight">' . $runon . '</span>';
         }
-        $result = strtr($result, array_combine($table['search'], $table['replace']));
+        if (isset($table['search'][0])) {
+            $result = strtr($result, array_combine($table['search'], $table['replace']));
+        }
         $this->highlighted = $result;
     }
 }

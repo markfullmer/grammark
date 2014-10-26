@@ -78,8 +78,10 @@ class Passive extends ProcessText {
             $table['ureplace'][] = '<span class="highlight">' . ucfirst($find) . '</span>';
         }
         // If there is a correction table, append that to the replaces.
-        $result = strtr($result, array_combine($table['search'], $table['replace']));
-        $result = strtr($result, array_combine($table['usearch'], $table['ureplace']));
+        if (isset($table['search'][0])) {
+            $result = strtr($result, array_combine($table['search'], $table['replace']));
+            $result = strtr($result, array_combine($table['usearch'], $table['ureplace']));
+        }
         $this->highlighted = $result;
     }
 }
