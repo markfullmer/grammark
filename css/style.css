@@ -18,7 +18,36 @@ label, input[type=button], input[type=submit], button { cursor: pointer; }
 }
 .highlight {
 	background-color:yellow;
+	position:relative;
 }
+
+.highlight .suggestion {
+	display:none;
+}
+
+.highlight:hover .suggestion {
+position:absolute;
+top: -4em;
+left: 1em;
+padding:10px;
+background: linear-gradient(#f9d835, #f3961c) repeat scroll 0 0 rgba(0, 0, 0, 0);
+border-radius: 10px;
+display: block;
+z-index: 1;
+}
+
+.highlight:hover .suggestion:after{
+    border-color: #f3961c transparent;
+    border-style: solid;
+    border-width: 15px 15px 0;
+    bottom: -8px;
+    content: "";
+    display: block;
+    left:0em;
+    position: absolute;
+    width: 0;
+}
+
 nav {
 	margin-bottom:10px;
 }

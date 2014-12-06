@@ -19,7 +19,7 @@ class Grammar extends ProcessText {
     public static $id = 'grammar';
     public static $table = 'miscellaneous';
     public static $find = 'error';
-    public static $suggestion = null;
+    public static $suggestion = 'correct';
     public static $fails_if = '>';
     public static $fail = '<p>Gram<mark>mark</mark> identified grammar or spelling issues</b> from
     <a href="grammar-error-list">this list</a>. This doesn\'t mean those are all

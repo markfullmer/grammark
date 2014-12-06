@@ -15,11 +15,13 @@ class Data {
       $stmt->execute(array());
       $rows = $stmt
         ->fetchAll(PDO::FETCH_ASSOC);
+      $inc = 0;
       foreach($rows as $row) {
-        $table['find'][] = $row{$obj::$find};
+        $table[$inc]['find'] = $row{$obj::$find};
         if (isset($obj::$suggestion)) {
-          $table['suggestion'][] = $row{$obj::$suggestion};
+          $table[$inc]['suggestion'] = $row{$obj::$suggestion};
         }
+        $inc++;
       }
       return $table;
     }

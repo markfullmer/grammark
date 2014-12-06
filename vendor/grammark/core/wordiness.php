@@ -19,7 +19,7 @@ class Wordiness extends ProcessText {
     public static $id = 'wordiness';
     public static $table = 'wordiness';
     public static $find = 'error';
-    public static $suggestion = null;
+    public static $suggestion = 'correct';
     public static $fails_if = '>';
     public static $fail = '<p>Your writing has potential wordiness issues</b> from <a href="/wordiness">this list</a>. Why use 3 words when you can say it with 1? Consider the following examples:
 <ul><li>it seems <span class="highlight">to be</span> effective --> it <b>seems</b> effective</li>

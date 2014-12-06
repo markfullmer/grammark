@@ -40,28 +40,50 @@ class ProcessText {
     }
     public function highlight($table) {
       $result = $this->clean;
-      foreach ($table['find'] as $find) {
-        if ($this::$highlight_spacer) { $find = ' ' . $find . ' '; }
-        $table['search'][] = $find;
-        $table['replace'][] = '<span class="highlight">' . $find . '</span>';
+      // Find and store all lowercase instances
+      foreach ($table as $instance) {
+        $suggestion = (isset($instance['suggestion']))
+          ? '<div class="suggestion">' . $instance['suggestion'] . '</div>'
+          : '';
+        if ($this::$highlight_spacer) {
+          $instance['find'] = ' ' . $instance['find'] . ' ';
+        }
+        // filter out false positives
+        if (!in_array($instance['find'],array('  ',' ',''))) {
+          $table['search'][] = $instance['find'];
+          $table['replace'][] = '<span class="highlight">' . $instance['find'] . $suggestion . '</span>';
+        }
       }
-      foreach ($table['find'] as $find) {
-        if ($this::$highlight_spacer) { $find = ' ' . $find . ' '; }
-        $table['usearch'][] = ucfirst($find);
-        $table['ureplace'][] = '<span class="highlight">' . ucfirst($find) . '</span>';
+
+      // Do the same thing for uppercase words
+      foreach ($table as $instance) {
+        $suggestion = (isset($instance['suggestion']))
+          ? '<div class="suggestion">' . $instance['suggestion'] . '</div>'
+          : '';
+        if ($this::$highlight_spacer) { $instance['find'] = ' ' . $instance['find'] . ' '; }
+        // filter out false positives
+        if (!in_array($instance['find'],array('  ',' ',''))) {
+          $table['usearch'][] = ucfirst($instance['find']);
+          $table['ureplace'][] = '<span class="highlight">' . ucfirst($instance['find']) . $suggestion . '</span>';
+        }
       }
-      // If there is a correction table, append that to the replaces.
+
+      // If at least one result has been stored above, merge the highlights into the text
       if (isset($table['search'][0])) {
         $result = strtr($result, array_combine($table['search'], $table['replace']));
+      }
+      if (isset($table['usearch'][0])) {
         $result = strtr($result, array_combine($table['usearch'], $table['ureplace']));
       }
+
+
       $this->highlighted = $result;
     }
     public function score($table) {
-      foreach($table['find'] as $find) {
-        $count = substr_count($this->nopunctuation,' '. $find .' ');
-        $ucount = substr_count($this->nopunctuation,' '. ucfirst($find) .' ');
-        if ($count+$ucount > 0) { $this->instances[] = $find; }
+      foreach($table as $instance) {
+        $count = substr_count($this->nopunctuation,' '. $instance['find'] .' ');
+        $ucount = substr_count($this->nopunctuation,' '. ucfirst($instance['find']) .' ');
+        if ($count+$ucount > 0) { $this->instances[] = $instance['find']; }
         $total = $total+$count+$ucount;
 
       }

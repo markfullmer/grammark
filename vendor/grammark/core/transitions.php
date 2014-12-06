@@ -36,5 +36,6 @@ class Transitions extends ProcessText {
     public static $humanities = '25';
     public static $sciences = '25';
     public static $internet = '15';
+    public static $highlight_spacer = false;
 }
 ?>
