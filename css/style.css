@@ -30,6 +30,9 @@ position:absolute;
 top: -4em;
 left: 1em;
 padding:10px;
+background: -webkit-linear-gradient(#f9d835, #f3961c) repeat scroll 0 0 rgba(0, 0, 0, 0); /* For Safari 5.1 to 6.0 */
+background: -o-linear-gradient(#f9d835, #f3961c) repeat scroll 0 0 rgba(0, 0, 0, 0); /* For Opera 11.1 to 12.0 */
+background: -moz-linear-gradient(#f9d835, #f3961c) repeat scroll 0 0 rgba(0, 0, 0, 0); /* For Firefox 3.6 to 15 */
 background: linear-gradient(#f9d835, #f3961c) repeat scroll 0 0 rgba(0, 0, 0, 0);
 border-radius: 10px;
 display: block;
