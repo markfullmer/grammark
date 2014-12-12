@@ -33,6 +33,7 @@ class AndButOr extends ProcessText {
     public $runons;
 
     public function score($table) {
+        $total = 0;
         $this->getSentences();
         $this->sentenceVariety();
         foreach($this::$fragments as $find) {
@@ -53,7 +54,7 @@ class AndButOr extends ProcessText {
         $this->score = $total;
         $this->raw_score = $total;
     }
-    public function highlight() {
+    public function highlight($table = array()) {
         $result = $this->clean;
         foreach ($this::$fragments as $find) {
             $table['search'][] = $find;

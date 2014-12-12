@@ -34,8 +34,7 @@ class Passive extends ProcessText {
      fund<span style="text-decoration:line-through;">ed</span></span> by X... -->
      X needs to <b>fund</b>...</li>
     <li>Y can <span class="highlight"><span style="text-decoration:line-through;">
-    be</span> taught</span> by X... --> X can <b>teach</b> Y...</li></ul>
-    Try for a passive sentence percentage of ';
+    be</span> taught</span> by X... --> X can <b>teach</b> Y...</li></ul>';
     public static $pass = '<p>Your writing passed the criterion for passive sentences. Congrats!</p>';
     public static $label = '% sentences with passive voice';
     public static $score_type = 'per_sentence';
@@ -45,6 +44,9 @@ class Passive extends ProcessText {
     public static $internet = '0';
 
     public function score($table) {
+        foreach ($table as $key => $value) {
+            $simpleTable[] = $value['find'];
+        }
         $this->getSentences();
         $verbs = array(
             'is','are','was','were','be','being','been',
@@ -54,7 +56,7 @@ class Passive extends ProcessText {
         $gotverb = false;
         foreach($wordlist as $word) {
             if ($gotverb) { // If the current word is a past participle
-                if (substr($word,-2) == 'ed' || in_array($word,$table['find'])) {
+                if (substr($word,-2) == 'ed' || in_array($word,$simpleTable)) {
                     $passive[] = $gotverb. " ". $word;
                 }
             }
@@ -67,7 +69,8 @@ class Passive extends ProcessText {
         $this->raw_score = count($passive);
         $this->score = number_format(count($passive)/$this->sentences['count']*100);
     }
-    public function highlight() {
+    public function highlight($table = array()) {
+
         $result = $this->clean;
         foreach ($this->passive as $find) {
             $table['search'][] = $find;
@@ -82,7 +85,7 @@ class Passive extends ProcessText {
             $result = strtr($result, array_combine($table['search'], $table['replace']));
             $result = strtr($result, array_combine($table['usearch'], $table['ureplace']));
         }
-        $this->highlighted = $result;
+        $this->highlighted = stripslashes($result);
     }
 }
 ?>

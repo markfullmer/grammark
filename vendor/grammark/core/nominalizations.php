@@ -70,7 +70,7 @@ class Nominalizations extends ProcessText {
         $this->raw_score = count($caught);
         $this->score = number_format(count($caught)/$this->sentences['count']*100);
     }
-    public function highlight() {
+    public function highlight($table = array()) {
         $result = $this->clean;
         foreach ($this->nominalized as $find) {
             $table['search'][] = $find;

@@ -28,6 +28,7 @@ class Results {
         'raw_score' => $test->raw_score
       );
       if ($test::$fails_if == '>') {
+        $results['total'] = 0;
         $results['total'] = $results['total']+$test->raw_score;
         if ($test->score <= $test->guidance['goal']) {
           $results['grade'][] = 1;

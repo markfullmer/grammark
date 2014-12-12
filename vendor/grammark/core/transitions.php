@@ -27,7 +27,7 @@ class Transitions extends ProcessText {
         about tax brackets seems...</i></li><li><b>Has transition:</b> <i>Martinez
         states that 70% of taxes are paid by the wealthiest 10%. <mark>Given
         this</mark> statistic, Obama\'s argument about tax brackets seems...</i></li>
-        </ul><p><b>Goal:</b> Try to increase your transitions percentage to';
+        </ul>';
     public static $pass = 'Transitions help readers see your organization and thought
         process. Your writing reaches the transitions per sentence percentage goal of ';
     public static $label = '% sentences with transitions';

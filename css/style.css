@@ -21,6 +21,10 @@ label, input[type=button], input[type=submit], button { cursor: pointer; }
 	position:relative;
 }
 
+.highlight-good {
+	background-color:lightgreen;
+	position:relative;
+}
 .highlight .suggestion {
 	display:none;
 }

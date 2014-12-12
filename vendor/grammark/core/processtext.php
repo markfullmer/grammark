@@ -39,6 +39,12 @@ class ProcessText {
       $this->nopunctuation = $text;
     }
     public function highlight($table) {
+      $checkmark = (in_array($this::$id,array('transitions')))
+        ? '&#10003'
+        : '';
+      $highlight = (in_array($this::$id,array('transitions')))
+        ? 'highlight-good'
+        : 'highlight';
       $result = $this->clean;
       // Find and store all lowercase instances
       foreach ($table as $instance) {
@@ -51,20 +57,22 @@ class ProcessText {
         // filter out false positives
         if (!in_array($instance['find'],array('  ',' ',''))) {
           $table['search'][] = $instance['find'];
-          $table['replace'][] = '<span class="highlight">' . $instance['find'] . $suggestion . '</span>';
+          $table['replace'][] = '<span class="' . $highlight . '">' . $checkmark . $instance['find'] . $suggestion . '</span>';
         }
       }
 
       // Do the same thing for uppercase words
       foreach ($table as $instance) {
-        $suggestion = (isset($instance['suggestion']))
-          ? '<div class="suggestion">' . $instance['suggestion'] . '</div>'
-          : '';
-        if ($this::$highlight_spacer) { $instance['find'] = ' ' . $instance['find'] . ' '; }
-        // filter out false positives
-        if (!in_array($instance['find'],array('  ',' ',''))) {
-          $table['usearch'][] = ucfirst($instance['find']);
-          $table['ureplace'][] = '<span class="highlight">' . ucfirst($instance['find']) . $suggestion . '</span>';
+        if (isset($instance['find'])) {
+          $suggestion = (isset($instance['suggestion']))
+            ? '<div class="suggestion">' . $instance['suggestion'] . '</div>'
+            : '';
+          if ($this::$highlight_spacer) { $instance['find'] = ' ' . $instance['find'] . ' '; }
+          // filter out false positives
+          if (!in_array($instance['find'],array('  ',' ',''))) {
+            $table['usearch'][] = ucfirst($instance['find']);
+            $table['ureplace'][] = '<span class="' . $highlight . '">' . $checkmark . ucfirst($instance['find']) . $suggestion . '</span>';
+          }
         }
       }
 
@@ -77,9 +85,10 @@ class ProcessText {
       }
 
 
-      $this->highlighted = $result;
+      $this->highlighted = stripslashes($result);
     }
     public function score($table) {
+      $total = 0;
       foreach($table as $instance) {
         $count = substr_count($this->nopunctuation,' '. $instance['find'] .' ');
         $ucount = substr_count($this->nopunctuation,' '. ucfirst($instance['find']) .' ');
