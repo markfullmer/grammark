@@ -67,7 +67,7 @@ class AndButOr extends ProcessText {
         if (isset($table['search'][0])) {
             $result = strtr($result, array_combine($table['search'], $table['replace']));
         }
-        $this->highlighted = $result;
+        $this->highlighted = stripslashes($result);
     }
 }
 ?>

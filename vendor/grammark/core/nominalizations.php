@@ -85,7 +85,7 @@ class Nominalizations extends ProcessText {
             $result = strtr($result, array_combine($table['search'], $table['replace']));
             $result = strtr($result, array_combine($table['usearch'], $table['ureplace']));
         }
-        $this->highlighted = $result;
+        $this->highlighted = stripslashes($result);
     }
 }
 ?>
