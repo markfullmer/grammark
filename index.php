@@ -35,7 +35,7 @@ function my_autoloader($name) {
 
 $pages = array(
 	'about', 'source', 'contact', 'wordiness-list', 'grammar-error-list',
-	'transitions-list', 'database-add','spelling-errors'
+	'transitions-list', 'database-add','spelling-errors','academic-style-list'
 );
 $tabs = array('passive','wordiness','transitions','grammar','andbutor','spelling',
 'nominalizations','academic');

@@ -78,7 +78,8 @@ class Page {
     $results .= '<h3>' . l('/transitions-list','Transitions') . '</h3>';
     $results .= '<h3>' . l('/grammar-error-list','Grammar Errors') . '</h3>';
     $results .= ' <h3>' . l('/wordiness-list','Wordiness List') . '</h3>';
-    $results .= ' <h3>' . l('/spelling-errors','Spelling Errors') . '</h3>';
+    $results .= ' <h3>' . l('/spelling-errors','Common Spelling Errors') . '</h3>';
+    $results .= ' <h3>' . l('/academic-style-list','Academic Style') . '</h3>';
     return $results;
   }
 
@@ -110,6 +111,21 @@ public function spellingerrors() {
       'content' => $content,
       'sidebar' => $this->errorLinks(),
       'message' => 'Complete spelling errors checked by Grammark.'
+    );
+  }
+
+  public function academicstylelist() {
+    $data = new Data();
+    $table = $data->getAllByTable('academic');
+    $content .= '<table><tr><th>Informal / Casual</th><th>Academic Usage</th></tr>';
+    foreach ($table as $key => $value) {
+      $content .= '<tr><td>' . $value['error'] . '</td><td> ' . $value['suggestion']. '</td></tr>';
+    }
+    $content .= '</table>';
+    $this->content = array(
+      'content' => $content,
+      'sidebar' => $this->errorLinks(),
+      'message' => 'Complete list of academic style checked by Grammark.'
     );
   }
 

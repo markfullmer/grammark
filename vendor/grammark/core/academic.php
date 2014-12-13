@@ -22,7 +22,7 @@ class Academic extends ProcessText {
     public static $suggestion = 'suggestion';
     public static $fails_if = '>';
     public static $fail = '<p>Gram<mark>mark</mark> identified academic style issues</b> from
-    <a href="grammar-error-list">this list</a>. This doesn\'t mean those are all
+    <a href="academic-style-list">this list</a>. This doesn\'t mean those are all
     the errors. It\'s very difficult for computers to understand the nuances of
     natural language.</p>';
     public static $pass = '<p>Your writing passed the academic criteria. This doesn\'t mean your writing is perfect. Even now, it\'s very difficult for computers to understand the nuances of natural language, and Gram<mark>mark</mark> cannot find things like sentence fragments, comma splices, subject-verb errors, pronoun agreement problems, and many other things.</p>';
