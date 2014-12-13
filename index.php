@@ -38,7 +38,7 @@ $pages = array(
 	'transitions-list', 'database-add','spelling-errors'
 );
 $tabs = array('passive','wordiness','transitions','grammar','andbutor','spelling',
-'nominalizations');
+'nominalizations','academic');
 $template = 'default';
 $content = array();
 if (isset($_GET['id']) && $_GET['id'] == 'start' ) {

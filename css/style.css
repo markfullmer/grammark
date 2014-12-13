@@ -1,6 +1,21 @@
 html { -webkit-font-smoothing: antialiased; }
 
+nav.top-bar,
+nav .top-bar-section li:not(.has-form) a:not(.button) {
+	background: none repeat scroll 0 0 #660000;
+}
 
+nav .top-bar-section ul li > a.button {
+	background-color: #b30000;
+}
+input.button {
+	background-color: #660000;
+}
+
+input.button:hover,
+input.button:focus {
+	background-color: #b30000;
+}
 
 label, input[type=button], input[type=submit], button { cursor: pointer; }
 
@@ -31,28 +46,17 @@ label, input[type=button], input[type=submit], button { cursor: pointer; }
 
 .highlight:hover .suggestion {
 position:absolute;
-top: -4em;
+top: -3em;
 left: 1em;
 padding:10px;
-background: -webkit-linear-gradient(#f9d835, #f3961c) repeat scroll 0 0 rgba(0, 0, 0, 0); /* For Safari 5.1 to 6.0 */
-background: -o-linear-gradient(#f9d835, #f3961c) repeat scroll 0 0 rgba(0, 0, 0, 0); /* For Opera 11.1 to 12.0 */
-background: -moz-linear-gradient(#f9d835, #f3961c) repeat scroll 0 0 rgba(0, 0, 0, 0); /* For Firefox 3.6 to 15 */
-background: linear-gradient(#f9d835, #f3961c) repeat scroll 0 0 rgba(0, 0, 0, 0);
-border-radius: 10px;
+background: -webkit-linear-gradient(#d3d3d3, #ffffff) repeat scroll 0 0 rgba(0, 0, 0, 0); /* For Safari 5.1 to 6.0 */
+background: -o-linear-gradient(#d3d3d3, #ffffff) repeat scroll 0 0 rgba(0, 0, 0, 0); /* For Opera 11.1 to 12.0 */
+background: -moz-linear-gradient(#d3d3d3, #ffffff) repeat scroll 0 0 rgba(0, 0, 0, 0); /* For Firefox 3.6 to 15 */
+background: linear-gradient(#d3d3d3, #ffffff) repeat scroll 0 0 rgba(0, 0, 0, 0);
+border:1px solid black;
 display: block;
 z-index: 1;
-}
-
-.highlight:hover .suggestion:after{
-    border-color: #f3961c transparent;
-    border-style: solid;
-    border-width: 15px 15px 0;
-    bottom: -8px;
-    content: "";
-    display: block;
-    left:0em;
-    position: absolute;
-    width: 0;
+min-width:200px;
 }
 
 nav {

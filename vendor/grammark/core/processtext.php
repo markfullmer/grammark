@@ -57,7 +57,6 @@ class ProcessText {
         // remove the wildcard character from the beginning
           if (substr($instance['find'], 0, 1) == '%') {
             $instance['find'] = substr($instance['find'], 1);
-            echo $instance['find'];
         }
         // filter out false positives
         if (!in_array($instance['find'],array('  ',' ',''))) {
@@ -78,7 +77,6 @@ class ProcessText {
           // remove the wildcard character from the beginning
           if (substr($instance['find'], 0, 1) == '%') {
             $instance['find'] = substr($instance['find'], 1);
-            echo $instance['find'];
           }
           // filter out false positives
           if (!in_array($instance['find'],array('  ',' ',''))) {
