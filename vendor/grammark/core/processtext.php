@@ -51,8 +51,13 @@ class ProcessText {
         $suggestion = (isset($instance['suggestion']))
           ? '<div class="suggestion">' . $instance['suggestion'] . '</div>'
           : '';
-        if ($this::$highlight_spacer) {
+        if ($this::$highlight_spacer && substr($instance['find'], 0, 1) != '%') {
           $instance['find'] = ' ' . $instance['find'] . ' ';
+        }
+        // remove the wildcard character from the beginning
+          if (substr($instance['find'], 0, 1) == '%') {
+            $instance['find'] = substr($instance['find'], 1);
+            echo $instance['find'];
         }
         // filter out false positives
         if (!in_array($instance['find'],array('  ',' ',''))) {
@@ -67,7 +72,14 @@ class ProcessText {
           $suggestion = (isset($instance['suggestion']))
             ? '<div class="suggestion">' . $instance['suggestion'] . '</div>'
             : '';
-          if ($this::$highlight_spacer) { $instance['find'] = ' ' . $instance['find'] . ' '; }
+          if ($this::$highlight_spacer && substr($instance['find'], 0, 1) != '%') {
+            $instance['find'] = ' ' . $instance['find'] . ' ';
+          }
+          // remove the wildcard character from the beginning
+          if (substr($instance['find'], 0, 1) == '%') {
+            $instance['find'] = substr($instance['find'], 1);
+            echo $instance['find'];
+          }
           // filter out false positives
           if (!in_array($instance['find'],array('  ',' ',''))) {
             $table['usearch'][] = ucfirst($instance['find']);
