@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.5
+-- version 4.1.8
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 15, 2013 at 08:31 AM
--- Server version: 5.1.66-cll
--- PHP Version: 5.2.6
+-- Generation Time: Dec 13, 2014 at 05:44 PM
+-- Server version: 5.5.32-31.0-log
+-- PHP Version: 5.4.23
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,8 +17,148 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `grammark_grammar`
+-- Database: `markfull_grammark`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `academic`
+--
+
+CREATE TABLE IF NOT EXISTS `academic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `error` varchar(255) NOT NULL,
+  `suggestion` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=122 ;
+
+--
+-- Dumping data for table `academic`
+--
+
+INSERT INTO `academic` (`id`, `error`, `suggestion`) VALUES
+(1, 'plenty of', 'a great deal of /numerous/ several'),
+(2, 'a lot of', 'a great deal of /numerous/ several'),
+(3, 'loads of', 'a great deal of /numerous/ several'),
+(4, 'a bit', 'somewhat (before adj. or adv.)/ slightly'),
+(5, 'get together', 'collaborate with'),
+(6, 'big', 'large (number/percentage) / considerable'),
+(7, 'thing', 'device/object'),
+(8, 'stuff', 'material'),
+(9, 'find out', 'ascertain/discover'),
+(10, 'do again', 'repeat'),
+(11, 'set up', 'establish'),
+(12, 'cut down on', 'reduce'),
+(13, 'go up', 'increase'),
+(14, 'come up with', 'create'),
+(15, 'look into', 'investigate'),
+(16, 'go up and down', 'fluctuate'),
+(17, 'brings up the question', 'raises the question'),
+(18, 'get rid of', 'eliminate'),
+(19, 'turn down', 'refuse'),
+(20, 'take back', 'retract'),
+(21, 'put off', 'postpone/delay'),
+(22, 'put up with', 'tolerate'),
+(23, 'put away', 'save'),
+(24, 'put down', 'attribute / insult'),
+(25, 'give up', 'relinquish / surrender'),
+(26, 'go back', 'return to'),
+(27, 'give back', 'return'),
+(28, 'give off', 'produce'),
+(29, 'give away', 'betray / donate'),
+(30, 'carry out', 'conduct'),
+(31, 'help', 'assist/ aid'),
+(32, 'in the end', 'finally/ultimately'),
+(33, 'at once', 'immediately'),
+(34, 'at the same time', 'simultaneously/ concurrently'),
+(35, 'at first', 'initially'),
+(36, 'on and off', 'intermittently'),
+(37, 'mainly', 'principally/primarily'),
+(38, 'next', 'subsequently/subsequent/following'),
+(39, 'again and again', 'repeatedly'),
+(40, 'understanding', 'comprehension / comprehending'),
+(41, 'in charge of', 'responsible for'),
+(42, 'enough', 'sufficient'),
+(43, 'better', 'superior to'),
+(44, 'more and more', 'Increasingly/ unceasingly/non-stop'),
+(45, 'bad', 'disappointing / negative'),
+(46, 'get worse', 'deteriorate'),
+(47, 'horrible', 'unacceptable'),
+(48, 'come in', 'to enter'),
+(49, 'talk about', 'discuss'),
+(50, 'come up with', 'suggest / provide'),
+(51, 'look at', 'examine'),
+(52, 'pin down', 'determine'),
+(53, 'let’s consider', 'it is important to consider'),
+(54, 'I like', 'avoid first person'),
+(55, 'I don''t like', 'avoid first person / or if necessary "personally I dislike"'),
+(56, 'on top of that', 'another point is / furthermore / similarly'),
+(57, 'in a nutshell', 'briefly / in short / basically'),
+(58, 'by chance', 'incidentally / accidentally'),
+(59, 'by accident', 'accidentally'),
+(60, 'kids', 'infants / offspring / children / teens'),
+(61, 'O.K', 'acceptable/ satisfactory'),
+(62, 'okay', 'acceptable / satisfactory'),
+(63, 'make up for', 'compensate for'),
+(64, 'get in touch with', 'contact'),
+(65, 'let somebody know', 'inform someone'),
+(66, 'call off', 'cancel'),
+(67, 'sort out', 'resolve'),
+(68, 'deal with', 'handle / address'),
+(69, 'to think of', 'to conceive of/ to imagine'),
+(70, 'keep up', 'maintain'),
+(71, 'a lot', 'a substantial amount'),
+(72, 'stand for', 'denote'),
+(73, 'the same as', 'equivalent to'),
+(74, 'man', 'male'),
+(75, 'guy', 'male'),
+(76, 'old people', 'senior citizens / retirees'),
+(77, 'old person', 'senior citizens / retirees'),
+(78, 'crooks', 'offenders / lawbreakers'),
+(79, 'awesome', 'preferable / desirable'),
+(80, 'sick of', 'dissatisfied with'),
+(81, 'fed up with', 'dissatisfied with'),
+(82, 'I think that', 'It seems that / It could be argued that'),
+(83, 'to go over', 'exceed / review'),
+(84, 'make sure', 'ensure'),
+(85, 'take away', 'withdraw / remove'),
+(86, 'whenever we want', 'without prior notice / anytime'),
+(87, 'whenever we like', 'without prior notice / anytime'),
+(88, 'one after the other', 'regularly'),
+(89, 'big differences', 'significant differences'),
+(90, 'this shows that', 'this seems to demonstrate that'),
+(91, 'etc.', 'Delete / among other examples'),
+(92, 'and so forth', 'Delete / among other examples'),
+(93, 'and so on', 'Delete / among other examples'),
+(94, 'ie', 'namely'),
+(95, 'eg', 'for example'),
+(96, 'vs.', 'versus/as opposed to'),
+(97, 'nice', 'Avoid / friendly'),
+(98, 'cute', 'Avoid / attractive'),
+(99, 'smart', 'intelligent'),
+(100, 'tired', 'exhausted'),
+(101, 'drunk', 'intoxicated'),
+(102, 'really', 'Avoid / extremely'),
+(103, 'to go up to', 'to reach'),
+(104, 'come across', 'find'),
+(105, 'do away with', 'abolish'),
+(106, 'build up', 'accumulate'),
+(107, 'finish off', 'conclude'),
+(108, 'poor country', 'developing country'),
+(109, 'that’s why', 'for this reason / the reason for'),
+(110, 'how much', 'to what extent'),
+(111, 'every year', 'annually'),
+(112, 'each year', 'annualy'),
+(113, 'fridge', 'refrigerator'),
+(114, 'TV', 'television'),
+(115, 'boss', 'employer'),
+(116, 'obviously', 'Extreme lanuage. Avoid'),
+(117, 'totally', 'Extreme lanuage. Avoid'),
+(118, 'extremely', 'Extreme lanuage. Avoid'),
+(119, 'stupid', 'Avoid unless analyzing the word stupid'),
+(120, 'clearly', 'Extreme lanuage. Avoid'),
+(121, 'never', 'Extreme lanuage. Avoid or use rarely');
 
 -- --------------------------------------------------------
 
@@ -178,7 +318,7 @@ CREATE TABLE IF NOT EXISTS `miscellaneous` (
   `error` varchar(255) NOT NULL,
   `correct` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1314 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1317 ;
 
 --
 -- Dumping data for table `miscellaneous`
@@ -1494,7 +1634,10 @@ INSERT INTO `miscellaneous` (`id`, `error`, `correct`) VALUES
 (1310, 'wreck havoc', 'wreak havoc');
 INSERT INTO `miscellaneous` (`id`, `error`, `correct`) VALUES
 (1311, 'younger that', 'younger than'),
-(1312, 'younger then', 'younger than');
+(1312, 'younger then', 'younger than'),
+(1314, '%er then', 'than'),
+(1315, 'base on', 'based on ("base on" may be acceptable, depending on context)'),
+(1316, 'its an', 'it''s an');
 
 -- --------------------------------------------------------
 
@@ -6451,6 +6594,28 @@ INSERT INTO `misspellings` (`id`, `error`, `correct`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pages`
+--
+
+CREATE TABLE IF NOT EXISTS `pages` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `content` text,
+  `url` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`id`, `content`, `url`) VALUES
+(1, '<p><b>Gram<span style="background-color:yellow">mark</span></b> helps improve writing style &amp; grammar and teaches students to self-edit. Basically, it finds things that grammarians consider to be bad, highlights them, and suggests improvements. So writers can measure progress, it gives a "score" based on problems per document length, which is updated whenever the writer fixes a problem.</p><p>Since not all writing forms are equal, users can customize each element that Gram<span style="background-color:yellow">mark</span> checks. It works best for college-level essays. It doesn''t improve content. And it''s not much use for creative writing, since literature often breaks rules for aesthetic effect. These are the basic premises the program follows, in plain language:</p>\r\n<ol>\r\n<li><b>Passive voice</b> is harder to read and sometimes obscures meaning. Active voice is clearer and punchier. Gram<span style="background-color:yellow">mark</span> highlights all instances of passive voice and suggests how to rewrite them actively.</li>\r\n<li>Don''t use 3 words when you can say the same thing with 1. Gram<span style="background-color:yellow">mark</span> has a database of <a href="wordiness-list.php">973 wordy phrases</a>, like <i>with respect to</i>, <i>a considerable amount of</i>, and <i>as a matter of fact</i>. It finds these and offers concise alternatives (<i>concerning, many, in fact</i>). </li>\r\n<li><b>Sentence length</b> correlates with sophistication of thought. Writing with many short sentences is usually simplistic, while preponderantly long sentences suggest convoluted thought, and if sentences are all about the same length, writing sounds soporific. Gram<span style="background-color:yellow">mark</span> provides a sentence variety score (using standard deviation) and average words per sentence.</li>\r\n<li><b>Transitions</b> help organize ideas. Writing that is short on transitions is often hard to follow. Based on analysis, writing that has less than 1 transition per every 4 sentences may be confusing. Gram<span style="background-color:yellow">mark</span> checks your document for <a href="transitions-list.php">188 common transition words</a>. </li>\r\n<li>As a college writing teacher, I often find myself scribbling "<i>be more specific</i>" on student essays. Gram<span style="background-color:yellow">mark</span> checks your document against a list of <b>vague words</b>. </li>\r\n<li><b>Grammar</b> is, quite simply, a bunch of rules writers follow. As a teacher, I''ve spent many a Saturday correcting grammar. Gram<span style="background-color:yellow">mark</span> searches for <a href="grammar-error-list.php">6,239 errors</a> in about 0.144 seconds.</li>\r\n</ol>\r\n<p>There are many more rules of grammar thumb: prepositions at the ends of phrases should be dealt with, to usually avoid split infinitives, and following parallel structure. But many of these have exceptions, and I felt including checks for them would make the tool less efficient and consequently less useful.</p>\r\n<h2>Make the Project Better</h2>\r\n<p>The grammark database has 7,060 grammar rules currently, not including algorithms for identifying passive voice and analyzing sentences. Help improve the comprehensiveness of this tool by <a href="database-add">adding more grammar rules</a>. Go to the submission form and enter a grammar error. If it doesn''t yet exist, it will be added to the database after approval.</p>\r\n<p>--Mark Fullmer</p>\r\n<p><img src="./img/mark-fullmer.jpg" alt="screenshot of Mark Fullmer" align="right" /><i>Mark Fullmer (M.A., English, <a href=http://www.bc.edu/">Boston College</a>, 2006) has taught college writing and creative writing in the United States and in the Philippines, where he was a <a href=http://peacecorps.gov/">Peace Corps</a> volunteer (2010-2012).</p><p>He maintains a website for writing tips, <a href="http://writing.markfullmer.com/">writing.markfullmer.com</a>, a pedagogy site for online teaching, <a href="http://howtoteachonline.org">howtoteachonline.org</a>, and a website for language and teaching resources in Waray-Waray, a language spoken by 3 million Filipinos, <a href="http://corporaproject.org">corporaproject.org</a>.</p>', 'about'),
+(2, '<h2>Open Source</h2>\r\n<p>I advocate <a href="http://www.opensource.org/docs/osd">open-source</a> philosophy: things (tools, art, knowledge) should be available for other people to adapt and improve. This includes educational web-tools like grammar checkers. So this website is both free to use and to modify, so long as you allow others to do the same with whatever you create.\r\n</p>\r\n<p>\r\nRead the <a href="http://www.opensource.org/licenses/GPL-3.0">GNU General Public License here</a>\r\n</p>\r\n\r\n<h2>Download</h2>\r\n<p>Grammark is a web-based application. To run it, you need to have access to a webserver (or the equivalent on your local computer) with PHP and MySQL installed, and a basic knowledge of how to use them. The download includes installation and configuration instructions.</p>\r\n<a class="button" href="https://github.com/markfullmer/grammark/archive/master.zip" />Download as zip</a>\r\n<p>Or clone from Git:</p>\r\n<code>\r\ngit clone https://github.com/markfullmer/grammark.git\r\n</code>\r\n\r\n<h2>The databases as human-readable webpages</h2>\r\n<ul><li><a href="wordiness-list.php">Wordiness</a> (adapted from <a href="http://www.advanced-english-grammar.com/list-of-prepositional-phrases.html">advanced-english-grammar.com</a> & Dr. Kim Blank''s <a href="http://web.uvic.ca/~gkblank/wordiness.html">list</a>)<br />\r\n</li><li><a href="grammar-error-list.php">Grammar Errors</a> (adapted from the editors of <a href="http://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/Grammar_and_Misc">wikipedia.org list of grammar patterns</a>)<br />\r\n</li><li><a href="transitions-list.php">Transitions</a> (adapted from <a href="http://www.smart-words.org/transition-words.html">smart-words.org</a>)<br /></li>\r\n<li>Non-Academic/Informal language (including data from <a href="https://www.englishforums.com/English/FormalForm/bvhvmn/post.htm">Tran Manh Trung''s list</a>)</ul>\r\n', 'source');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `specific`
 --
 
@@ -6725,7 +6890,7 @@ CREATE TABLE IF NOT EXISTS `wordiness` (
   `error` varchar(55) NOT NULL,
   `correct` varchar(55) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=987 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=989 ;
 
 --
 -- Dumping data for table `wordiness`
@@ -7716,7 +7881,9 @@ INSERT INTO `wordiness` (`id`, `error`, `correct`) VALUES
 (983, 'without precedent', 'unprecedented'),
 (984, 'without question', 'unquestionably'),
 (985, 'without warning', 'unexpected'),
-(986, 'whole different', 'different');
+(986, 'whole different', 'different'),
+(987, 'to me', 'DELETE'),
+(988, 'do not like', 'dislike');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
