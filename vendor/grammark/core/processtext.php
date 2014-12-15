@@ -12,6 +12,10 @@ class ProcessText {
     public static $highlight_spacer;
 
     public function __construct($submission) {
+      // filter out suggestion text
+      $submission = preg_replace('/<div(.*?)<\/div>/i', '', $submission);
+      preg_replace('/[\.!?;]/', '.', $submission);
+
       $this->clean = strip_tags($submission); // remove html/javascript
       $this->stripPunctuation();
     }
@@ -39,9 +43,6 @@ class ProcessText {
       $this->nopunctuation = $text;
     }
     public function highlight($table) {
-      $checkmark = (in_array($this::$id,array('transitions')))
-        ? '&#10003'
-        : '';
       $highlight = (in_array($this::$id,array('transitions')))
         ? 'highlight-good'
         : 'highlight';
@@ -61,7 +62,7 @@ class ProcessText {
         // filter out false positives
         if (!in_array($instance['find'],array('  ',' ',''))) {
           $table['search'][] = $instance['find'];
-          $table['replace'][] = '<span class="' . $highlight . '">' . $checkmark . $instance['find'] . $suggestion . '</span>';
+          $table['replace'][] = '<span class="' . $highlight . '">' . $instance['find'] . $suggestion . '</span>';
         }
       }
 
@@ -81,7 +82,7 @@ class ProcessText {
           // filter out false positives
           if (!in_array($instance['find'],array('  ',' ',''))) {
             $table['usearch'][] = ucfirst($instance['find']);
-            $table['ureplace'][] = '<span class="' . $highlight . '">' . $checkmark . ucfirst($instance['find']) . $suggestion . '</span>';
+            $table['ureplace'][] = '<span class="' . $highlight . '">' . ucfirst($instance['find']) . $suggestion . '</span>';
           }
         }
       }
