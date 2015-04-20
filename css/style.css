@@ -23,12 +23,11 @@ label, input[type=button], input[type=submit], button { cursor: pointer; }
 	border:1px solid gray;
 }
 
-.title-area .name div {
+.title-area .name h1 {
 	background:url("../img/title.png");
 	background-size:100% 100%;
 	height:45px;
 	width:400px;
-	font-size:1px;
 	font-color:black;
 }
 .highlight {
@@ -190,9 +189,31 @@ ul#tabnav a:hover {
 	}
 }
 
+.obscure {
+position: absolute !important;
+clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+clip: rect(1px, 1px, 1px, 1px);
+}
 
 
+::-webkit-input-placeholder {
+   color: #b30000;
+   font-size:30px;
+}
 
+:-moz-placeholder { /* Firefox 18- */
+   color: #b30000;
+   font-size:30px;
+}
 
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #b30000;
+   font-size:30px;
+}
+
+:-ms-input-placeholder {
+   color: #b30000;
+   font-size:30px;
+}
 
 

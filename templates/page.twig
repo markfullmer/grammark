@@ -2,11 +2,11 @@
 
 {% block content %}
   <div class="large-8 columns">
-  {% if message %}
-    <div class="panel">
-      {{ message|raw }}
-    </div>
-  {% endif %}
+    {% if message %}
+      <div class="panel">
+        {{ message|raw }}
+      </div>
+    {% endif %}
     {{ content|raw }}
   </div>
 {% endblock %}
