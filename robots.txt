@@ -1,0 +1,21 @@
+User-agent: *
+Crawl-delay: 10
+
+Disallow: /cache/
+Disallow: /cgi-bin/
+Disallow: /composer.json
+Disallow: /composer.lock
+Disallow: /composer.phar*
+Disallow: /css/
+Disallow: /example.settings.php
+Disallow: /grammark_grammar.sql
+Disallow: /img/
+Disallow: /js/
+Disallow: /php.ini
+Disallow: /php_errorlog
+Disallow: /php_mail.log
+Disallow: /saveword.php
+Disallow: /settings.php
+Disallow: /templates/
+Disallow: /tests/
+Disallow: /vendor/

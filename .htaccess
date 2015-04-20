@@ -1,3 +1,4 @@
+SetEnv PHPRC /home/markfull/public_html/grammark/php.ini
 Options +FollowSymLinks
 RewriteEngine On
 
@@ -10,3 +11,14 @@ RewriteRule ^/$ index.php [QSA,NC,L]
 RewriteRule ^([a-z0-9_\-]+)/?$ index.php?url=$1 [QSA,NC,L]
 
 ErrorDocument 404 '404 Page not found. <a href="http://grammark.org">Back to grammark.org</a>'
+
+<Files 403.shtml>
+order allow,deny
+allow from all
+</Files>
+
+deny from 213.239.211.141
+deny from 158.129.192.208
+deny from 78.46.174.55
+deny from 50.31.96.17
+deny from 46.151.53.
