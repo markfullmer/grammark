@@ -198,22 +198,22 @@ clip: rect(1px, 1px, 1px, 1px);
 
 ::-webkit-input-placeholder {
    color: #b30000;
-   font-size:30px;
+   font-size:18px;
 }
 
 :-moz-placeholder { /* Firefox 18- */
    color: #b30000;
-   font-size:30px;
+   font-size:18px;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
    color: #b30000;
-   font-size:30px;
+   font-size:18px;
 }
 
 :-ms-input-placeholder {
    color: #b30000;
-   font-size:30px;
+   font-size:18px;
 }
 
 
