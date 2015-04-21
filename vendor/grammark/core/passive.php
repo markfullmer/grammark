@@ -54,6 +54,7 @@ class Passive extends ProcessText {
         );
         $wordlist = explode(' ', $this->nopunctuation);
         $gotverb = false;
+        $passive = array();
         foreach($wordlist as $word) {
             if ($gotverb) { // If the current word is a past participle
                 if (substr($word,-2) == 'ed' || in_array($word,$simpleTable)) {

@@ -25,6 +25,7 @@
   <form action="?id={{ id }}" method="post" onsubmit="return copyContent()">
   <p><textarea class="textbox" id="text" name="text" rows="50" cols="55" style="display:none; visibility:none" ></textarea></p>
   <p><input type="hidden" name="id" value="{{ id }}" /></p>
+  <p><input type="hidden" name="got" value="1" /></p>
   <p><input class="button" type="submit" name="submit" value="Recheck"/></p>
 </form>
 <form action="saveword.php" method="post" onsubmit="return copyContenttwo()">

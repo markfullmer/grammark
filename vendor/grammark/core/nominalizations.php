@@ -54,6 +54,7 @@ class Nominalizations extends ProcessText {
         );
         $wordlist = explode(' ', $this->nopunctuation);
         $gotverb = false;
+        $caught = array();
         foreach($wordlist as $word) {
             foreach ($nominalizations as $nominalization => $length) {
                 $pos = strpos($word, $nominalization);

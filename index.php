@@ -46,7 +46,9 @@ if (isset($_GET['id']) && $_GET['id'] == 'start' ) {
 	unset($_SESSION['text']);
 }
 // If text has just been submitted, store it in the session object
-if (isset($_POST['text'])) { $_SESSION['text'] = $_POST['text'];}
+if (isset($_REQUEST['text']) && $_REQUEST['got'] == '1') {
+	$_SESSION['text'] = $_REQUEST['text'];
+}
 
 if (isset($_GET['url']) && in_array($_GET['url'],$pages)) {
 	// If the callback is for a page defined in the system
