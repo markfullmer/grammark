@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.5/css/foundation.min.css">
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+      <script src="js/app.js"></script>
+      <script src="js/fix.js"></script>
+      <script src="js/page.js"></script>
+      <script src="js/overview.js"></script>
+  </head>
+
+  <body ng-app="grammarkApp">
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <a href="#">
+            <h1><span class="obscure">Grammark, the open source writing aide</span></h1>
+          </a>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="divider"></li>
+          <li><a href="#/page/about">About</a></li>
+          <li><a href="https://github.com/markfullmer/grammark">Source Code</a></li>
+          <li><a class="button" href="#/page/source">Download</a></li>
+          <li><a href="#/page/resources">Resources</a></li>
+          <li><a href="#/page/contact">Contact</a></li>
+        </ul>
+      </section>
+    </nav>
+
+    <div id="wrap">
+      <div id="content">
+        <!-- Place where dynamic content will be displayed -->
+        <div ng-view></div>
+      </div>
+    </div>
+
+  </body>
+</html>

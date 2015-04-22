@@ -1,0 +1,25 @@
+<ng-include src="'templates/results-nav.html'"></ng-include>
+
+<div class="panel">
+  <img alt="passes the criterion" style="display:inline; float:right;" src="{{img}}">
+  <h2>{{title | capitalize}}</h2>
+
+  <p>{{feedback}}</p>
+</div>
+
+<h4>Click on the text below to start editing</h4>
+
+<div id="editable" class="textbox" style="padding:10px 30px 10px 30px;" contenteditable="true"></div>
+
+<form action="" method="post" onsubmit="return copyContent()">
+  <p><textarea class="textbox" id="text" name="text" rows="50" cols="55" style="display:none; visibility:none" ></textarea></p>
+  <p><input type="hidden" name="id" value="" /></p>
+  <p><input type="hidden" name="got" value="1" /></p>
+  <p><input class="button" type="submit" name="submit" value="Recheck"/></p>
+</form>
+<form action="saveword.php" method="post" onsubmit="return copyContenttwo()">
+  <p><textarea class="textbox" id="save" name="text" rows="50" cols="55" style="display:none; visibility:none" ></textarea></p>
+  <p><input class="button" type="submit" name="submit" value="Save &amp; Download"/></p>
+</form>
+
+
