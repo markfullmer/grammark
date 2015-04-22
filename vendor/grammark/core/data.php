@@ -1,20 +1,18 @@
 <?php
-
+/**
+ * Class to retrieve data from static files in /grammark/core/data/
+ */
 class Data {
 
-    protected $db;
-    protected static $table;
-    public function __construct() {
-        $this->db = new PDO('mysql:host='.HOST.';dbname='.DB_NAME.';charset=utf8', USERNAME, PASSWORD);
-    }
+  protected static $table;
 
-    public function getTable($obj) {
-      $table = array();
-      $sql = "SELECT * FROM " . $obj::$table;
-      $stmt = $this->db->prepare($sql);
-      $stmt->execute(array());
-      $rows = $stmt
-        ->fetchAll(PDO::FETCH_ASSOC);
+  public function getTable($obj) {
+    $rows = array();
+    $table = array();
+    $file = __DIR__ . '/data/' . $obj::$table . '.inc';
+    if(file_exists($file)) {
+      include_once($file);
+      $rows = ${$obj::$table};
       $inc = 0;
       foreach($rows as $row) {
         $table[$inc]['find'] = $row{$obj::$find};
@@ -23,26 +21,17 @@ class Data {
         }
         $inc++;
       }
-      return $table;
     }
-    public function getOneByURL($url) {
-      $table = array();
-      $sql = "SELECT content FROM pages WHERE url = :url";
-      $stmt = $this->db->prepare($sql);
-      $stmt->execute(array(':url' => $url));
-      $row = $stmt
-        ->fetch(PDO::FETCH_OBJ);
-      return $row->content;
-    }
+    return $table;
+  }
 
-    public function getAllByTable($table) {
-      $results = array();
-      $sql = "SELECT * FROM ".$table;
-      $stmt = $this->db->prepare($sql);
-      $stmt->execute(array());
-      $row = $stmt
-        ->fetchAll(PDO::FETCH_ASSOC);
-      return $row;
+  public function getAllByTable($table) {
+    $row = array();
+    $file = __DIR__ . '/data/' . $table . '.inc';
+    if(file_exists($file)) {
+      include_once($file);
+      $row = $$table;
     }
+    return $row;
+  }
 }
-?>

@@ -9,9 +9,6 @@ class Page {
     if (method_exists('Page',$specific)) {
       $this->$specific();
     }
-    else {
-      $this->standard();
-    }
   }
 
   public function spamcheck($field) {
@@ -136,7 +133,7 @@ git clone https://github.com/markfullmer/grammark.git
   public function transitionslist() {
     $data = new Data();
     $table = $data->getAllByTable('transitions');
-    $content .= '<table>';
+    $content = '<table>';
     foreach ($table as $key => $value) {
       $content .= '<tr><td>' . $value['transition'] . '</td></tr>';
     }
@@ -169,7 +166,7 @@ public function spellingerrors() {
   public function academicstylelist() {
     $data = new Data();
     $table = $data->getAllByTable('academic');
-    $content .= '<table><tr><th>Informal / Casual</th><th>Academic Usage</th></tr>';
+    $content = '<table><tr><th>Informal / Casual</th><th>Academic Usage</th></tr>';
     foreach ($table as $key => $value) {
       $content .= '<tr><td>' . $value['error'] . '</td><td> ' . $value['suggestion']. '</td></tr>';
     }
@@ -185,7 +182,7 @@ public function spellingerrors() {
   public function grammarerrorlist() {
     $data = new Data();
     $table = $data->getAllByTable('miscellaneous');
-    $content .= '<table><tr><th>Grammar Error</th><th>Suggested Fix</th></tr>';
+    $content = '<table><tr><th>Grammar Error</th><th>Suggested Fix</th></tr>';
     foreach ($table as $key => $value) {
       $content .= '<tr><td>' . $value['error'] . '</td><td> ' . $value['correct']. '</td></tr>';
     }
@@ -212,14 +209,6 @@ public function spellingerrors() {
       'message' => 'Complete list of words considered extraneous or unnecessary,
     with suggested fixes.',
     'title' => 'Wordiness List',
-    );
-  }
-
-  public function standard() {
-    $data = new Data();
-    $this->content = array(
-      'content' => $data->getOneByURL($_GET['url']),
-      'sidebar' => ''
     );
   }
 }
