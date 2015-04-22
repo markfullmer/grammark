@@ -19,9 +19,29 @@ angular.module('grammarkApp', ['ngRoute'])
         });
 
     })
+    .service('sharedProperties', function () {
+        var property = '';
+
+        return {
+            getProperty: function () {
+                return property;
+            },
+            setProperty: function(value) {
+                property = value;
+            }
+        };
+    })
+
+    .controller('FormCtrl', function ($scope, sharedProperties) {
+        $scope.submitForm = function() {
+            console.log("posting data...." + $scope.text);
+            sharedProperties.setProperty($scope.text);
+            window.location.assign("#/fix/passive");
+        };
+    })
+
     .filter('capitalize', function() {
     return function(input, all) {
       return (!!input) ? input.replace(/([^\W_]+[^\s-]*) */g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
     }
   })
-
