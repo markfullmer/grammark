@@ -22,9 +22,9 @@ Installation
 the location (e.g., mysite.com/grammark) will render the site, but without the
 text processing.
 2. Copy *example.settings.php* as a new file, "settings.php".
-4. In *settings.php*, define your site preferences by replacing what is between the <>
- - define('EMAIL','<your email>'); // for the contact and database suggestion forms
- - define('ANALYTICS','<google tracking code>'); // place Google Analytics tracking code here
+4. In *settings.php*, define your site preferences by replacing what is between the ::
+ - define('EMAIL',':your email:'); // for the contact and database suggestion forms
+ - define('ANALYTICS',':Google tracking code:'); // place Google Analytics tracking code here
  - define('TESTING_MODE', false); // true runs and displays unit tests
 
 If you've followed the steps above, going to "mysite.com/grammark" will give you
