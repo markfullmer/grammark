@@ -5,6 +5,8 @@ function fixCtrl ($scope, $routeParams, sharedProperties) {
     $scope.feedback = "Feedback goes here";
     $scope.img = "img/pass.png";
     $scope.text = sharedProperties.getProperty();
+    $scope.source = $scope.source;
+
     switch ($routeParams.postId) {
         case 'passive':
             $scope.content = "This is my first post";

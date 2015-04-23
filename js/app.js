@@ -32,12 +32,40 @@ angular.module('grammarkApp', ['ngRoute'])
         };
     })
 
+    .directive("contenteditable", function() {
+      return {
+        restrict: "A",
+        require: "ngModel",
+        link: function(scope, element, attrs, ngModel) {
+
+          function read() {
+            ngModel.$setViewValue(element.html());
+          }
+
+          ngModel.$render = function() {
+            element.html(ngModel.$viewValue || "");
+          };
+
+          element.bind("blur keyup change", function() {
+            scope.$apply(read);
+          });
+        }
+      }
+    })
+
     .controller('FormCtrl', function ($scope, sharedProperties) {
         $scope.submitForm = function() {
             console.log("posting data...." + $scope.text);
             sharedProperties.setProperty($scope.text);
             window.location.assign("#/fix/passive");
         };
+    })
+
+    .controller('textCtrl', function ($scope, sharedProperties) {
+      $scope.counter = 0;
+      $scope.change = function() {
+        sharedProperties.setProperty($scope.text);
+      };
     })
 
     .filter('capitalize', function() {
