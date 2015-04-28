@@ -1,6 +1,6 @@
-function overviewCtrl ($scope, $routeParams, sharedProperties) {
+function overviewCtrl ($scope, $routeParams, textProperties) {
     $scope.title = "Potential Problems";
     $scope.content = "Table goes here";
-    $scope.text = sharedProperties.getProperty();
+    $scope.text = textProperties.getCurrent();
 
 }

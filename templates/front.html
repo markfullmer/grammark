@@ -1,10 +1,8 @@
 <div class="large-6 columns">
-<form ng-submit="submitForm()" ng-controller="FormCtrl">
-  Enter text and hit enter:
-  <input type="submit" id="submit" value="Submit" />
+<form ng-submit="submitForm()" ng-controller="formCtrl">
   <label for="text" class="obscure">Document Text</label>
   <textarea autofocus class="empty-textarea" id="text" cols="4" placeholder="Type or paste your writing here. It will not be stored or reused in any way." ng-model="text"></textarea>
-    <p><input type="hidden" name="got" value="1" /></p>
+    <p><input class="button" type="submit" value="Submit" /></p>
   </form>
 </div>
 <div class="row">

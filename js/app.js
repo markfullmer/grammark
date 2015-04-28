@@ -1,4 +1,4 @@
-angular.module('grammarkApp', ['ngRoute'])
+angular.module('grammarkApp',['underscore','ngRoute'])
     // Setting configuration for application
     .config(function ($routeProvider) {
         $routeProvider.when('/overview', {
@@ -6,8 +6,8 @@ angular.module('grammarkApp', ['ngRoute'])
             templateUrl: 'templates/overview.html'
         });
         $routeProvider.when('/fix/:postId', {
-            controller: fixCtrl,
-            templateUrl: 'templates/fix.html'
+            controller: individualCtrl,
+            templateUrl: 'templates/individual.html'
         });
         $routeProvider.when('/page/:postId', {
             controller: pageCtrl,
@@ -15,19 +15,59 @@ angular.module('grammarkApp', ['ngRoute'])
         });
         $routeProvider.otherwise({
             redirectTo: '/',
-            templateUrl: 'templates/home.html'
+            templateUrl: 'templates/front.html'
         });
 
     })
-    .service('sharedProperties', function () {
-        var property = '';
+
+    .controller('formCtrl', function ($scope, textProperties, $routeParams) {
+        $scope.submitForm = function() {
+            textProperties.setCurrent($scope.text);
+            window.location.assign("#/overview");
+        };
+        $scope.resetForm = function() {
+            textProperties.setCurrent('');
+            textProperties.setExisting('');
+            window.location.assign("#/");
+        };
+    })
+
+    .controller('textCtrl', function ($scope, textProperties) {
+        $scope.text = textProperties.getCurrent();
+        $scope.$watch( 'text',
+        function(newValue, oldValue){
+            var output = String(newValue).replace(/<[^>]+>/gm, '');
+            var raw = output.trim().split(/\s+/);
+            $scope.wordcount = raw.length;
+            $scope.words = _.uniq(raw);
+        });
+        $scope.change = function() {
+            textProperties.setCurrent($scope.text);
+        };
+        $scope.reloadForm = function() {
+            $scope.text = ($scope.text).replace('hello','<b>hello</b>');
+            textProperties.setCurrent($scope.text);
+            textProperties.setExisting($scope.text);
+        };
+    })
+
+    .service('textProperties', function () {
+        var current = '';
+        var existing = '';
+        var begin = false;
 
         return {
-            getProperty: function () {
-                return property;
+            getCurrent: function () {
+                return current;
             },
-            setProperty: function(value) {
-                property = value;
+            setCurrent: function(value) {
+                current = value;
+            },
+            getExisting: function(value) {
+                return existing;
+            },
+            setExisting: function(value) {
+                existing = value;
             }
         };
     })
@@ -51,21 +91,6 @@ angular.module('grammarkApp', ['ngRoute'])
           });
         }
       }
-    })
-
-    .controller('FormCtrl', function ($scope, sharedProperties) {
-        $scope.submitForm = function() {
-            console.log("posting data...." + $scope.text);
-            sharedProperties.setProperty($scope.text);
-            window.location.assign("#/fix/passive");
-        };
-    })
-
-    .controller('textCtrl', function ($scope, sharedProperties) {
-      $scope.counter = 0;
-      $scope.change = function() {
-        sharedProperties.setProperty($scope.text);
-      };
     })
 
     .filter('capitalize', function() {

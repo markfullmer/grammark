@@ -16,10 +16,11 @@
         </td>
     </tr>
   </table>
-  <a class="button" href="index.php?id=passive">Fix Problems</a>
-  <a class="button" href="index.php?id=start">Start Over</a><br />
+  <div ng-controller="formCtrl"/>
+    <input class="button" ng-click="submitForm()" value="Fix Problems" />
+    <input class="button" ng-click="resetForm()" value="Clear & Start Over" />
+  </div>
 </div>
-
 <script type="text/javascript">
   function showValue(value, name) {
     document.getElementById(name).innerHTML=value;

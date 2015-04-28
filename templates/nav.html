@@ -1,12 +1,12 @@
-<ul id="tabnav">
-  <li class="tab1"><a href="#/overview" ng-click="sharedProperties.setProperty($scope.text);">Overview</a></li>
-  <li class="tab2"><a href="#/fix/passive" ng-click="sharedProperties.setProperty('hello');">Passive Voice</a></li>
+<ul id="tabnav" ng-controller="formCtrl">
+  <li class="tab1"><a href="#/overview" >Overview</a></li>
+  <li class="tab2"><a href="#/fix/passive" >Passive Voice</a></li>
   <li class="tab3"><a href="#/fix/wordiness">Wordiness</a></li>
   <li class="tab4"><a href="#/fix/transitions">Transitions</a></li>
   <li class="tab5"><a href="#/fix/sentences">Sentences</a></li>
   <li class="tab6"><a href="#/fix/grammar">Grammar</a></li>
   <li class="tab6"><a href="#/fix/nominalizations">Nominalizations</a></li>
   <li class="tab7"><a href="#/fix/style">Academic Style</a></li>
-  <li class="tab8 right"><a href="#">Reset and Start Over</a></li>
+  <li class="tab8 right"><a ng-click="resetForm()">Reset and Start Over</a></li>
 </ul>
 
