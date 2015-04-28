@@ -32,31 +32,65 @@ angular.module('grammarkApp',['underscore','ngRoute'])
         };
     })
 
-    .controller('textCtrl', function ($scope, textProperties) {
+    .controller('textCtrl', function ($scope, textProperties, $http) {
+
+        $scope.find = textProperties.getFind('academic');
         $scope.text = textProperties.getCurrent();
         $scope.$watch( 'text',
         function(newValue, oldValue){
-            var output = String(newValue).replace(/<[^>]+>/gm, '');
-            var raw = output.trim().split(/\s+/);
+            var sanitized = String(newValue).replace(/<[^>]+>/gm, '') + ' ';
+            var noPunctuation = sanitized.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+            var raw = sanitized.trim().split(/\s+/);
             $scope.wordcount = raw.length;
-            $scope.words = _.uniq(raw);
+            $scope.hits = [];
+            var arrayLength = $scope.find.length;
+            for (var i = 0; i < arrayLength; i++) {
+                if (noPunctuation.indexOf(' ' + $scope.find[i] + ' ') !=-1) {
+                    $scope.hits.push($scope.find[i]);
+                }
+                var uppercase = $scope.find[i].substr(0, 1).toUpperCase() + $scope.find[i].substr(1);
+                if (noPunctuation.indexOf(' ' + uppercase + ' ') !=-1) {
+                    $scope.hits.push($scope.find[i]);
+                }
+            }
+            $scope.hits = _.uniq($scope.hits);
         });
+
         $scope.change = function() {
             textProperties.setCurrent($scope.text);
         };
+
         $scope.reloadForm = function() {
-            $scope.text = ($scope.text).replace('hello','<b>hello</b>');
+            var arrayLength = $scope.hits.length;
+            var text = $scope.text;
+            for (var i = 0; i < arrayLength; i++) {
+                var text = text.split($scope.hits[i]).join('<mark>' + $scope.hits[i] + '</mark>');
+                var uppercase = $scope.hits[i].substr(0, 1).toUpperCase() + $scope.hits[i].substr(1);
+                var text = text.split(uppercase).join('<mark>' + uppercase + '</mark>');
+            }
+            $scope.text = text;
             textProperties.setCurrent($scope.text);
             textProperties.setExisting($scope.text);
         };
     })
 
-    .service('textProperties', function () {
+    .service('textProperties', function ($http) {
         var current = '';
         var existing = '';
         var begin = false;
+        var find = [];
 
         return {
+            getFind: function (value) {
+                $http.get('data/' + value + '.json')
+                .then(function(res){
+                    var arrayLength = res.data.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        find[i] = res.data[i].error;
+                    }
+                });
+                return find;
+            },
             getCurrent: function () {
                 return current;
             },
