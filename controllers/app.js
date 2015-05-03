@@ -29,8 +29,6 @@ angular.module('grammarkApp',['underscore','ngRoute'])
 .controller ('formCtrl', function ($scope, $routeParams, cache, text) {
     $scope.submitForm = function() {
         cache.set('text', $scope.text);
-        text.process();
-        text.highlight();
         window.location.assign("#/overview");
     };
     $scope.resetForm = function() {
