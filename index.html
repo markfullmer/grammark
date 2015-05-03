@@ -1,20 +1,25 @@
 <!doctype html>
 <html ng-app="grammarkApp">
   <head>
-    <script src="js/angular/angular.js"></script>
-    <script src="js/underscore/underscore.js"></script>
-<!--     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
-    <script src="js/angular/angular-route.js"></script>
+    <script src="controllers/angular-1.3.15/angular.min.js"></script>
+    <script src="controllers/angular-1.3.15/angular-route.min.js"></script>
+    <script src="controllers/underscore/underscore.min.js"></script>
+    <script src="controllers/angular-underscore-module/angular-underscore-module.js"></script>
     <link rel="stylesheet" href="css/foundation.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script src="js/app.js"></script>
-    <script src="js/individual.js"></script>
-    <script src="js/page.js"></script>
-    <script src="js/overview.js"></script>
-      <script src="js/angular-underscore-module/angular-underscore-module.js"></script>
+    <script src="controllers/app.js"></script>
+    <script src="controllers/individual.js"></script>
+    <script src="controllers/page.js"></script>
+    <script src="controllers/overview.js"></script>
+    <script src="models/wordiness.js"></script>
+    <script src="models/grammar.js"></script>
+    <script src="models/academic.js"></script>
+    <script src="models/transitions.js"></script>
+    <script src="models/passive.js"></script>
+
   </head>
   <body>
-    <ng-include src="'templates/header.html'"></ng-include>
+    <ng-include src="'views/header.html'"></ng-include>
 
     <div id="wrap">
       <div id="content">

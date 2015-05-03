@@ -1,0 +1,49 @@
+<ng-include src="'views/nav.html'"></ng-include>
+<div class="large-6 columns">
+  <h2>{{title | capitalize}}: <span class="highlight">{{ results.total }}</span></h2>
+    <p><input type="hidden" name="got" value="1" /></p>
+  </form>
+    <table>
+    <tr><td></td><td>Actual</td><td>Goal</td></tr>
+      <tr>
+        <td class="bold">
+          <a href="?id="></a>:
+        </td>
+        <td>
+          <span class="highlight"><a href="?id="></a></span>
+        </td>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div ng-controller="formCtrl"/>
+    <input class="button" ng-click="submitForm()" value="Fix Problems" />
+    <input class="button" ng-click="resetForm()" value="Clear & Start Over" />
+  </div>
+</div>
+<script type="text/javascript">
+  function showValue(value, name) {
+    document.getElementById(name).innerHTML=value;
+  }
+</script>
+<div class="row">
+  <div class="large-6 columns">
+     <div class="panel">
+      <h2>Score: %</h2>
+      <p>Calculates errors divided by number of your sentences () sentences). Maximum allowable errors for 100%:</p>
+      <form action="index.php" method="post">
+
+          <br />
+          <input type="range" name="{{ item.id }}" min="0" max="100" value="{{ item.goal }}"
+          step="1" onchange="showValue(this.value, '')" />
+          <span id=""></span><br />
+        <input class="button" type="submit" name="customize" value="Customize" />
+      </form>
+    <p>
+    Presets:
+      <a class="tiny button" href="index.php?preset=humanities">Humanities</a>
+      <a class="tiny button" href="index.php?preset=sciences">Sciences</a>
+      <a class="tiny button" href="index.php?preset=internet">Web</a>
+      <a class="tiny button" href="index.php?preset=default">Default</a></p>
+  </div>
+</div>

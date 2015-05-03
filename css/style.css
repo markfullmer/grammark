@@ -24,26 +24,26 @@ label, input[type=button], input[type=submit], button { cursor: pointer; }
 }
 
 .title-area .name h1 {
-	background:url("../img/title.png");
+	background:url("../img/title-small.png");
 	background-size:100% 100%;
 	height:45px;
-	width:400px;
+	width:200px;
 	font-color:black;
 }
-.highlight {
+mark {
 	background-color:yellow;
 	position:relative;
 }
-
-.highlight-good {
+.green mark {
 	background-color:lightgreen;
 	position:relative;
 }
-.highlight .suggestion {
+
+mark .suggestion {
 	display:none;
 }
 
-.highlight:hover .suggestion {
+mark:hover .suggestion {
 position:absolute;
 top: -3em;
 left: 1em;
@@ -215,5 +215,3 @@ clip: rect(1px, 1px, 1px, 1px);
    color: #b30000;
    font-size:18px;
 }
-
-
