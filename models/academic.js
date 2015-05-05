@@ -1,6 +1,10 @@
 var academic = function() {
     this.machineName = 'academic';
     this.title = 'Academic Style';
+    this.passingScore = '3';
+    this.passingText = '% or fewer';
+    this.scoringType = 'punitive';
+    this.ratioType = '% of sentences';
     this.fail = 'You didn\'t meet the criteria.';
     this.markup = "yellow";
     this.corrections = {
@@ -96,8 +100,8 @@ var academic = function() {
 "etc.":"Delete / among other examples",
 "and so forth":"Delete / among other examples",
 "and so on":"Delete / among other examples",
-"ie":"namely",
-"eg":"for example",
+"i.e.":"namely",
+"e.g.":"for example",
 "vs.":"versus/as opposed to",
 "nice":"Avoid / friendly",
 "cute":"Avoid / attractive",

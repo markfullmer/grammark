@@ -1,6 +1,10 @@
 var wordiness = function() {
     this.machineName = 'wordiness';
     this.title = 'Wordiness Errors';
+    this.passingScore = '2';
+    this.passingText = '% or fewer';
+    this.scoringType = 'punitive';
+    this.ratioType = '% of sentences';
     this.fail = 'You didn\'t meet the criteria.';
     this.markup = "yellow";
     this.corrections =  {

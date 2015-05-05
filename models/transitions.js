@@ -1,6 +1,10 @@
 var transitions = function() {
     this.machineName = 'transitions';
     this.title = 'Transitions';
+    this.passingScore = '10';
+    this.passingText = '% or more';
+    this.scoringType = 'positive';
+    this.ratioType = '% of sentences';
     this.fail = 'You didn\'t meet the criteria.';
     this.markup = "green";
     this.corrections = {

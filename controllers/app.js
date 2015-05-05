@@ -50,68 +50,55 @@ angular.module('grammarkApp',['underscore','ngRoute'])
     var matchIds = [];
     var find = [];
     var highlighted = '';
+    var instances = 0;
 
     return {
         process: function () {
-        console.log('text-process');
-        this.raw = cache.get('text');
-        //$submission = preg_replace('/<div(.*?)<\/div>/i', '', $submission);
-        var noSuggestions = String(this.raw).replace(/<div class="suggestion">(.*?)<\/div>/gmi, '');
-        this.sanitized = String(noSuggestions).replace(/<[^>]+>/gm, '');
-        this.semicolonsAndPeriods = this.sanitized.replace(/[,\-\/#!$%\^&\*:{}=\-_`~()]/g,'');
-        this.sentences = this.semicolonsAndPeriods.replace(/[;]/g,'.');
-        this.sentenceCount = this.sentences.trim().split(/[\.]/g).length -1;
-        this.noPunctuation = ' ' + this.sentences.replace(/[\.]/g,'').toLowerCase() + ' ';
-        this.words = this.noPunctuation.trim().split(/\s+/);
-        this.wordcount = this.words.length;
-        var matches = []; // reset
+            this.raw = cache.get('text');
+            var noSuggestions = String(this.raw).replace(/<div class="suggestion">(.*?)<\/div>/gi, '');
+            this.sanitized = String(noSuggestions).replace(/<[^>]+>/gm, '');
+            this.semicolonsAndPeriods = this.sanitized.replace(/[,\-\/#!$%\^&\*:{}=\-_`~()]/g,'');
+            this.sentences = this.semicolonsAndPeriods.replace(/[;]/g,'.');
+            this.sentenceCount = this.sentences.trim().split(/[\.]/g).length -1;
+            this.noPunctuation = ' ' + this.sentences.replace(/[\.]/g,'').toLowerCase() + ' ';
+            this.words = this.noPunctuation.trim().split(/\s+/);
+            this.wordCount = this.words.length;
+            var matches = []; // reset
+            var count = 0;
 
-/*        console.log('raw: ' + this.raw);
-        console.log('sanitized: ' + this.sanitized);
-        console.log('semicolonsAndPeriods: ' + this.semicolonsAndPeriods);
-        console.log('sentences: ' + this.sentences);
-        console.log('sentence count: ' + this.sentenceCount);
-        console.log('noPunctuation: ' + this.noPunctuation);
-        console.log('words: ' + this.words);
-        console.log('wordcount: ' + this.wordcount);
-        console.log('matches:  ' + this.find);*/
-        type.get();
-        var corrections = type.data.corrections;
-        for (var i in corrections) {
-            if (this.noPunctuation.indexOf(' ' + i + ' ') !=-1) {
-                matches.push(i);
-            }
-            var uppercase = i.substr(0, 1).toUpperCase() + i.substr(1);
-            if (this.noPunctuation.indexOf(' ' + uppercase + ' ') !=-1) {
-                matches.push(i);
-            }
-        }
-        this.matches = _.uniq(matches);
-        var cachename = type.data.machineName + '_matches';
-        cache.set(cachename, this.matches);
-/*         console.log(i);
-         console.log(source[i]);*/
-/*            for (var i = 0; i < arrayLength; i++) {
-                if (this.noPunctuation.indexOf(' ' + type.data.hits[i].find + ' ') !=-1) {
-                    matchIds.push(type.data.hits[i].id);
-                    matches.push(type.data.hits[i].find);
+    /*        console.log('raw: ' + this.raw);
+            console.log('sanitized: ' + this.sanitized);
+            console.log('semicolonsAndPeriods: ' + this.semicolonsAndPeriods);
+            console.log('sentences: ' + this.sentences);
+            console.log('sentence count: ' + this.sentenceCount);
+            console.log('noPunctuation: ' + this.noPunctuation);
+            console.log('words: ' + this.words);
+            console.log('wordcount: ' + this.wordcount);
+            console.log('matches:  ' + this.find);*/
+            type.get();
+            var corrections = type.data.corrections;
+            for (var i in corrections) {
+                var needle = i.replace(/[,\-\/#!$%\^&\*:{}=\-_`~();\.]/g,'');
+                if (this.noPunctuation.indexOf(' ' + needle + ' ') !=-1) {
+                    matches.push(i);
+                    count++;
                 }
-                var uppercase = type.data.hits[i].find.substr(0, 1).toUpperCase() + type.data.hits[i].find.substr(1);
+                var uppercase = needle.substr(0, 1).toUpperCase() + needle.substr(1);
                 if (this.noPunctuation.indexOf(' ' + uppercase + ' ') !=-1) {
-                    matchIds.push(type.data.hits[i].id);
-                    matches.push(type.data.hits[i]);
+                    matches.push(i);
+                    count++;
                 }
             }
-        this.matches = _.uniq(matches);
-        this.matchIds = _.uniq(matchIds);
-        // console.log('processed' + matches);
-        var cachename = type.data.machineName + '_matches';
-        cache.set(cachename, this.matches);*/
+            console.log('count' + count);
+            this.instances = matches.length;
+            this.matches = _.uniq(matches);
+            var cachename = type.data.machineName + '_matches';
+            cache.set(cachename, this.matches);
         },
 
         highlight: function () {
             type.get();
-            console.log('text-highlight' + this.matches);
+            //console.log('text-highlight' + this.matches);
             this.highlighted = this.sanitized;
             for (i = 0; i < this.matches.length; i++) {
                 var match = this.matches[i];
@@ -119,7 +106,9 @@ angular.module('grammarkApp',['underscore','ngRoute'])
                 if (type.data.corrections[match] != '') {
                     var suggestion = '<div class="suggestion">' + type.data.corrections[match] + '</div>';
                 }
-                this.highlighted = this.highlighted.split(match).join('<mark>' + match + suggestion + '</mark>');
+                this.highlighted = this.highlighted.split(' ' + match + ' ').join(' <mark>' + match + suggestion + '</mark> ');
+                this.highlighted = this.highlighted.split(' ' + match + '.').join(' <mark>' + match + suggestion + '</mark>.');
+                this.highlighted = this.highlighted.split(' ' + match + ',').join(' <mark>' + match + suggestion + '</mark>,');
                 var uppercase = match.substr(0, 1).toUpperCase() + match.substr(1);
                 this.highlighted = this.highlighted.split(uppercase).join('<mark>' + uppercase + '</mark>');
             }
@@ -149,6 +138,44 @@ angular.module('grammarkApp',['underscore','ngRoute'])
             return cache;
         }
     };
+})
+
+.service('score', function ($routeParams, type, text) {
+
+    this.calculate = function() {
+        var result = 0;
+        switch (type.data.ratioType) {
+            case 'errors':
+                result = text.instances;
+                break;
+            case '% of sentences':
+                result = (text.instances/text.sentenceCount)*100;
+                break;
+            case ' per sentence':
+                result = (text.instances/text.sentenceCount);
+                break;
+            case '% of words':
+                result = (text.instances/text.wordCount)*100;
+                break;
+        }
+        return parseInt(result, 10);
+    }
+    this.grade = function() {
+        var result = 'success'; // default
+        switch (type.data.scoringType) {
+        case 'punitive':
+            if (this.calculate() > type.data.passingScore) {
+                result = 'warning';
+            }
+            break;
+        case 'positive':
+            if (this.calculate() < type.data.passingScore) {
+                result = 'warning';
+            }
+            break;
+        }
+        return result;
+    }
 })
 
 .service('type', function ($routeParams) {

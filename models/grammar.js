@@ -1,6 +1,10 @@
 var grammar = function() {
     this.machineName = 'grammar';
     this.title = 'Grammar Issues';
+    this.passingScore = '0';
+    this.passingText = ' errors'
+    this.scoringType = 'punitive';
+    this.ratioType = 'errors';
     this.fail = 'You didn\'t meet the criteria.';
     this.markup = "yellow";
     this.corrections = {
