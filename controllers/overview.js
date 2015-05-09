@@ -26,11 +26,14 @@ function overviewCtrl ($scope, $routeParams, cache, type, text, score) {
           percent = ' (' + score.calculate(name) + '%)';
         }
       }
+      if (type.data.scoringType == 'punitive') {
+        total = total + cache.get(name + '_count',text.getCount(name));
+      }
       $scope.score[name] = cache.get(name_passingScore,type.data.passingScore);
       $scope[name_score] = cache.get(name + '_count',text.getCount(name)) + percent;
       $scope[name] = cache.get(name_passingScore, type.data.passingScore);
       $scope[name_grade] = score.grade(name);
-      total = total + cache.get(name + '_count',text.getCount(name));
+
     }
 
     $scope.totals = total;
