@@ -1,7 +1,7 @@
 var passive = function() {
     this.machineName = 'passive';
     this.title = 'Passive Voice';
-    this.passingScore = '10';
+    this.passingScore = '11';
     this.passingText = '% or fewer';
     this.scoringType = 'punitive';
     this.ratioType = '% of sentences';

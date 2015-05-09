@@ -1,23 +1,21 @@
 <ng-include src="'views/nav.html'"></ng-include>
-<div class="large-6 columns">
-  <h2>{{title | capitalize}}: <span class="highlight">{{ results.total }}</span></h2>
-    <p><input type="hidden" name="got" value="1" /></p>
-  </form>
+<div class="medium-6 columns">
+  <h2>{{title | capitalize}}: <mark>{{ totals }}</mark></h2>
+  {{ content }}
     <table>
-    <tr><td></td><td>Actual</td><td>Goal</td></tr>
-      <tr>
-        <td class="bold">
-          <a href="?id="></a>:
-        </td>
-        <td>
-          <span class="highlight"><a href="?id="></a></span>
-        </td>
-        <td>
-        </td>
-    </tr>
-  </table>
+      <thead><tr><th>Category</th><th>Results</th><th>Goal</th></tr></thead>
+      <tbody>
+      <tr class="{{ passive_grade }}"><td>Passive voice</td><td>{{ ::passive_score }}</td><td>Less than {{ passive }}%</td></tr>
+      <tr class="{{ wordiness_grade }}"><td>Wordiness</td><td>{{ ::wordiness_score }}</td><td>Less than {{ wordiness }}%</td></tr>
+      <tr class="{{ sentences_grade }}"><td>Sentences</td><td>{{ ::sentences_score }}</td><td>Less than {{ sentences }}%</td></tr>
+      <tr class="{{ transitions_grade }}"><td>Transitions</td><td>{{ ::transitions_score }}</td><td>More than {{ transitions }}%</td></tr>
+      <tr class="{{ academic_grade }}"><td>Academic Style</td><td>{{ ::academic_score }}</td><td>Less than {{ academic }}%</td></tr>
+      <tr class="{{ grammar_grade }}"><td>Grammar</td><td>{{ ::grammar_score }}</td><td>{{ grammar }} errors</td></tr>
+      <tr class="{{ nominalizations_grade }}"><td>Nominalizations</td><td>{{ ::nominalizations_score }}</td><td>Less than {{ nominalizations }}%</td></tr>
+      </tbody>
+    </table>
   <div ng-controller="formCtrl"/>
-    <input class="button" ng-click="submitForm()" value="Fix Problems" />
+    <input class="button" ng-click="view()" value="View Problems" /><br />
     <input class="button" ng-click="resetForm()" value="Clear & Start Over" />
   </div>
 </div>
@@ -27,23 +25,27 @@
   }
 </script>
 <div class="row">
-  <div class="large-6 columns">
-     <div class="panel">
-      <h2>Score: %</h2>
-      <p>Calculates errors divided by number of your sentences () sentences). Maximum allowable errors for 100%:</p>
-      <form action="index.php" method="post">
-
-          <br />
-          <input type="range" name="{{ item.id }}" min="0" max="100" value="{{ item.goal }}"
-          step="1" onchange="showValue(this.value, '')" />
-          <span id=""></span><br />
-        <input class="button" type="submit" name="customize" value="Customize" />
-      </form>
-    <p>
-    Presets:
-      <a class="tiny button" href="index.php?preset=humanities">Humanities</a>
-      <a class="tiny button" href="index.php?preset=sciences">Sciences</a>
-      <a class="tiny button" href="index.php?preset=internet">Web</a>
-      <a class="tiny button" href="index.php?preset=default">Default</a></p>
+  <div class="medium-5 columns right">
+    <div data-alert class="alert-box success radius">
+      <h2>Score: {{ overallscore }}%</h2>
+    </div>
+    <div class="panel">
+      <h3>Grading Criteria</h3>
+      <p>Adjust the target number for each category.</p>
+      <table>
+      <tr><td>Passive voice</td><td><input type="range" ng-model="score.passive" min="0" max="100" step="1" /> {{ passive }}%</td></tr>
+      <tr><td>Wordiness</td><td><input type="range" ng-model="score.wordiness" min="0" max="100" step="1" /> {{ wordiness }}%</td></tr>
+      <tr><td>Sentences</td><td><input type="range" ng-model="score.sentences" min="0" max="100" step="1" /> {{ sentences }}%</td></tr>
+      <tr><td>Transitions</td><td><input type="range" ng-model="score.transitions" min="0" max="100" step="1" /> {{ transitions }}%</td></tr>
+      <tr><td>Academic Style</td><td><input type="range" ng-model="score.academic" min="0" max="100" step="1" /> {{ academic }}%</td></tr>
+      <tr><td>Grammar</td><td><input type="range" ng-model="score.grammar" min="0" max="100" step="1" /> {{ grammar }}</td></tr>
+      <tr><td>Nominalizations</td><td><input type="range" ng-model="score.nominalizations" min="0" max="100" step="1" /> {{ nominalizations }}%</td></tr>
+      </table>
+      <h3>Presets</h3>
+      <a class="tiny button" ng-click="humanities()">Humanities</a>
+      <a class="tiny button">Sciences</a>
+      <a class="tiny button">Web</a>
+      <a class="tiny button">Default</a></p>
+    </div>
   </div>
 </div>

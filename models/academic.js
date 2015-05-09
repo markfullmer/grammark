@@ -7,6 +7,9 @@ var academic = function() {
     this.ratioType = '% of sentences';
     this.fail = 'You didn\'t meet the criteria.';
     this.markup = "yellow";
+    this.test = function() {
+      return 'boo';
+    }
     this.corrections = {
 "plenty of":"a great deal of /numerous/ several",
 "loads of":"a great deal of /numerous/ several",

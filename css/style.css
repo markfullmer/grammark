@@ -45,7 +45,7 @@ mark .suggestion {
 
 mark:hover .suggestion {
 position:absolute;
-top: -3em;
+top: -5em;
 left: 1em;
 padding:10px;
 background: -webkit-linear-gradient(#d3d3d3, #ffffff) repeat scroll 0 0 rgba(0, 0, 0, 0); /* For Safari 5.1 to 6.0 */
@@ -55,7 +55,7 @@ background: linear-gradient(#d3d3d3, #ffffff) repeat scroll 0 0 rgba(0, 0, 0, 0)
 border:1px solid black;
 display: block;
 z-index: 1;
-min-width:200px;
+min-width:400px;
 }
 
 nav {
@@ -72,6 +72,66 @@ nav {
 .error {color:red;}
 .empty-textarea {
 	height:500px;
+}
+
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+tr.success { background-color: lightgreen!important;
+	 -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+      -moz-animation: fadein 0.5s; /* Firefox < 16 */
+       -ms-animation: fadein 0.5s; /* Internet Explorer */
+        -o-animation: fadein 0.5s; /* Opera < 12.1 */
+           animation: fadein 0.5s;
+  -webkit-transition: all .5s ease-in-out;
+  	 -moz-transition: all .5s ease-in-out;
+  		-ms-transition: all .5s ease-in-out;
+  		 -o-transition: all .5s ease-in-out;
+  				transition: all .5s ease-in-out;
+
+}
+tr.warning { background-color: yellow!important;
+	-webkit-animation: fadein .5s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein .5s; /* Firefox < 16 */
+      -ms-animation: fadein .5s; /* Internet Explorer */
+       -o-animation: fadein .5s; /* Opera < 12.1 */
+          animation: fadein .5s;
+	-webkit-transition: all .5s ease-in-out;
+		 -moz-transition: all .5s ease-in-out;
+		  -ms-transition: all .5s ease-in-out;
+			 -o-transition: all .5s ease-in-out;
+					transition: all .5s ease-in-out;
 }
 
 /* highlighthing */

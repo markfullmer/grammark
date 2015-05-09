@@ -1,47 +1,43 @@
-function individualCtrl ($scope, type, text, cache, score) {
+function individualCtrl ($scope, type, text, cache, score, $routeParams) {
     $scope.title = '';
     $scope.score = '';
     $scope.scoreText = '';
     $scope.feedback = '';
     $scope.grade = '';
     $scope.text = '';
-    $scope.matches = '';
-    $scope.raw = '';
+    //$scope.matches = '';
+    $scope.raw = 0;
     $scope.number = 'instances';
 
-    type.get();
-    text.process();
-    $scope.markup = type.data.markup;
+    text.parse(cache.get('text','Here is some totally awesome text provided by nevertheless. Me. Obviously.'));
+    text.process(cache.get('text',' '), $routeParams.postId);
+    $scope.markup = type.data.markup; // type will have been set during text.process
     $scope.title = type.data.title; // one-time bind
     $scope.feedback = type.data.fail;
-    $scope.text = text.highlight(); // one-time bind
-    $scope.grade = score.grade();
-    $scope.raw = text.instances;
-    if (text.instances == 1) {
-        $scope.number = 'instance';
-    }
+
     $scope.goal = type.data.passingScore + type.data.passingText;
     if (type.data.ratioType != 'errors') {
-        $scope.score = '(' + score.calculate() + type.data.ratioType + ')';
+        $scope.score = '(' + score.calculate($routeParams.postId) + type.data.ratioType + ')';
     }
 
+    $scope.text = text.highlight(); // one-time bind
 
     // Monitor the user input text for changes
-    $scope.$watch( 'text',
-        function(newValue, oldValue){
-            cache.set('text', newValue); // record the new text value
-            text.process();
-            $scope.matches = text.matches;
-            $scope.grade = score.grade();
-            $scope.raw = text.instances;
-            $scope.number = 'instances';
-            if (text.instances == 1) {
-                $scope.number = 'instance';
-            }
-            if (type.data.ratioType != 'errors') {
-                $scope.score = '(' + score.calculate() + type.data.ratioType + ')';
-            }
-        });
+    $scope.$watch( 'text', function (newValue, oldValue) {
+        cache.set('text', newValue); // record the new text value
+        text.parse(cache.get('text'), ' ');
+        text.process(cache.get('text',' '), $routeParams.postId);
+        $scope.matches = cache.get($routeParams.postId + '_matches', text.matches);
+        $scope.grade = score.grade($routeParams.postId);
+        $scope.raw = cache.get($routeParams.postId + '_count', 0);
+        $scope.number = 'instances';
+        if ($scope.raw == 1) {
+            $scope.number = 'instance';
+        }
+        if (type.data.ratioType != 'errors') {
+            $scope.score = '(' + score.calculate() + type.data.ratioType + ')';
+        }
+    });
 
     $scope.reHighlight = function() {
         $scope.text = text.highlight();
