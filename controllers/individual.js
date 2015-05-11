@@ -5,7 +5,6 @@ function individualCtrl ($scope, type, text, cache, score, $routeParams) {
     $scope.feedback = '';
     $scope.grade = '';
     $scope.text = '';
-    //$scope.matches = '';
     $scope.raw = 0;
     $scope.number = 'instances';
 
@@ -15,7 +14,9 @@ function individualCtrl ($scope, type, text, cache, score, $routeParams) {
     $scope.title = type.data.title; // one-time bind
     $scope.feedback = type.data.fail;
 
-    $scope.goal = type.data.passingScore + type.data.passingText;
+    console.log(cache.get($routeParams.postId + '_count','yikes'));
+
+    $scope.goal = cache.get($routeParams.postId + '_passingScore', type.data.passingScore) + type.data.passingText;
     if (type.data.ratioType != 'errors') {
         $scope.score = '(' + score.calculate($routeParams.postId) + type.data.ratioType + ')';
     }
@@ -35,7 +36,7 @@ function individualCtrl ($scope, type, text, cache, score, $routeParams) {
             $scope.number = 'instance';
         }
         if (type.data.ratioType != 'errors') {
-            $scope.score = '(' + score.calculate() + type.data.ratioType + ')';
+            $scope.score = '(' + score.calculate($routeParams.postId) + type.data.ratioType + ')';
         }
     });
 

@@ -61,14 +61,13 @@ angular.module('grammarkApp',['underscore','ngRoute'])
             var withLineBreaks = rawText.replace(/<br>/g,'LINEBREAK');
             var withLineBreaks = withLineBreaks.replace(/<br \/>/g,'LINEBREAK');
             var withLineBreaks = withLineBreaks.replace(/<p (.*?)>/gi,'PARAGRAPHSTART');
-/*            withLineBreaks.replace(/[This]/g,'fullmer');
-            withLineBreaks.replace(/<br \/>/g,'fullmer');*/
             var noSuggestions = String(withLineBreaks).replace(/<div class="suggestion">(.*?)<\/div>/gi, '');
             this.sanitized = String(noSuggestions).replace(/<[^>]+>/gm, '');
-            //this.sanitized = noSuggestions;
             this.noLineBreaks = this.sanitized.replace(/PARAGRAPHEND/g,' ');
             this.noLineBreaks = this.noLineBreaks.replace(/PARAGRAPHSTART/g,' ');
             this.noLineBreaks = this.noLineBreaks.replace(/LINEBREAK/g,' ');
+            var placeholder = this.noLineBreaks.replace(/[\-\/#!$%\^&\*:{}=\-_`~()]/g,'');
+            this.spacedPunctuation = placeholder.replace(/[\.,;]/g,' .');
             this.semicolonsAndPeriods = this.noLineBreaks.replace(/[,\-\/#!$%\^&\*:{}=\-_`~()]/g,'');
             this.sentences = this.semicolonsAndPeriods.replace(/[;]/g,'.');
             this.sentenceCount = this.sentences.trim().split(/[\.]/g).length -1;
@@ -78,27 +77,33 @@ angular.module('grammarkApp',['underscore','ngRoute'])
         },
 
         process: function (rawText, analysisType) {
-            //console.log(this.sanitized);
-            var matches = []; // reset
-            var count = 0;
 
             type.get(analysisType);
-            var corrections = type.data.corrections;
-            for (var i in corrections) {
-
-                var needle = i.replace(/[,\-\/#!$%\^&\*:{}=\-_`~();\.]/g,'');
-                if (this.noPunctuation.indexOf(' ' + needle + ' ') !=-1) {
-                    matches.push(i);
-                    count = count + this.countOccurrences(this.noPunctuation,' ' + needle + ' ');
-                }
-                var uppercase = needle.substr(0, 1).toUpperCase() + needle.substr(1);
-                if (this.noPunctuation.indexOf(' ' + uppercase + ' ') !=-1) {
-                    matches.push(i);
-                    // count does not need to be performed, as case-insensitive regex
-                }
+            if (typeof type.data.process == 'function') { 
+                var result = type.data.process(this.noPunctuation);
+                this.matches = result[0];
+                var count = result[1];
+                console.log('matches:' + this.matches);
             }
-            this.matches = _.uniq(matches);
-           // console.log(_.uniq(matches));
+            else {
+                var matches = []; // reset
+                var count = 0;
+                var corrections = type.data.corrections;
+                for (var i in corrections) {    
+
+                    var needle = i.replace(/[\.]/g,' .');
+                    if (this.spacedPunctuation.indexOf(' ' + needle + ' ') !=-1) {
+                        matches.push(i);
+                        count = count + this.countOccurrences(this.spacedPunctuation,' ' + needle + ' ');
+                    }
+                    var uppercase = needle.substr(0, 1).toUpperCase() + needle.substr(1);
+                    if (this.spacedPunctuation.indexOf(' ' + uppercase + ' ') !=-1) {
+                        matches.push(i);
+                        // count does not need to be performed, as case-insensitive regex
+                    }
+                }
+                this.matches = _.uniq(matches);   
+            }
             cache.set(analysisType + '_count', count);
             cache.set(analysisType + '_matches', this.matches);
         },
@@ -305,3 +310,16 @@ angular.module('grammarkApp',['underscore','ngRoute'])
     return (!!input) ? input.replace(/([^\W_]+[^\s-]*) */g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
   }
 })
+
+var countOccurrences = function (str, value) {
+    var regExp = new RegExp(value, "gi");
+    return str.match(regExp) ? str.match(regExp).length : 0;
+};
+
+var wordArray = function (rawText) {
+    var sanitized = String(rawText).replace(/<[^>]+>/gm, '');
+    var semicolonsAndPeriods = sanitized.replace(/[,\-\/#!$%\^&\*:{}=\-_`~()]/g,'');
+    var noPunctuation = semicolonsAndPeriods.replace(/[;\.]/g,' ');
+    var lowercase = noPunctuation = ' ' + noPunctuation.replace(/[\.]/g,'').toLowerCase() + ' ';
+    return lowercase.trim().split(/\s+/);
+};

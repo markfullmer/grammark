@@ -7,6 +7,26 @@ var passive = function() {
     this.ratioType = '% of sentences';
     this.fail = 'You didn\'t meet the criteria.';
     this.markup = "yellow";
+    this.matches = [];
+    this.process = function(rawText) {
+    	var helpers = ['is','was','were','being','having','been'];
+    	var count = 0;
+    	var matches = [];
+    	var irregularPast = this.corrections;
+    	var words = wordArray(rawText);
+    	for (var i in words) {
+    		var previous = i - 1;
+    		if (_.indexOf(_.keys(irregularPast), words[i]) != -1 || words[i].substr(-2, 2) == 'ed') {
+    			if (_.indexOf(helpers, words[previous]) != -1) {
+    				matches.push(words[previous] + ' ' + words[i]);
+    				count = count + 1;
+    			}
+    		}
+    	}
+        this.matches = _.uniq(matches);
+        return [this.matches, count];
+        //return this.matches;
+    };
     this.corrections = {
 "arisen":"",
 "babysat":"",
