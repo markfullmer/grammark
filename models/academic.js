@@ -1,10 +1,10 @@
 var academic = function() {
     this.machineName = 'academic';
     this.title = 'Academic Style';
-    this.passingScore = '3';
+    this.passingScore = '10';
     this.passingText = '% or fewer';
     this.scoringType = 'punitive';
-    this.ratioType = '% of sentences';
+    this.ratioType = '% of words';
     this.fail = 'You didn\'t meet the criteria.';
     this.markup = "yellow";
     this.corrections = {

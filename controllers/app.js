@@ -99,7 +99,7 @@ angular.module('grammarkApp',['underscore','ngRoute'])
                     var uppercase = needle.substr(0, 1).toUpperCase() + needle.substr(1);
                     if (this.spacedPunctuation.indexOf(' ' + uppercase + ' ') !=-1) {
                         matches.push(i);
-                        // count does not need to be performed, as case-insensitive regex
+                        count = count + this.countOccurrences(this.spacedPunctuation,' ' + uppercase + ' ');
                     }
                 }
                 this.matches = _.uniq(matches);   
@@ -142,7 +142,7 @@ angular.module('grammarkApp',['underscore','ngRoute'])
         },
 
         countOccurrences: function (str, value) {
-            var regExp = new RegExp(value, "gi");
+            var regExp = new RegExp(value, "g");
             return str.match(regExp) ? str.match(regExp).length : 0;
         },
     };
@@ -205,6 +205,7 @@ angular.module('grammarkApp',['underscore','ngRoute'])
                 result = (count/text.sentenceCount);
                 break;
             case '% of words':
+                console.log(count + ' in number; % of words');
                 result = (count/text.wordCount)*100;
                 break;
         }
@@ -261,7 +262,7 @@ angular.module('grammarkApp',['underscore','ngRoute'])
         case 'academic':
             var data = new academic();
             cache.set('academic_scoringType',data.scoringType);
-            cache.set('grammar_ratioType',data.ratioType);
+            cache.set('academic_ratioType',data.ratioType);
             break;
         case 'transitions':
             var data = new transitions();
