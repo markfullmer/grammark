@@ -5,7 +5,8 @@ var passive = function() {
     this.passingText = '% or fewer';
     this.scoringType = 'punitive';
     this.ratioType = '% of sentences';
-    this.fail = 'You didn\'t meet the criteria.';
+    this.fail = 'Generally, writing is clearer in active voice. Compare:<ul><li>"Mark ate Planet Mars." (active)</li><li>"Planet Mars was eaten by Mark." (passive)</li></ul><h4>What to do</h4>Think "who did what", not "what was done by whom" (you\'ll probably need to reverse the sentence order). In grammar-speak, avoid <i>is, was, were</i> or <i>be, being, been</i> followed by a past tense verb. <h4>Example fixes</h4><ul><li>it <mark><strike>is</strike> accept<strike>ed</strike></mark> that... --> we <b>accept</b> that...</li><li>needs to <mark><strike>be</strike> fund<strike>ed</strike></mark> by Britain... --> Britain needs to <b>fund</b>...</li></ul>';
+    this.pass = 'Your writing passed the criterion for passive sentences. Congrats!';
     this.markup = "yellow";
     this.matches = [];
     this.process = function(rawText) {
@@ -139,7 +140,7 @@ var passive = function() {
 "worn":"",
 "won":"",
 "withdrawn":"",
-"written ":"",
+"written":"",
 "burned":"",
 "burnt":"",
 "dreamed":"",

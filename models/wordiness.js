@@ -5,7 +5,8 @@ var wordiness = function() {
     this.passingText = '% or fewer';
     this.scoringType = 'punitive';
     this.ratioType = '% of sentences';
-    this.fail = 'You didn\'t meet the criteria.';
+    this.fail = 'Your writing seems too wordy. Why use 3 words when you can say it with 1? <b>Examples:</b><ul><li>it <mark>seems to be</mark> effective --> it <mark class="green">seems</mark> effective</li><li>the amount of energy <mark>being</mark> used --> the amount of energy used</li><li>We make <mark>a majority of</mark> our decisions <mark>in a brief moment</mark> --> We make <mark class="green">most</mark> of our decisions <mark class="green">quickly</mark>.</li></ul>You don\'t need to remove ALL instances below, but try to reduce your use until you are in the green.';
+    this.pass = 'Woohoo! Your writing seems concise, precise, and snappy. George Orwell would be proud.';
     this.markup = "yellow";
     this.corrections =  {
 "absolutely essential":"essential",

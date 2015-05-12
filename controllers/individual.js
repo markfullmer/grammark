@@ -13,9 +13,6 @@ function individualCtrl ($scope, type, text, cache, score, $routeParams) {
     $scope.markup = type.data.markup; // type will have been set during text.process
     $scope.title = type.data.title; // one-time bind
     $scope.feedback = type.data.fail;
-
-    console.log(cache.get($routeParams.postId + '_count','yikes'));
-
     $scope.goal = cache.get($routeParams.postId + '_passingScore', type.data.passingScore) + type.data.passingText;
     if (type.data.ratioType != 'errors') {
         $scope.score = '(' + score.calculate($routeParams.postId) + type.data.ratioType + ')';
@@ -37,6 +34,10 @@ function individualCtrl ($scope, type, text, cache, score, $routeParams) {
         }
         if (type.data.ratioType != 'errors') {
             $scope.score = '(' + score.calculate($routeParams.postId) + type.data.ratioType + ')';
+        }
+        $scope.feedback = cache.get($routeParams.postId + '_fail','');
+        if ($scope.grade == 'success') {
+            $scope.feedback = cache.get($routeParams.postId + '_pass','');
         }
     });
 

@@ -5,7 +5,8 @@ var grammar = function() {
     this.passingText = ' errors';
     this.scoringType = 'punitive';
     this.ratioType = 'errors';
-    this.fail = 'You didn\'t meet the criteria.';
+    this.fail = 'Your writing includes words or phrases usually considered to be grammar errors (see list below). <h4>Notes</h4><ul><li>In some contexts, the words highlighted may be just fine. Natural language has many exceptions.</li><li>The error list below isn\'t comprehensive. Your writing may contain other grammar errors.</li></ul>';
+    this.pass = 'Woohoo! We didn\'t find any obvious grammark errors. However, beware: Grammark does not check for fragments, comma splices, subject-verb errors, number and pronoun problems. What\'s the best way to find grammar errors? Read your writing aloud.';
     this.markup = "yellow";
     this.corrections = {
 "a 100":"100, a hundred, one hundred",

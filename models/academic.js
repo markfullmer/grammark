@@ -5,7 +5,8 @@ var academic = function() {
     this.passingText = '% or fewer';
     this.scoringType = 'punitive';
     this.ratioType = '% of words';
-    this.fail = 'You didn\'t meet the criteria.';
+    this.fail = 'Your writing may contain language that is either too casual or too extreme for academic discourse. For example:<ul><li><b>Bad</b>: The longitudinal study was <mark>totally</mark> biased, which is not <mark>okay</mark>.</li><li><b>Better</b>: The longitudinal study was <mark class="green">significantly</mark> biased, which <mark class="green">invalidated</mark> the results.</li></ul>Also consider adding more <b>tentative</b> cues, like "seems to be," "suggests," "likely," "possibly," or "may indicate." ';
+    this.pass = 'Your writing has a low percentage of casual and/or extreme language. This makes it more acceptable for academic style.';
     this.markup = "yellow";
     this.corrections = {
 "plenty of":"a great deal of /numerous/ several",

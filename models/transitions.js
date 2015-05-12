@@ -5,7 +5,8 @@ var transitions = function() {
     this.passingText = '% or more';
     this.scoringType = 'positive';
     this.ratioType = '% of sentences';
-    this.fail = 'You didn\'t meet the criteria.';
+    this.fail = 'The number of transition words in your writing seems low. Transitions help readers see your organization and thought process. <b>Example:</b><ul><li><b>No transition:</b> Martinez says the wealthiest 10% pay 70% of taxes. The governor\'s argument about tax brackets seems...</li><li><b>Has transition:</b> Martinez says the wealthiest 10% pay 70% of taxes. <mark class="green">Given this</mark> statistic, the governor\'s argument about tax brackets seems...</li></ul>';
+    this.pass = 'Woot! Your writing seems to have a good proportion of transitions. <h4>Bonus points</h4>Check the highlighted text below to make sure you\'re not overusing the same transition words:<ul><li>Straight-ahead transitions: <i>indeed, another key point, furthermore, in the same way</i></li><li>Detour transitions: <i>in contrast, conversely, in reality, albeit</i></li><li>Summative transitions: <i>as shown above, as a result, hence, given these points</i>.';
     this.markup = "green";
     this.corrections = {
 "above all":"",

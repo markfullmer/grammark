@@ -1,6 +1,5 @@
 function overviewCtrl ($scope, $routeParams, cache, type, text, score) {
     $scope.title = "Potential Problems";
-    $scope.content = "Table goes here";
     $scope.score = [];
     var total = 0;
     var types = ['passive','wordiness','nominalizations','sentences','transitions','academic','grammar'];

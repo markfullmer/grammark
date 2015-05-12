@@ -5,7 +5,8 @@ var nominalizations = function() {
     this.passingText = '% or fewer';
     this.ratioType = '% of words';
     this.scoringType = 'punitive';
-    this.fail = 'You didn\'t meet the criteria.';
+    this.fail = 'Most of the words highlighted below are perfectly acceptable. However, you use many of these "nominalized" (non root-form) words. They bog down writing and decrease readability:<ul><li><b>Nominalized usage:</b> The <mark>distribution</mark> of <mark>monetization</mark> will show <mark>financial</mark> <mark>improvement</mark>.</li><li><b>Root form usage:</b> <mark class="green">Finances</mark> will <mark class="green">improve</mark> if we <mark class="green">distribute</mark> <mark class="green">money</mark>.</li></ul>Pick a number of the more glaringly obvious nominalized forms below and ask yourself, "How can I say the same thing with a root form word?"';
+    this.pass = 'Rock on. Your writing has a reasonable number of "nominalized" word forms, highlighted below. You probably don\'t need to reduce these any further.';
     this.markup = "yellow";
     this.process = function(rawText) {
 		var count = 0;

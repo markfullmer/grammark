@@ -1,4 +1,4 @@
-angular.module('grammarkApp',['underscore','ngRoute'])
+angular.module('grammarkApp',['underscore','ngRoute','ngSanitize'])
 
 // Setting configuration for application
 .config(function ($routeProvider) {
@@ -13,6 +13,10 @@ angular.module('grammarkApp',['underscore','ngRoute'])
     $routeProvider.when('/page/:postId', {
         controller: pageCtrl,
         templateUrl: 'views/page.html'
+    });
+    $routeProvider.when('/resources/:postId', {
+        controller: resourceCtrl,
+        templateUrl: 'views/resources.html'
     });
     $routeProvider.otherwise({
         redirectTo: '/',
@@ -69,7 +73,7 @@ angular.module('grammarkApp',['underscore','ngRoute'])
             var placeholder = this.noLineBreaks.replace(/[\-\/#!$%\^&\*:{}=\-_`~()]/g,'');
             this.spacedPunctuation = placeholder.replace(/[\.,;]/g,' .');
             this.semicolonsAndPeriods = this.noLineBreaks.replace(/[,\-\/#!$%\^&\*:{}=\-_`~()]/g,'');
-            this.sentences = this.semicolonsAndPeriods.replace(/[;]/g,'.');
+            this.sentences = this.semicolonsAndPeriods.replace(/[?;]/g,'.');
             this.sentenceCount = this.sentences.trim().split(/[\.]/g).length -1;
             this.noPunctuation = ' ' + this.sentences.replace(/[\.]/g,'').toLowerCase() + ' ';
             this.words = this.noPunctuation.trim().split(/\s+/);
@@ -80,7 +84,7 @@ angular.module('grammarkApp',['underscore','ngRoute'])
 
             type.get(analysisType);
             if (typeof type.data.process == 'function') { 
-                var result = type.data.process(this.noPunctuation);
+                var result = type.data.process(cache.get('text',this.noPunctuation));
                 this.matches = result[0];
                 var count = result[1];
                 console.log('matches:' + this.matches);
@@ -246,40 +250,37 @@ angular.module('grammarkApp',['underscore','ngRoute'])
         switch (value) {
         case 'passive':
             var data = new passive();
-            cache.set('passive_scoringType',data.scoringType);
-            cache.set('passive_ratioType',data.ratioType);
+            var name = 'passive';
             break;
         case 'wordiness':
             var data = new wordiness();
-            cache.set('wordiness_scoringType',data.scoringType);
-            cache.set('wordiness_ratioType',data.ratioType);
+            var name = 'wordiness';
             break;
         case 'grammar':
             var data = new grammar();
-            cache.set('grammar_scoringType',data.scoringType);
-            cache.set('grammar_ratioType',data.ratioType);
+            var name = 'grammar';
             break;
         case 'academic':
             var data = new academic();
-            cache.set('academic_scoringType',data.scoringType);
-            cache.set('academic_ratioType',data.ratioType);
+            var name = 'academic';
             break;
         case 'transitions':
             var data = new transitions();
-            cache.set('transitions_scoringType',data.scoringType);
-            cache.set('transitions_ratioType',data.ratioType);
+            var name = 'transitions';
             break;
         case 'nominalizations':
             var data = new nominalizations();
-            cache.set('nominalizations_scoringType',data.scoringType);
-            cache.set('nominalizations_ratioType',data.ratioType);
+            var name = 'nominalizations';
             break;
         case 'sentences':
             var data = new sentences();
-            cache.set('sentences_scoringType',data.scoringType);
-            cache.set('sentences_ratioType',data.ratioType);
+            var name = 'sentences';
             break;
         }
+        cache.set(name + '_scoringType',data.scoringType);
+        cache.set(name + '_ratioType',data.ratioType);
+        cache.set(name + '_pass',data.pass);
+        cache.set(name + '_fail',data.fail);
         this.data = data;
         return data;
     }
@@ -318,9 +319,24 @@ var countOccurrences = function (str, value) {
 };
 
 var wordArray = function (rawText) {
-    var sanitized = String(rawText).replace(/<[^>]+>/gm, '');
-    var semicolonsAndPeriods = sanitized.replace(/[,\-\/#!$%\^&\*:{}=\-_`~()]/g,'');
+    var sanitized = sanitize(rawText);
+    var semicolonsAndPeriods = sentenceMarkers(sanitized);
     var noPunctuation = semicolonsAndPeriods.replace(/[;\.]/g,' ');
     var lowercase = noPunctuation = ' ' + noPunctuation.replace(/[\.]/g,'').toLowerCase() + ' ';
     return lowercase.trim().split(/\s+/);
 };
+
+var sanitize = function (rawText) {
+    return String(rawText).replace(/<[^>]+>/gm, '');
+}
+
+var sentenceMarkers = function (rawText) {
+    return String(rawText).replace(/[,\-\/#!$%\^&\*:{}=\-_`~()]/g,'');
+}
+
+var getSentences = function(rawText) {
+    var sanitized = sanitize(rawText);
+    var removePunctuation = sanitized.replace(/[\-\/#!$%\^,&\*:{}=\-_`~()]/g,'');
+    var sentences = removePunctuation.replace(/[?;]/g,'.');
+    return sentences.trim().split(/[\.]/g);
+}
