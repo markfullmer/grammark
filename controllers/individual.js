@@ -1,4 +1,4 @@
-function individualCtrl ($scope, type, text, cache, score, $routeParams) {
+function individualCtrl ($scope, type, text, cache, score, $routeParams, $cookies) {
     $scope.title = '';
     $scope.score = '';
     $scope.scoreText = '';

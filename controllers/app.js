@@ -1,4 +1,4 @@
-angular.module('grammarkApp',['underscore','ngRoute','ngSanitize'])
+angular.module('grammarkApp',['underscore','ngRoute','ngSanitize','ngCookies'])
 
 // Setting configuration for application
 .config(function ($routeProvider) {
@@ -39,6 +39,7 @@ angular.module('grammarkApp',['underscore','ngRoute','ngSanitize'])
         window.location.assign("#/fix/passive");
     };
     $scope.resetForm = function() {
+        document.cookie = "text=";
         cache.clearAll();
         window.location.assign("#/");
     };
@@ -152,14 +153,20 @@ angular.module('grammarkApp',['underscore','ngRoute','ngSanitize'])
     };
 })
 
-.service('cache', function() {
+.service('cache', function ($cookies) {
     var cache = [];
 
     return {
-        get: function (name, defaultvalue) {
+        get: function (name, defaultValue) {
             if (!(name in cache)) {
-                this.set(name,defaultvalue);
+                this.set(name,defaultValue);
                 console.log('not in cache. Saved.');
+                if (name == 'text') {
+                    document.cookie = "text=" + defaultValue;
+                }
+            }
+            if (name == 'text') {
+                cache[name] = $cookies.text;
             }
             return cache[name];
         },
@@ -179,6 +186,9 @@ angular.module('grammarkApp',['underscore','ngRoute','ngSanitize'])
         },
         set: function (name, value) {
             cache[name] = value;
+            if (name == 'text') {
+                    document.cookie = "text=" + value;
+            }
         },
         clear: function (name) {
             cache.name = [];

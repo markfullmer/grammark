@@ -1,13 +1,27 @@
 html { -webkit-font-smoothing: antialiased; }
 
+/*.tabs dd > a, .tabs .tab-title > a {
+    background-color: #efefef;
+    color: #222;
+    display: block;
+    font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+    font-size: 0.8rem;
+    font-weight:bold;
+    margin-right: 0.4rem;
+    padding: 0.5rem;
+}*/
+
+button.tiny, .button.tiny {
+font-weight:bold;
+}
 nav.top-bar,
 nav .top-bar-section li:not(.has-form) a:not(.button) {
 	background: none repeat scroll 0 0 #660000;
 }
-
+/*
 nav .top-bar-section ul li > a.button {
 	background-color: #b30000;
-}
+}*/
 input.button {
 	background-color: #660000;
 }
