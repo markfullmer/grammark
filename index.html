@@ -2,18 +2,30 @@
 <html ng-app="grammarkApp">
   <head>
     <base href="http://localhost/grammark/">
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+
+
+  </head>
+  <body>
+    <div ng-view></div>
+  </body>
+  <footer>
+
     <script src="controllers/angular-1.3.15/angular.min.js"></script>
     <script src="controllers/angular-1.3.15/angular-route.min.js"></script>
     <script src="controllers/angular-1.3.15/angular-cookies.min.js"></script>
     <script src="controllers/underscore/underscore.min.js"></script>
     <script src="controllers/angular-1.3.15/angular-sanitize.min.js"></script>
     <script src="controllers/angular-underscore-module/angular-underscore-module.js"></script>
-    <link rel="stylesheet" href="css/foundation.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <script src="controllers/app.js"></script>
+    <script src="tests/unit-tests.js"></script>
     <script src="controllers/individual.js"></script>
     <script src="controllers/page.js"></script>
+    <script src="controllers/contact.js"></script>
     <script src="controllers/overview.js"></script>
     <script src="controllers/resource.js"></script>
     <script src="models/wordiness.js"></script>
@@ -23,15 +35,5 @@
     <script src="models/academic.js"></script>
     <script src="models/transitions.js"></script>
     <script src="models/passive.js"></script>
-
-  </head>
-  <body>
-    <ng-include src="'views/header.html'"></ng-include>
-
-    <div id="wrap">
-      <div id="content">
-        <div ng-view></div>
-      </div>
-    </div>
-  </body>
+  </footer>
 </html>

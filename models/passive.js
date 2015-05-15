@@ -10,6 +10,7 @@ var passive = function() {
     this.markup = "yellow";
     this.matches = [];
     this.process = function(rawText) {
+        console.log(rawText);
     	var helpers = ['is','was','were','being','having','been'];
     	var count = 0;
     	var matches = [];
@@ -20,6 +21,7 @@ var passive = function() {
     		if (_.indexOf(_.keys(irregularPast), words[i]) != -1 || words[i].substr(-2, 2) == 'ed') {
     			if (_.indexOf(helpers, words[previous]) != -1) {
     				matches.push(words[previous] + ' ' + words[i]);
+                    //console.log(words[i]);
     				count = count + 1;
     			}
     		}

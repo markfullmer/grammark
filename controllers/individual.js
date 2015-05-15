@@ -18,7 +18,7 @@ function individualCtrl ($scope, type, text, cache, score, $routeParams, $cookie
         $scope.score = '(' + score.calculate($routeParams.postId) + type.data.ratioType + ')';
     }
 
-    $scope.text = text.highlight(); // one-time bind
+    $scope.text = text.highlight($routeParams.postId); // one-time bind
 
     // Monitor the user input text for changes
     $scope.$watch( 'text', function (newValue, oldValue) {
@@ -42,7 +42,7 @@ function individualCtrl ($scope, type, text, cache, score, $routeParams, $cookie
     });
 
     $scope.reHighlight = function() {
-        $scope.text = text.highlight();
+        $scope.text = text.highlight($routeParams.postId);
     };
 }
 

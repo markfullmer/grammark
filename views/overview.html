@@ -4,33 +4,32 @@
     <table>
       <thead><tr><th>Category</th><th>Results</th><th>Goal</th></tr></thead>
       <tbody>
-      <tr class="{{ passive_grade }}"><td>Passive voice</td><td>{{ ::passive_score }}</td><td>Less than {{ passive }}%</td></tr>
-      <tr class="{{ wordiness_grade }}"><td>Wordiness</td><td>{{ ::wordiness_score }}</td><td>Less than {{ wordiness }}%</td></tr>
-      <tr class="{{ sentences_grade }}"><td>Sentences</td><td>{{ ::sentences_score }}</td><td>Less than {{ sentences }}%</td></tr>
-      <tr class="{{ transitions_grade }}"><td>Transitions</td><td>{{ ::transitions_score }}</td><td>More than {{ transitions }}%</td></tr>
-      <tr class="{{ academic_grade }}"><td>Academic Style</td><td>{{ ::academic_score }}</td><td>Less than {{ academic }}%</td></tr>
-      <tr class="{{ grammar_grade }}"><td>Grammar</td><td>{{ ::grammar_score }}</td><td>{{ grammar }} errors</td></tr>
-      <tr class="{{ nominalizations_grade }}"><td>Nominalizations</td><td>{{ ::nominalizations_score }}</td><td>Less than {{ nominalizations }}%</td></tr>
+      <tr class="{{ passive_grade }}"><td><a href="#/fix/passive">Passive voice</a></td><td>{{ ::passive_score }}</td><td>Less than {{ passive }}%</td></tr>
+      <tr class="{{ wordiness_grade }}"><td><a href="#/fix/wordiness">Wordiness</a></td><td>{{ ::wordiness_score }}</td><td>Less than {{ wordiness }}%</td></tr>
+      <tr class="{{ sentences_grade }}"><td><a href="#/fix/sentences">Sentences</a></td><td>{{ ::sentences_score }}</td><td>Less than {{ sentences }}%</td></tr>
+      <tr class="{{ transitions_grade }}"><td><a href="#/fix/transitions">Transitions</a></td><td>{{ ::transitions_score }}</td><td>More than {{ transitions }}%</td></tr>
+      <tr class="{{ academic_grade }}"><td><a href="#/fix/academic">Academic Style</a></td><td>{{ ::academic_score }}</td><td>Less than {{ academic }}%</td></tr>
+      <tr class="{{ grammar_grade }}"><td><a href="#/fix/grammar">Grammar</a></td><td>{{ ::grammar_score }}</td><td>{{ grammar }} errors</td></tr>
+      <tr class="{{ nominalizations_grade }}"><td><a href="#/fix/nominalizations">Nominalizations</a></td><td>{{ ::nominalizations_score }}</td><td>Less than {{ nominalizations }}%</td></tr>
       </tbody>
     </table>
   <div ng-controller="formCtrl"/>
-    <input class="button" ng-click="view()" value="View Problems" /><br />
     <input class="button" ng-click="resetForm()" value="Clear & Start Over" />
   </div>
 </div>
-<script type="text/javascript">
-  function showValue(value, name) {
-    document.getElementById(name).innerHTML=value;
-  }
-</script>
 <div class="row">
-  <div class="medium-5 columns right">
+  <div class="medium-6 columns right">
     <div data-alert class="alert-box success radius">
       <h2>Score: {{ overallscore }}%</h2>
     </div>
     <div class="panel">
       <h3>Grading Criteria</h3>
-      <p>Adjust the target number for each category.</p>
+      <p>Adjust the target for each category.</p>
+      <h3>Presets</h3>
+      <a class="tiny button" ng-click="humanities()">Humanities</a>
+      <a class="tiny button">Sciences</a>
+      <a class="tiny button">Web</a>
+      <a class="tiny button">Default</a></p>
       <table>
       <tr><td>Passive voice</td><td><input type="range" ng-model="score.passive" min="0" max="100" step="1" /> {{ passive }}%</td></tr>
       <tr><td>Wordiness</td><td><input type="range" ng-model="score.wordiness" min="0" max="100" step="1" /> {{ wordiness }}%</td></tr>
@@ -40,11 +39,6 @@
       <tr><td>Grammar</td><td><input type="range" ng-model="score.grammar" min="0" max="100" step="1" /> {{ grammar }}</td></tr>
       <tr><td>Nominalizations</td><td><input type="range" ng-model="score.nominalizations" min="0" max="100" step="1" /> {{ nominalizations }}%</td></tr>
       </table>
-      <h3>Presets</h3>
-      <a class="tiny button" ng-click="humanities()">Humanities</a>
-      <a class="tiny button">Sciences</a>
-      <a class="tiny button">Web</a>
-      <a class="tiny button">Default</a></p>
     </div>
   </div>
 </div>

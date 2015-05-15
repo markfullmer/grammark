@@ -17,7 +17,7 @@ function pageCtrl ($scope, $routeParams, type) {
             break;
         case 'contact':
             $scope.title = "Contact";
-            $scope.content = "models/test.html";
+            $scope.source = "models/contact.html";
             break;
     }
 }

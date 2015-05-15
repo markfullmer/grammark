@@ -14,9 +14,17 @@ angular.module('grammarkApp',['underscore','ngRoute','ngSanitize','ngCookies'])
         controller: pageCtrl,
         templateUrl: 'views/page.html'
     });
+    $routeProvider.when('/contact', {
+        controller: ContactController,
+        templateUrl: 'models/contact.html'
+    });
     $routeProvider.when('/resources/:postId', {
         controller: resourceCtrl,
         templateUrl: 'views/resources.html'
+    });
+    $routeProvider.when('/tests', {
+        controller: TestController,
+        templateUrl: 'tests/unit-tests.html'
     });
     $routeProvider.otherwise({
         redirectTo: '/',
@@ -33,18 +41,21 @@ angular.module('grammarkApp',['underscore','ngRoute','ngSanitize','ngCookies'])
 .controller ('formCtrl', function ($scope, $routeParams, cache, text) {
     $scope.submitForm = function() {
         cache.set('text', $scope.text);
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
         window.location.assign("#/overview");
     };
     $scope.view = function() {
+
         window.location.assign("#/fix/passive");
     };
     $scope.resetForm = function() {
         document.cookie = "text=";
         cache.clearAll();
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
         window.location.assign("#/");
     };
     $scope.highlight = function() {
-        text.highlight();
+        text.highlight($routeParams.postId);
     }
 })
 
@@ -52,7 +63,7 @@ angular.module('grammarkApp',['underscore','ngRoute','ngSanitize','ngCookies'])
     var current = '';
     var existing = '';
     var sanitized = '';
-    var sentencecount = '';
+    var sentenceCount = '';
     var wordcount = '';
     var matches = [];
     var matchIds = [];
@@ -85,10 +96,9 @@ angular.module('grammarkApp',['underscore','ngRoute','ngSanitize','ngCookies'])
 
             type.get(analysisType);
             if (typeof type.data.process == 'function') { 
-                var result = type.data.process(cache.get('text',this.noPunctuation));
+                var result = type.data.process(cache.get('text',' '));
                 this.matches = result[0];
                 var count = result[1];
-                console.log('matches:' + this.matches);
             }
             else {
                 var matches = []; // reset
@@ -113,22 +123,21 @@ angular.module('grammarkApp',['underscore','ngRoute','ngSanitize','ngCookies'])
             cache.set(analysisType + '_matches', this.matches);
         },
 
-        highlight: function () {
+        highlight: function (analysisType) {
+            // todo -- what about getting the latest text?
             this.highlighted = this.sanitized;
             this.highlighted = this.highlighted.split("LINEBREAK").join("<br>");
             this.highlighted = this.highlighted.split("PARAGRAPHSTART").join("<br><br>");
-            //var cachename = $routeParams.postId + '_matches';
-            //cache.get(cachename,['empty']);
-            type.get($routeParams.postId);
+            type.get(analysisType);
             for (i = 0; i < this.matches.length; i++) {
                 var match = this.matches[i];
                 var suggestion = '';
-                if (type.data.corrections[match] != '') {
+                if (type.data.corrections[match] != undefined) {
                     var suggestion = '<div class="suggestion">' + type.data.corrections[match] + '</div>';
                 }
-                this.highlighted = this.highlighted.split(' ' + match + ' ').join(' <mark>' + match + suggestion + '</mark> ');
-                this.highlighted = this.highlighted.split(' ' + match + '.').join(' <mark>' + match + suggestion + '</mark>.');
-                this.highlighted = this.highlighted.split(' ' + match + ',').join(' <mark>' + match + suggestion + '</mark>,');
+                this.highlighted = this.highlighted.split(' ' + match + ' ').join(' <mark>' + suggestion + match + '</mark> ');
+                this.highlighted = this.highlighted.split(' ' + match + '.').join(' <mark>' + suggestion + match + '</mark>.');
+                this.highlighted = this.highlighted.split(' ' + match + ',').join(' <mark>' + suggestion + match + '</mark>,');
                 var uppercase = match.substr(0, 1).toUpperCase() + match.substr(1);
                 this.highlighted = this.highlighted.split(uppercase).join('<mark>' + uppercase + '</mark>');
             }
@@ -161,13 +170,13 @@ angular.module('grammarkApp',['underscore','ngRoute','ngSanitize','ngCookies'])
             if (!(name in cache)) {
                 this.set(name,defaultValue);
                 console.log('not in cache. Saved.');
-                if (name == 'text') {
+/*                if (name == 'text') {
                     document.cookie = "text=" + defaultValue;
-                }
+                }*/
             }
-            if (name == 'text') {
+/*            if (name == 'text') {
                 cache[name] = $cookies.text;
-            }
+            }*/
             return cache[name];
         },
         isset: function (name) {
