@@ -81,7 +81,7 @@ angular
             var withLineBreaks = rawText.replace(/<br>/g,'LINEBREAK');
             withLineBreaks = withLineBreaks.replace(/<br \/>/g,'LINEBREAK');
             withLineBreaks = withLineBreaks.replace(/<p (.*?)>/gi,'PARAGRAPHSTART');
-            var noSuggestions = String(withLineBreaks).replace(/<div class="suggestion">(.*?)<\/div>/gi, '');
+            var noSuggestions = String(withLineBreaks).replace(/<span class="suggestion">(.*?)<\/span>/gi, '');
             this.sanitized = String(noSuggestions).replace(/<[^>]+>/gm, '');
             this.noLineBreaks = this.sanitized.replace(/PARAGRAPHEND/g,' ');
             this.noLineBreaks = this.noLineBreaks.replace(/PARAGRAPHSTART/g,' ');
@@ -138,7 +138,7 @@ angular
                 var match = this.matches[i];
                 var suggestion = '';
                 if (type.data.corrections[match] !== undefined) {
-                    suggestion = '<div class="suggestion">' + type.data.corrections[match] + '</div>';
+                    suggestion = '<span class="suggestion">' + type.data.corrections[match] + '</span>';
                 }
                 this.highlighted = this.highlighted.split(' ' + match + ' ').join(' <mark>' + suggestion + match + '</mark> ');
                 this.highlighted = this.highlighted.split(' ' + match + '.').join(' <mark>' + suggestion + match + '</mark>.');
