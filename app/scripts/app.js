@@ -59,9 +59,46 @@ angular
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         window.location.assign('#/');
     };
-    $scope.highlight = function() {
-        text.highlight($routeParams.postId);
-    };
+})
+
+.controller ('navController', function ($scope, $routeParams, cache, text) {
+    $scope.tabs = [{
+        title: 'Overview',
+        url: 'overview'
+    }, {
+        title: 'Passive Voice',
+        url: 'fix/passive'
+    }, {
+        title: 'Wordiness',
+        url: 'fix/wordiness'
+    }, {
+        title: 'Academic Style',
+        url: 'fix/academic'
+    }, {
+        title: 'Grammar',
+        url: 'fix/grammar'
+    }, {
+        title: 'Nominalizations',
+        url: 'fix/nominalizations'
+    }, {
+        title: 'Sentences',
+        url: 'fix/sentences'
+    }, {
+        title: 'Eggcorns',
+        url: 'fix/eggcorns'
+    }, {
+        title: 'Transitions',
+        url: 'fix/transitions'
+  }];
+    $scope.currentTab = 'overview';
+
+    $scope.onClickTab = function (tab) {
+        $scope.currentTab = tab.url;
+    }
+
+    $scope.isActiveTab = function(tabUrl) {
+        return tabUrl == $scope.currentTab;
+    }
 })
 
 .service('text', function (cache, type, $routeParams) {
@@ -99,7 +136,6 @@ angular
         },
 
         process: function (rawText, analysisType) {
-            console.log(this.spacedPunctuation);
             type.get(analysisType);
             this.parse(rawText);
             var count = 0;
@@ -184,7 +220,7 @@ angular
         get: function (name, defaultValue) {
             if (!(name in cache)) {
                 this.set(name,defaultValue);
-                console.log('not in cache. Saved.');
+                //console.log('not in cache. Saved.');
 /*                if (name == 'text') {
                     document.cookie = "text=" + defaultValue;
                 }*/
@@ -309,6 +345,10 @@ angular
         case 'sentences':
             data = new sentences();
             name = 'sentences';
+            break;
+        case 'eggcorns':
+            data = new eggcorns();
+            name = 'eggcorns';
             break;
         }
         cache.set(name + '_scoringType',data.scoringType);

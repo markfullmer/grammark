@@ -1,13 +1,15 @@
+'use strict';
+
 function ContactController($scope, $http) {
   $scope.success = false;
   $scope.error = false;
   $scope.send = function () {
- 
+
   var htmlBody = '<div>Name: ' + $scope.user.name + '</div>' +
                  '<div>Email: ' + $scope.user.email + '</div>' +
                  '<div>Message: ' + $scope.user.body + '</div>' +
                  '<div>Date: ' + (new Date()).toString() + '</div>';
-  
+
     $http({
       url: 'https://api.postmarkapp.com/email',
       method: 'POST',
@@ -30,5 +32,5 @@ function ContactController($scope, $http) {
     error(function (data) {
         $scope.error = true;
     });
-  }
+  };
 }

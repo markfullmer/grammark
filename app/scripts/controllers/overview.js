@@ -4,7 +4,7 @@ function overviewController ($scope, $routeParams, cache, type, text, score) {
     $scope.title = 'Potential Problems';
     $scope.score = [];
     var total = 0;
-    var types = ['passive','wordiness','nominalizations','sentences','transitions','academic','grammar'];
+    var types = ['passive','wordiness','nominalizations','sentences','transitions','academic','grammar','eggcorns'];
     //var types = ['transitions'];
 
     text.parse(cache.get('text','This is totally, awoken an awesome really. seen Because man is used. Nevertheless. However.',' '));
@@ -91,6 +91,14 @@ function overviewController ($scope, $routeParams, cache, type, text, score) {
 
     $scope.$watch('score.transitions', function (newValue) {
       var thisType = 'transitions';
+      var thisType_grade = thisType + '_grade';
+      cache.set(thisType + '_passingScore', newValue);
+      $scope[thisType] = cache.get(thisType + '_passingScore',type.data.passingScore);
+      $scope[thisType_grade] = score.grade(thisType);
+    });
+
+    $scope.$watch('score.eggcorns', function (newValue) {
+      var thisType = 'eggcorns';
       var thisType_grade = thisType + '_grade';
       cache.set(thisType + '_passingScore', newValue);
       $scope[thisType] = cache.get(thisType + '_passingScore',type.data.passingScore);

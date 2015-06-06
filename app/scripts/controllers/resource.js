@@ -49,6 +49,20 @@ function resourceController ($scope, $routeParams, type) {
             }
             $scope.data = table;
             break;
+        case 'eggcorns':
+            $scope.title = 'Eggcorns';
+            type.get('eggcorns');
+            table = [];
+            count = 0;
+            values = type.data.corrections;
+            for (var i in values) {
+                table.push({
+                    find: i,
+                    suggestion: values[i],
+                });
+            }
+            $scope.data = table;
+            break;
     }
 }
 
