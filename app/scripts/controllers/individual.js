@@ -10,8 +10,7 @@ function individualController ($scope, type, text, cache, score, $routeParams) {
     $scope.raw = 0;
     $scope.number = 'instances';
 
-    text.parse(cache.get('text','Here is some totally awesome text provided by nevertheless. Me. Obviously.'));
-    text.process(cache.get('text',' '), $routeParams.postId);
+    text.process(cache.get('text','Here is some totally awesome text provided by nevertheless. Me. Obviously.'), $routeParams.postId);
     $scope.markup = type.data.markup; // type will have been set during text.process
     $scope.title = type.data.title; // one-time bind
     $scope.feedback = type.data.fail;
@@ -25,7 +24,6 @@ function individualController ($scope, type, text, cache, score, $routeParams) {
     // Monitor the user input text for changes
     $scope.$watch( 'text', function (newValue) {
         cache.set('text', newValue); // record the new text value
-        text.parse(cache.get('text'), ' ');
         text.process(cache.get('text',' '), $routeParams.postId);
         $scope.matches = cache.get($routeParams.postId + '_matches', text.matches);
         $scope.grade = score.grade($routeParams.postId);

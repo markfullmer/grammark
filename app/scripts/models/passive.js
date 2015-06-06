@@ -10,7 +10,6 @@ var passive = function() {
     this.markup = "yellow";
     this.matches = [];
     this.process = function(rawText) {
-        console.log(rawText);
     	var helpers = ['is','was','were','being','having','been'];
     	var count = 0;
     	var matches = [];

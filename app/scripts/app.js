@@ -44,6 +44,7 @@ angular
 
 .controller ('formCtrl', function ($scope, $routeParams, cache, text) {
     $scope.submitForm = function() {
+        console.log('text' + $scope.text);
         cache.set('text', $scope.text);
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         window.location.assign('#/overview');
@@ -53,7 +54,7 @@ angular
         window.location.assign('#/fix/passive');
     };
     $scope.resetForm = function() {
-        document.cookie = 'text=';
+        //document.cookie = 'text=';
         cache.clearAll();
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         window.location.assign('#/');
@@ -80,15 +81,16 @@ angular
 
             var withLineBreaks = rawText.replace(/<br>/g,'LINEBREAK');
             withLineBreaks = withLineBreaks.replace(/<br \/>/g,'LINEBREAK');
-            withLineBreaks = withLineBreaks.replace(/<p (.*?)>/gi,'PARAGRAPHSTART');
-            var noSuggestions = String(withLineBreaks).replace(/<span class="suggestion">(.*?)<\/span>/gi, '');
+            withLineBreaks = withLineBreaks.replace(/<p(.*?)>/gi,'PARAGRAPHSTART');
+            var simpleQuotes= withLineBreaks.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
+            var noSuggestions = String(simpleQuotes).replace(/<span class="suggestion">(.*?)<\/span>/gi, '');
             this.sanitized = String(noSuggestions).replace(/<[^>]+>/gm, '');
             this.noLineBreaks = this.sanitized.replace(/PARAGRAPHEND/g,' ');
             this.noLineBreaks = this.noLineBreaks.replace(/PARAGRAPHSTART/g,' ');
             this.noLineBreaks = this.noLineBreaks.replace(/LINEBREAK/g,' ');
-            var placeholder = this.noLineBreaks.replace(/[\-\/#!$%\^&\*:{}=\-_`~()]/g,'');
+            var placeholder = this.noLineBreaks.replace(/[\-\/#!\"\'$%\^&\*:{}=\-_`~()]/g,'');
             this.spacedPunctuation = placeholder.replace(/[\.,;]/g,' .');
-            this.semicolonsAndPeriods = this.noLineBreaks.replace(/[,\-\/#!$%\^&\*:{}=\-_`~()]/g,'');
+            this.semicolonsAndPeriods = this.noLineBreaks.replace(/[,\-\/#!"'$%\^&\*:{}=\-_`~()]/g,'');
             this.sentences = this.semicolonsAndPeriods.replace(/[?;]/g,'.');
             this.sentenceCount = this.sentences.trim().split(/[\.]/g).length -1;
             this.noPunctuation = ' ' + this.sentences.replace(/[\.]/g,'').toLowerCase() + ' ';
@@ -97,11 +99,12 @@ angular
         },
 
         process: function (rawText, analysisType) {
-
+            console.log(this.spacedPunctuation);
             type.get(analysisType);
+            this.parse(rawText);
             var count = 0;
             if (typeof type.data.process === 'function') {
-                var result = type.data.process(cache.get('text',' '));
+                var result = type.data.process(this.spacedPunctuation);
                 this.matches = result[0];
                 count = result[1];
             }
@@ -132,6 +135,10 @@ angular
             this.highlighted = this.sanitized;
             this.highlighted = this.highlighted.split('LINEBREAK').join('<br>');
             this.highlighted = this.highlighted.split('PARAGRAPHSTART').join('<br><br>');
+            this.highlighted = this.highlighted.replace(/\n{2}/g, ' </p><p>');
+            this.highlighted = this.highlighted.replace(/\n/g, ' <br />');
+            this.highlighted = this.highlighted.replace(/\n/g, ' <br />');
+            this.highlighted = this.highlighted.replace('&nbsp;', ' ');
             type.get(analysisType);
             var i = 0;
             for (i = 0; i < this.matches.length; i++) {
@@ -143,6 +150,9 @@ angular
                 this.highlighted = this.highlighted.split(' ' + match + ' ').join(' <mark>' + suggestion + match + '</mark> ');
                 this.highlighted = this.highlighted.split(' ' + match + '.').join(' <mark>' + suggestion + match + '</mark>.');
                 this.highlighted = this.highlighted.split(' ' + match + ',').join(' <mark>' + suggestion + match + '</mark>,');
+                this.highlighted = this.highlighted.split(' ' + match + ';').join(' <mark>' + suggestion + match + '</mark>;');
+                this.highlighted = this.highlighted.split('"' + match + ',').join('"<mark>' + suggestion + match + '</mark>,');
+                this.highlighted = this.highlighted.split('"' + match + '"').join('"<mark>' + suggestion + match + '</mark>"');
                 var uppercase = match.substr(0, 1).toUpperCase() + match.substr(1);
                 this.highlighted = this.highlighted.split(uppercase).join('<mark>' + suggestion + uppercase + '</mark>');
             }
@@ -233,7 +243,6 @@ angular
                 result = (count/text.sentenceCount);
                 break;
             case '% of words':
-                console.log(count + ' in number; % of words');
                 result = (count/text.wordCount)*100;
                 break;
         }
