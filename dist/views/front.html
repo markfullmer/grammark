@@ -3,6 +3,7 @@
 <form ng-submit="submitForm()" ng-controller="formCtrl">
   <label for="text" class="obscure">Document Text</label>
   <textarea autofocus class="empty-textarea" id="text" cols="4" placeholder="Type or paste your writing here. It will not be stored or reused in any way." ng-model="text" required></textarea>
+<!--     <div id="editable" class="textbox {{ markup }}" style="padding:10px 30px 30px 30px;margin-bottom:20px;" ng-model="text" contenteditable="true">{{ ::text }}</div> -->
     <p><input class="button" id="button" type="submit" value="Submit" /></p>
   </form>
 </div>
