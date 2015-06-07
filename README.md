@@ -1,8 +1,7 @@
 Grammark
 ========
-<img src="https://github.com/markfullmer/grammark/blob/master/img/screenshot1.png" align="right" />
 > A complete web application for identifying writing problems and offering suggestions.
-
+<img src="https://github.com/markfullmer/grammark/blob/master/dist/images/screenshot.742fd093.png" />
 
 Requirements
 ============
@@ -34,6 +33,7 @@ To facilitate easy development, install `yo`, `grunt-cli`, `bower`, `generator-a
 npm install -g grunt-cli bower yo generator-karma generator-angular
 ```
 You can then use the following for local development:
+
 Serve the project locally
 ```
 grunt serve
