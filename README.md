@@ -16,7 +16,9 @@ Dependencies
 Installation
 ============
 1. Place the files into a directory on your webserver (e.g., http://example.com/grammark)
-2. Go to http://example.com/grammark/dist You should now fully-functioning grammark checker.
+2. Go to http://example.com/grammark/
+
+You should now fully-functioning grammark checker!
 
 License
 =======
