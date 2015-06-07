@@ -4,11 +4,6 @@ RewriteEngine On
 
 RewriteBase /
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
-
-RewriteRule ^/$ index.php [QSA,NC,L]
-
-RewriteRule ^([a-z0-9_\-]+)/?$ index.php?url=$1 [QSA,NC,L]
 
 ErrorDocument 404 '404 Page not found. <a href="http://grammark.org">Back to grammark.org</a>'
 
