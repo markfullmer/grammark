@@ -1,13 +1,13 @@
 'use strict';
 
 function overviewController ($scope, $routeParams, cache, type, text, score) {
-    $scope.title = 'Potential Problems';
+    $scope.title = 'Potential Problems:';
     $scope.score = [];
     var total = 0;
     var types = ['passive','wordiness','nominalizations','sentences','transitions','academic','grammar','eggcorns'];
     //var types = ['transitions'];
 
-    text.parse(cache.get('text','This is totally, awoken an awesome really. seen Because man is used. Nevertheless. However.',' '));
+    text.parse(cache.get('text','Type or paste your writing here. Grammark does not store or reuse it in any way.',' '));
 
     // Generate the scores & grades
     var i = 0;
@@ -20,25 +20,33 @@ function overviewController ($scope, $routeParams, cache, type, text, score) {
       var nameScore = name + 'Score';
       var name_passingScore = name + '_passingScore';
 
-      text.process(cache.get('text','This is totally, awoken an awesome really. seen Because man is used. Nevertheless. However.',' '),name);
+      text.process(cache.get('text','Type or paste your writing here. Grammark does not store or reuse it in any way.',' '),name);
 
       type.get(name);
       if (type.data.ratioType !== 'errors') {
-        if (!isNaN(score.calculate(name)) && score.calculate(name) !== 0) {
-          percent = ' (' + score.calculate(name) + '%)';
+        if (!isNaN(score.calculate(name))) {
+          percent = ' (0%)';
+          if (score.calculate(name) !== 0) {
+            percent = ' (' + score.calculate(name) + '%)';
+          }
         }
-      }
-      if (type.data.scoringType === 'punitive') {
-        total = total + cache.get(name + '_count',text.getCount(name));
       }
       $scope.score[name] = cache.get(name_passingScore,type.data.passingScore);
       $scope[name_score] = cache.get(name + '_count',text.getCount(name)) + percent;
       $scope[name] = cache.get(name_passingScore, type.data.passingScore);
       $scope[name_grade] = score.grade(name);
+      if (type.data.scoringType === 'punitive' && $scope[name_grade] === 'warning') {
+        total = total + cache.get(name + '_count',text.getCount(name));
+      }
 
     }
-
     $scope.totals = total;
+    if (total === 0) {
+      $scope.totals = '';
+      $scope.title = 'Woot! This writing looks pretty snazzy.'
+    }
+
+
 
     // Watchers
     $scope.$watch('score.passive', function (newValue) {

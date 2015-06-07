@@ -2,8 +2,8 @@
 
 var academic = function() {
     this.machineName = 'academic';
-    this.title = 'Academic Style';
-    this.passingScore = '10';
+    this.title = 'Academic Style Issues';
+    this.passingScore = '1';
     this.passingText = '% or fewer';
     this.scoringType = 'punitive';
     this.ratioType = '% of words';

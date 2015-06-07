@@ -44,7 +44,6 @@ angular
 
 .controller ('formCtrl', function ($scope, $routeParams, cache, text) {
     $scope.submitForm = function() {
-        console.log('text' + $scope.text);
         cache.set('text', $scope.text);
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         window.location.assign('#/overview');
@@ -64,44 +63,52 @@ angular
 .controller ('navController', function ($scope, $routeParams, cache, text) {
     $scope.tabs = [{
         title: 'Overview',
-        url: 'overview'
+        url: 'overview',
+        active: '',
     }, {
         title: 'Passive Voice',
-        url: 'fix/passive'
+        url: 'fix/passive',
+        active: '',
     }, {
         title: 'Wordiness',
-        url: 'fix/wordiness'
+        url: 'fix/wordiness',
+        active: '',
     }, {
         title: 'Academic Style',
-        url: 'fix/academic'
+        url: 'fix/academic',
+        active: '',
     }, {
         title: 'Grammar',
-        url: 'fix/grammar'
+        url: 'fix/grammar',
+        active: '',
     }, {
         title: 'Nominalizations',
-        url: 'fix/nominalizations'
+        url: 'fix/nominalizations',
+        active: '',
     }, {
         title: 'Sentences',
-        url: 'fix/sentences'
+        url: 'fix/sentences',
+        active: '',
     }, {
         title: 'Eggcorns',
-        url: 'fix/eggcorns'
+        url: 'fix/eggcorns',
+        active: '',
     }, {
         title: 'Transitions',
-        url: 'fix/transitions'
+        url: 'fix/transitions',
+        active: '',
   }];
-    $scope.currentTab = 'overview';
 
-    $scope.onClickTab = function (tab) {
-        $scope.currentTab = tab.url;
-    }
+    angular.forEach($scope.tabs, function(tab) {
+        console.log($routeParams.postId);
+        if (tab.url === 'fix/' + $routeParams.postId) {
+            tab.active = 'secondary';
+        }
 
-    $scope.isActiveTab = function(tabUrl) {
-        return tabUrl == $scope.currentTab;
-    }
+    });
 })
 
-.service('text', function (cache, type, $routeParams) {
+.service('text', function (cache, type) {
     var current = '';
     var existing = '';
     var sanitized = '';
@@ -116,8 +123,7 @@ angular
     return {
         parse : function (rawText) {
 
-            var withLineBreaks = rawText.replace(/<br>/g,'LINEBREAK');
-            withLineBreaks = withLineBreaks.replace(/<br \/>/g,'LINEBREAK');
+            var withLineBreaks = rawText.replace(/<br(.*?)>/g,'LINEBREAK');
             withLineBreaks = withLineBreaks.replace(/<p(.*?)>/gi,'PARAGRAPHSTART');
             var simpleQuotes= withLineBreaks.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
             var noSuggestions = String(simpleQuotes).replace(/<span class="suggestion">(.*?)<\/span>/gi, '');
@@ -189,8 +195,15 @@ angular
                 this.highlighted = this.highlighted.split(' ' + match + ';').join(' <mark>' + suggestion + match + '</mark>;');
                 this.highlighted = this.highlighted.split('"' + match + ',').join('"<mark>' + suggestion + match + '</mark>,');
                 this.highlighted = this.highlighted.split('"' + match + '"').join('"<mark>' + suggestion + match + '</mark>"');
+                this.highlighted = this.highlighted.split('<br>' + match + ' ').join('<br><mark>' + suggestion + match + '</mark> ');
                 var uppercase = match.substr(0, 1).toUpperCase() + match.substr(1);
-                this.highlighted = this.highlighted.split(uppercase).join('<mark>' + suggestion + uppercase + '</mark>');
+                this.highlighted = this.highlighted.split(' ' + uppercase + ' ').join(' <mark>' + suggestion + uppercase + '</mark> ');
+                this.highlighted = this.highlighted.split(' ' + uppercase + '.').join(' <mark>' + suggestion + uppercase + '</mark>.');
+                this.highlighted = this.highlighted.split(' ' + uppercase + ',').join(' <mark>' + suggestion + uppercase + '</mark>,');
+                this.highlighted = this.highlighted.split(' ' + uppercase + ';').join(' <mark>' + suggestion + uppercase + '</mark>;');
+                this.highlighted = this.highlighted.split('"' + uppercase + ',').join('"<mark>' + suggestion + uppercase + '</mark>,');
+                this.highlighted = this.highlighted.split('"' + uppercase + '"').join('"<mark>' + suggestion + uppercase + '</mark>"');
+                this.highlighted = this.highlighted.split('<br>' + uppercase + ' ').join('<br><mark>' + suggestion + uppercase + '</mark> ');
             }
 
             return this.highlighted;
@@ -262,7 +275,7 @@ angular
     };
 })
 
-.service('score', function ($routeParams, type, text, cache) {
+.service('score', function (type, text, cache) {
 
     this.calculate = function(analysisType) {
         var result = 0;
@@ -396,7 +409,7 @@ var wordArray = function (rawText) {
     var sanitized = sanitize(rawText);
     var semicolonsAndPeriods = sentenceMarkers(sanitized);
     var noPunctuation = semicolonsAndPeriods.replace(/[;\.]/g,' ');
-    var lowercase = noPunctuation = ' ' + noPunctuation.replace(/[\.]/g,'').toLowerCase() + ' ';
+    var lowercase = ' ' + noPunctuation.replace(/[\.]/g,'').toLowerCase() + ' ';
     return lowercase.trim().split(/\s+/);
 };
 

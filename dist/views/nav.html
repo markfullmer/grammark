@@ -1,7 +1,7 @@
 <div class="button-bar">
 	<ul ng-controller="navController" class="button-group">
     <li ng-repeat="tab in tabs">
-    	<a id="{{tab.url}}" class="small button" href="#/{{tab.url}}">{{tab.title}}</a>
+    	<a id="{{tab.url}}" class="small button {{tab.active}}" ng-click="activeTab()" href="#/{{tab.url}}">{{tab.title}}</a>
     </li>
 	</ul>
 	<ul ng-controller="formCtrl">

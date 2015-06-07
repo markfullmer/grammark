@@ -10,7 +10,7 @@ function individualController ($scope, type, text, cache, score, $routeParams) {
     $scope.raw = 0;
     $scope.number = 'instances';
 
-    text.process(cache.get('text','Here is some totally awesome text provided by nevertheless. Me. Obviously.'), $routeParams.postId);
+    text.process(cache.get('text','Type or paste your writing here. Grammark does not store or reuse it in any way.'), $routeParams.postId);
     $scope.markup = type.data.markup; // type will have been set during text.process
     $scope.title = type.data.title; // one-time bind
     $scope.feedback = type.data.fail;
