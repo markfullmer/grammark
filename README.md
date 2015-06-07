@@ -1,7 +1,8 @@
 Grammark
 ========
 <img src="https://github.com/markfullmer/grammark/blob/master/img/screenshot1.png" align="right" />
-A complete web application for identifying writing problems and offering suggestions.
+> A complete web application for identifying writing problems and offering suggestions.
+
 
 Requirements
 ============
@@ -13,10 +14,34 @@ Dependencies
 - [AngularJS](https://angularjs.org/) (included in this distribution)
 - [underscore.js](http://underscorejs.org/) (included in this distribution)
 
-Installation
-============
-1. Place the files into a directory on your webserver (e.g., http://example.com/grammark)
-2. Go to http://example.com/grammark/dist You should now fully-functioning grammark checker.
+Out-of-Box Installation
+=======================
+If you just want your own version of Grammark on your server and don't plan to
+modify it, head on over to https://github.com/markfullmer/grammark/tree/angular-distribution.
+Clone the files, or download the zip into a directory on your server.
+
+You should now have a fully-functional grammark checker!
+
+Developer Installation
+======================
+1. Clone the master branch of this repository:
+```
+git clone git@github.com:markfullmer/grammark.git .
+```
+2. Grammark is built on the [yeoman angular scaffolding](https://github.com/yeoman/generator-angular)
+To facilitate easy development, install `yo`, `grunt-cli`, `bower`, `generator-angular` and `generator-karma`:
+```
+npm install -g grunt-cli bower yo generator-karma generator-angular
+```
+You can then use the following for local development:
+Serve the project locally
+```
+grunt serve
+```
+Build the distribution
+```
+grunt build
+```
 
 License
 =======
