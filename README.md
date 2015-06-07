@@ -54,7 +54,7 @@ Versions
 Release       | Short Description
 ------------- | -------------
 [Grammark Angular (developers)](https://github.com/markfullmer/grammark)  | yeoman-Angular build for developers
-[Grammark Distribution (non-developers)](https://github.com/markfullmer/grammark)  | CDN-ified AngularJS out-of-the-box app
+[Grammark Distribution (non-developers)](https://github.com/markfullmer/grammark/tree/angular-distribution)  | CDN-ified AngularJS out-of-the-box app
 [Grammark No-SQL](https://github.com/markfullmer/grammark/tree/No-SQL)  | Does not require SQL database to run; data stored in filesystem
 [Grammark 3.0](https://github.com/markfullmer/grammark/tree/Version-3)  | [Twig](http://twig.sensiolabs.org/) templating and class-based PHP
 [Grammark 2.0](https://github.com/markfullmer/grammark/tree/Version-2)  | [Foundation](http://foundation.zurb.com/)-based CSS with better directory structure and settings files
