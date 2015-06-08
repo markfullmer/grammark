@@ -131,9 +131,9 @@ angular
             this.noLineBreaks = this.sanitized.replace(/PARAGRAPHEND/g,' ');
             this.noLineBreaks = this.noLineBreaks.replace(/PARAGRAPHSTART/g,' ');
             this.noLineBreaks = this.noLineBreaks.replace(/LINEBREAK/g,' ');
-            var placeholder = this.noLineBreaks.replace(/[\-\/#!\"\'$%\^&\*:{}=\-_`~()]/g,'');
+            var placeholder = this.noLineBreaks.replace(/[\-\/#!\"$%\^&\*:{}=\-_`~()]/g,'');
             this.spacedPunctuation = placeholder.replace(/[\.,;]/g,' .');
-            this.semicolonsAndPeriods = this.noLineBreaks.replace(/[,\-\/#!"'$%\^&\*:{}=\-_`~()]/g,'');
+            this.semicolonsAndPeriods = this.noLineBreaks.replace(/[,\-\/#!\"$%\^&\*:{}=\-_`~()]/g,'');
             this.sentences = this.semicolonsAndPeriods.replace(/[?;]/g,'.');
             this.sentenceCount = this.sentences.trim().split(/[\.]/g).length -1;
             this.noPunctuation = ' ' + this.sentences.replace(/[\.]/g,'').toLowerCase() + ' ';
