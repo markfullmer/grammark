@@ -281,18 +281,26 @@ angular
         var result = 0;
         var count = cache.get(analysisType + '_count', '10');
         var ratioType = cache.get(analysisType + '_ratioType','errors');
+        var sentenceCount = 1;
+        var wordCount = 1;
+        if (text.sentenceCount !== 0) {
+            sentenceCount = text.sentenceCount;
+        }
+        if (text.wordCount !== 0) {
+            wordCount = text.wordCount;
+        }
         switch (ratioType) {
             case 'errors':
                 result = count;
                 break;
             case '% of sentences':
-                result = (count/text.sentenceCount)*100;
+                result = (count/sentenceCount)*100;
                 break;
             case ' per sentence':
-                result = (count/text.sentenceCount);
+                result = (count/sentenceCount);
                 break;
             case '% of words':
-                result = (count/text.wordCount)*100;
+                result = (count/wordCount)*100;
                 break;
         }
         return parseInt(result, 10);
