@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>https://grammark.org/</loc>
+</url>
+<url>
+  <loc>https://grammark.org/about</loc>
+</url>
+<url>
+  <loc>https://grammark.org/source</loc>
+</url>
+<url>
+  <loc>https://grammark.org/wordiness-list</loc>
+</url>
+<url>
+  <loc>https://grammark.org/contact</loc>
+</url>
+<url>
+  <loc>https://grammark.org/database-add</loc>
+</url>
+<url>
+  <loc>https://grammark.org/transitions-list</loc>
+</url>
+<url>
+  <loc>https://grammark.org/grammar-error-list</loc>
+</url>
+<url>
+  <loc>https://grammark.org/spelling-errors</loc>
+</url>
+<url>
+  <loc>https://grammark.org/academic-style-list</loc>
+</url>
+</urlset>

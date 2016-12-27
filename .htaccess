@@ -2,17 +2,22 @@ SetEnv PHPRC /home/markfull/public_html/grammark/php.ini
 Options +FollowSymLinks
 RewriteEngine On
 
-RewriteRule ^ - [E=protossl]
-RewriteCond %{HTTPS} on
-RewriteRule ^ - [E=protossl:s]
-RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-RewriteRule ^ http://%1 [L,R=301]
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*) https://%{HTTP_HOST}%{REQUEST_URI} [NC,L]
 
+#RewriteRule ^ - [E=protossl]
+#RewriteCond %{HTTPS} on
+#RewriteRule ^ - [E=protossl:s]
+#RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+#RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+#RewriteRule ^ https://%1 [L,R=301]
 
-RewriteBase /
+#RewriteBase /
 RewriteRule ^$ /dist [L]
 #RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*) https://%{HTTP_HOST}%{REQUEST_URI} [NC,L]
 
 ErrorDocument 404 '404 Page not found. <a href="http://grammark.org">Back to grammark.org</a>'
 
