@@ -1,25 +1,24 @@
 Grammark
 ========
 > A complete web application for identifying writing problems and offering suggestions.
-<img src="https://github.com/markfullmer/grammark/blob/master/dist/images/screenshot.742fd093.png" />
+<img src="https://github.com/markfullmer/grammark/raw/master/app/images/screenshot.png" />
 
 Requirements
 ============
 To run Grammark, you need to have a browser with Javascript enabled (almost all do by default).
 
-Dependencies
+Build Architecture
 ============
-- [Foundation](http://foundation.zurb.com/) CSS/JS library (included in this distribution)
-- [AngularJS](https://angularjs.org/) (included in this distribution)
-- [underscore.js](http://underscorejs.org/) (included in this distribution)
+- [AngularJS version 1.x](https://angularjs.org/)
+- [Foundation](http://foundation.zurb.com/) CSS/JS library
+- [underscore.js](http://underscorejs.org/)
 
 Out-of-Box Installation
 =======================
-If you just want your own version of Grammark on your server and don't plan to
-modify it, head on over to https://github.com/markfullmer/grammark/tree/angular-distribution.
+If you just want your own version of Grammark on your server, head on over to https://github.com/markfullmer/grammark/tree/angular-distribution.
 Clone the files, or download the zip into a directory on your server.
 
-You should now have a fully-functional grammark checker!
+You should now have a fully-functional grammar checker!
 
 Developer Installation
 ======================
