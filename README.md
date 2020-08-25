@@ -1,6 +1,8 @@
 # 1.Team/project names
   CtrlAltSpri4ng
-  
+# 2.Team Members
+  Josue Mayorga
+
 Grammark
 ========
 > A complete web application for identifying writing problems and offering suggestions.
@@ -61,4 +63,3 @@ Release       | Short Description
 [Grammark 3.0](https://github.com/markfullmer/grammark/tree/Version-3)  | [Twig](http://twig.sensiolabs.org/) templating and class-based PHP
 [Grammark 2.0](https://github.com/markfullmer/grammark/tree/Version-2)  | [Foundation](http://foundation.zurb.com/)-based CSS with better directory structure and settings files
 [Grammark 1.0](https://github.com/markfullmer/grammark/tree/Version-1)  | Custom CSS with flat file structure
-
