@@ -22,14 +22,14 @@ You should now have a fully-functional grammar checker!
 
 Developer Installation
 ======================
-1. Clone the master branch of this repository:
+1. Clone the `main` branch of this repository:
 ```
 git clone git@github.com:markfullmer/grammark.git .
 ```
 2. Grammark is built on the [yeoman angular scaffolding](https://github.com/yeoman/generator-angular)
 To facilitate easy development, install `yo`, `grunt-cli`, `bower`, `generator-angular` and `generator-karma`:
 ```
-npm install -g grunt-cli bower yo generator-karma generator-angular
+npm install && bower install
 ```
 You can then use the following for local development:
 
