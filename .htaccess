@@ -1,4 +1,4 @@
-SetEnv PHPRC /home/markfull/public_html/grammark/php.ini
+SetEnv PHPRC /home/customer/www/grammark.org/public_html/php.ini
 Options +FollowSymLinks
 RewriteEngine On
 
@@ -31,3 +31,4 @@ deny from 158.129.192.208
 deny from 78.46.174.55
 deny from 50.31.96.17
 deny from 46.151.53.
+# Commented by SiteGround automated systems #AddHandler application/x-httpd-php53 .php .php5 .php4 .php3
