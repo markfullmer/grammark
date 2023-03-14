@@ -374,6 +374,8 @@ var wordiness = function() {
 'safe haven':'haven',
 'exactly the same thing':'repeat',
 'scrutinize carefully':'scrutinize',
+'remediation': 'fix',
+'remediate': "fix",
 'prefer to have':'prefer',
 'serious danger':'danger',
 'serve the purpose of':'DELETE',
